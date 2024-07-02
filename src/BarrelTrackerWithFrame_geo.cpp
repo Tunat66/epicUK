@@ -75,7 +75,9 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
   // Volume assembly(det_name,topVolumeShape,air);
   Assembly assembly(det_name);
 
+  //you can pick between these two options
   sens.setType("tracker");
+  //sens.setType("calorimeter");
 
   // Loop over the suports
   for (xml_coll_t su(x_det, _U(support)); su; ++su) {
@@ -337,7 +339,7 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
     lay_elt.setPlacement(pv);
   }
 
-
+/*
   //for exercise, adding a volume that contains all the detector layers
   Tube  container_tub(10.0 * cm, 24.0 * cm, 10.0 * cm);
   std::string container_name = "container";
@@ -345,10 +347,18 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
   //now place the volume as a physical volume within the assembly
   Position container_pos(0, 0, 0); //placed at the origin
   pv = assembly.placeVolume(container_vol, container_pos);
-  int containerID = 100001; // a random number, may cause bugs  
+  int containerID = 100001; // a random number, may cause bugs
+			    
+			    
+  //make it a sensitive element by adding it to the detector
   DetElement container_elt(sdet, container_name, containerID);
+  pv.addPhysVolID("NewVolume", containerID);
   container_elt.setPlacement(pv);
 
+  
+
+  //END for exercise
+  */
 
   sdet.setAttributes(description, assembly, x_det.regionStr(), x_det.limitsStr(), x_det.visStr());
   assembly.setVisAttributes(description.invisible());
