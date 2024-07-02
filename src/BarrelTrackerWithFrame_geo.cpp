@@ -336,6 +336,20 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
                           x_layer.visStr());
     lay_elt.setPlacement(pv);
   }
+
+
+  //for exercise, adding a volume that contains all the detector layers
+  Tube  container_tub(10.0 * cm, 24.0 * cm, 10.0 * cm);
+  std::string container_name = "container";
+  Volume container_vol(container_name, container_tub, air);
+  //now place the volume as a physical volume within the assembly
+  Position container_pos(0, 0, 0); //placed at the origin
+  pv = assembly.placeVolume(container_vol, container_pos);
+  int containerID = 100001; // a random number, may cause bugs  
+  DetElement container_elt(sdet, container_name, containerID);
+  container_elt.setPlacement(pv);
+
+
   sdet.setAttributes(description, assembly, x_det.regionStr(), x_det.limitsStr(), x_det.visStr());
   assembly.setVisAttributes(description.invisible());
   pv = description.pickMotherVolume(sdet).placeVolume(assembly);
