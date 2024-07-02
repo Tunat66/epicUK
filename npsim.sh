@@ -1,0 +1,1 @@
+npsim --runType run --compactFile $DETECTOR_PATH/epic_vertex_only.xml --inputFiles root://dtn-eic.jlab.org//work/eic2/EPIC/EVGEN/SIDIS/pythia6-eic/1.0.0/18x275/q2_0to1/pythia_ep_noradcor_18x275_q2_0.000000001_1.0_run9.ab.hepmc3.tree.root --numberOfEvents 100 --outputFile test.edm4hep.root
