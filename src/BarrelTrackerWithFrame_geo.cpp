@@ -308,9 +308,9 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
           auto& comp_de_params =
               DD4hepDetectorHelper::ensureExtension<dd4hep::rec::VariantParameters>(comp_de);
           comp_de_params.set<string>("axis_definitions", "XYZ");
-          // comp_de.setAttributes(description, sens_pv.volume(), x_layer.regionStr(), x_layer.limitsStr(),
-          //                       xml_det_t(xmleles[m_nam]).visStr());
-          //
+          //comp_de.setAttributes(description, sens_pv.volume(), x_layer.regionStr(), x_layer.limitsStr(),
+                               //xml_det_t(xmleles[m_nam]).visStr());
+          
 
           volSurfaceList(comp_de)->push_back(volplane_surfaces[m_nam][ic]);
         }

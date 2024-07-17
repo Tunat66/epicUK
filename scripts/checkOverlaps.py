@@ -27,7 +27,9 @@ from g4units import keV, GeV, mm, ns, MeV
 def run():
   kernel = DDG4.Kernel()
   description = kernel.detectorDescription()
-  kernel.loadGeometry(str("file:" + args.compact))
+  #the file bit at the front was causing problems so I changed it
+  kernel.loadGeometry(str(args.compact)) 
+  #kernel.loadGeometry(str("file:" + args.compact))
 
   DDG4.importConstants(description)
 

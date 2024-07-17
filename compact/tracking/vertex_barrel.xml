@@ -138,7 +138,30 @@
         <rphi_layout phi_tilt="0.0*degree" nphi="VertexBarrelStave_count3" phi0="0.0" rc="VertexBarrelMod3_rmin" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
+
+      <!--<L3L4_gdmlfile file="install/share/epic/compact/tracking/L3-L4_gdml/epic2.gdml" material="Silicon"/>-->
+
     </detector>
+    <!--
+    <detector
+      id="VertexBarrel_1_ID"
+      name="VertexBarrelOuter"
+      type="epic_VertexBarrel"
+      readout="VertexBarrelOuterHits"
+      insideTrackingVolume="true">
+      <type_flags type="DetType_TRACKER + DetType_BARREL"/>
+      <comment> I entered these dimensions manually from the ePIC wiki </comment>
+      <dimensions
+        rmin="270 * mm"
+        rmax="420 * mm"
+        length="840 * mm" />
+      <comment>Vertex Barrel Modules (L3 and L4) to be added later separately. I just dropped the gdml file down here now</comment>
+      <L3L4_gdmlfile file="compact/tracking/L3-L4_gdml/epic2.gdml" material="Silicon"/>
+
+    </detector>
+    -->
+    
+
   </detectors>
 
   <plugins>
@@ -149,10 +172,12 @@
   </plugins>
 
   <readouts>
+
     <readout name="VertexBarrelHits">
       <segmentation type="CartesianGridXY" grid_size_x="0.020*mm" grid_size_y="0.020*mm" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,y:-16</id>
     </readout>
+
   </readouts>
 
 </lccdd>
