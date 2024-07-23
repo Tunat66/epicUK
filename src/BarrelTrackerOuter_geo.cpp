@@ -32,7 +32,7 @@ using namespace dd4hep::rec;
 using namespace dd4hep::detail;
 
 
-/* THIS BIT IS WORK IN PROGRESS
+/* THIS BIT IS WORK IN PROGRESS */
 class TriangularPrism : public TesselatedSolid {
   public:
   Vector3D normal;
@@ -43,9 +43,12 @@ class TriangularPrism : public TesselatedSolid {
     Vertex vec1 = vertices.at(1) - vertices.at(2);
     Vertex vec2 = vertices.at(0) - vertices.at(2);
     
-
-
-
+    //take the cross product
+    Vertex normal = Cross(vec1, vec2);
+    if(!normal.IsNormalized()) {
+      normal.Normalize()
+    }
+    return normal;
   }
 
   TriangularPrism(vector<Vertex> vertices, double extrusion_length){
@@ -73,26 +76,26 @@ class TriangularPrism : public TesselatedSolid {
         addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
       }
       //finally, correct the normals and close the mesh if not closed
-      this.CloseShape(true, true, true); //otherwise you get an infinite bounding box
-      this.CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
+      CloseShape(true, true, true); //otherwise you get an infinite bounding box
+      CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
 
     }
     
   }
 
   ~TriangularPrism() {}
-};*/
+};
 
-/** Barrel Tracker with space frame.
+/** Barrel Tracker imported from GDML file
  *
-  *
+ *
  * The shapes are created using createShape which can be one of many basic geomtries.
  * See the examples Check_shape_*.xml in
  * [dd4hep's examples/ClientTests/compact](https://github.com/AIDASoft/DD4hep/tree/master/examples/ClientTests/compact)
  * directory.
  *
  *
- * - Optional "frame" tag within the module element.
+ * 
  *
  * \ingroup trackers
  *
@@ -252,11 +255,20 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
           Volume sc_vol_tmp(c_nam + "_" + facet_index);
           Facet current_facet = c_sol->facet(facet_index); 
           //compute the normal to the facet
-          Vector3D xhat(1., 0., 0.);
+          Vertex xhat(1., 0., 0.);
+          //construct a Triangular prisim from the facet]
+          if(current_facet.GetNvert() == 3) //triangular facet
+          TriangularPrism thickened_facet(current_facet[0])
+          else if (current_facet.GetNvert() == 4) //quadrilateral facet
+          {
+            //yet to be implemented
+          }
+          
 
 
           //if the facet normal is not more than 90 deg off the x axis vector then keep it
           //note the standard in importing the cad models I defined when importing them
+          if (Dot())
 
 
 
