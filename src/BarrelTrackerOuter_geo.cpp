@@ -31,6 +31,58 @@ using namespace dd4hep;
 using namespace dd4hep::rec;
 using namespace dd4hep::detail;
 
+
+/* THIS BIT IS WORK IN PROGRESS
+class TriangularPrism : public TesselatedSolid {
+  public:
+  Vector3D normal;
+  Vector3D extrusionVector;
+  Vertex compute_normal(vector<Vertex> vertices)
+  {
+    //figure out the castings here
+    Vertex vec1 = vertices.at(1) - vertices.at(2);
+    Vertex vec2 = vertices.at(0) - vertices.at(2);
+    
+
+
+
+  }
+
+  TriangularPrism(vector<Vertex> vertices, double extrusion_length){
+    
+    if(verices.size() > 3)
+      printout(ERROR, "BarrelTrackerOuter", "Trying to construct triangular prism with more or less than 3 vertices");
+      throw runtime_error("Triangular prisim construction failed.");
+    else {
+      normal = compute_normal(vector<Vertex> vertices);
+      extrusionVector = extrusion_length * normal;
+      vector<Vertex> extruded_vertices
+      for(auto& element : vertices) 
+      {
+        extruded_vertices.push_back(vertices + extrusionVector);
+      }
+      //Now add the facets:
+      //Top and bottom
+      addFacet(vertices.at(0), vertices.at(1), vertices.at(2));
+      addFacet(extruded_vertices.at(2), extruded_vertices.at(1), extruded_vertices.at(0));
+
+      //sides
+      for(int i = 0; i < vertices.size(); i++) 
+      {
+        int next_i = (i + 1) % vertices.size();
+        addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
+      }
+      //finally, correct the normals and close the mesh if not closed
+      this.CloseShape(true, true, true); //otherwise you get an infinite bounding box
+      this.CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
+
+    }
+    
+  }
+
+  ~TriangularPrism() {}
+};*/
+
 /** Barrel Tracker with space frame.
  *
   *
@@ -103,7 +155,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
     string m_nam     = x_mod.nameStr();
 
     if (volumes.find(m_nam) != volumes.end()) {
-      printout(ERROR, "BarrelTrackerWithFrame",
+      printout(ERROR, "BarrelTrackerOuter",
                string((string("Module with named ") + m_nam + string(" already exists."))).c_str());
       throw runtime_error("Logics error in building modules.");
     }
@@ -128,15 +180,28 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       xml_comp_t x_pos   = x_comp.position(false);
       xml_comp_t x_rot   = x_comp.rotation(false);
       const string c_nam = _toString(ncomponents, "component%d");
+      const string c_nam_mesh = _toString(ncomponents, "component%d_MESH");
 
       //new code that consturcts them from GDML files
       //import the GDML file from the "file" attribute of the module_component
       std::string gdml_file =
           getAttrOrDefault<std::string>(x_comp, _Unicode(file), " ");
       printout(WARNING, "BarrelTrackerOuter", gdml_file);
-      Volume c_vol(c_nam);
-        printout(WARNING, "BarrelTrackerOuter", "Parsing a large GDML file may lead to segfault or heap overflow.");
-      /*c_vol = parser->GDMLReadFile(gdml_file.c_str());
+
+      //some branching needed there
+      if (x_comp.isSensitive()) {
+        Volume c_vol(c_nam_mesh);
+      }
+      else {
+        Volume c_vol(c_nam);
+      }
+      
+      printout(WARNING, "BarrelTrackerOuter", "Parsing a large GDML file may lead to segfault or heap overflow.");
+      //STANDARD WHEN IMPORTING CAD MODELS: 
+      //-> STAVE LONG AXIS MUST BE Z
+      //-> STAVE FACES ALONG THE X AXIS
+      
+      c_vol = parser->GDMLReadFile(gdml_file.c_str());
       //check the validity of the volume
       if (!c_vol.isValid()) {
         printout(WARNING, "BarrelTrackerOuter", "%s", gdml_file.c_str());
@@ -149,9 +214,9 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       TessellatedSolid c_sol = c_vol.solid();
       c_sol->CloseShape(true, true, true); //otherwise you get an infinite bounding box
       c_sol->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
-      c_vol.setSolid(c_sol);*/
+      c_vol.setSolid(c_sol);
       //for former testing purposes
-      c_vol.setSolid(Box(12 * mm, 12 * mm, 120 * mm));
+      //c_vol.setSolid(Box(12 * mm, 12 * mm, 120 * mm));
       
       /*
       //newer code, now can import .stl files directly
@@ -172,26 +237,33 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       // Utility variable for the relative z-offset based off the previous components
       //const double zoff = thickness_sum + x_comp.thickness() / 2.0;
       const double zoff = 0; //this value might cause issues, keep an eye out
-      if (x_pos && x_rot) {
-        Position c_pos(x_pos.x(0), x_pos.y(0), x_pos.z(0) + zoff);
-        RotationZYX c_rot(x_rot.z(0), x_rot.y(0), x_rot.x(0));
-        pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, c_pos));
-      } else if (x_rot) {
-        Position c_pos(0, 0, zoff);
-        pv = m_vol.placeVolume(c_vol,
-                               Transform3D(RotationZYX(x_rot.z(0), x_rot.y(0), x_rot.x(0)), c_pos));
-      } else if (x_pos) {
-        pv = m_vol.placeVolume(c_vol, Position(x_pos.x(0), x_pos.y(0), x_pos.z(0) + zoff));
-      } else {
-        //the c_rot is a temporary adjustment I added
-        RotationX c_rot(M_PI/2);
-        pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, Position(0, 0, zoff)));
-      
-      }
-      c_vol.setVisAttributes(description, x_comp.visStr());
-      if (x_comp.isSensitive()) {
+
+      //now, the code branches in the following way:
+      // if the volume is sensitive, build the tesselated solid into thickened pixels of extruded polyogons
+      // and place those under m_vol
+      // else, just place c_vol under m_vol
+      if (x_comp.isSensitive()) { // sensitive volume, create the pixels
         printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FOUND");
-        pv.addPhysVolID("sensor", sensor_number);
+        Volume sc_vol(c_nam);
+
+        //loop over the facets of c_vol to define volumes and set them as sensitive
+        //note these facets won't be actual pixels, but rather just bits of the mesh
+        for(int facet_index = 0; facet_index < c_sol->num_facet(); facet_index++) {
+          Volume sc_vol_tmp(c_nam + "_" + facet_index);
+          Facet current_facet = c_sol->facet(facet_index); 
+          //compute the normal to the facet
+          Vector3D xhat(1., 0., 0.);
+
+
+          //if the facet normal is not more than 90 deg off the x axis vector then keep it
+          //note the standard in importing the cad models I defined when importing them
+
+
+
+
+        }
+
+
         sensor_number = sensor_number + 1;
         c_vol.setSensitiveDetector(sens);
         sensitives[m_nam].push_back(pv);
@@ -218,22 +290,35 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
         volplane_surfaces[m_nam].push_back(surf);
 
         //--------------------------------------------
-        
+        pv.addPhysVolID("sensor", sensor_number);
+
       }
-      //thickness_sum += x_comp.thickness();
-      //thickness_so_far += x_comp.thickness();
-      // apply relative offsets in z-position used to stack components side-by-side
-      //if (x_pos) {
-        //thickness_sum += x_pos.z(0);
-        //thickness_so_far += x_pos.z(0);
-      //}
+      else { // not a sensitive volume
+
+        //place the volume
+        if (x_pos && x_rot) {
+          Position c_pos(x_pos.x(0), x_pos.y(0), x_pos.z(0) + zoff);
+          RotationZYX c_rot(x_rot.z(0), x_rot.y(0), x_rot.x(0));
+          pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, c_pos));
+        } else if (x_rot) {
+          Position c_pos(0, 0, zoff);
+          pv = m_vol.placeVolume(c_vol,
+                                Transform3D(RotationZYX(x_rot.z(0), x_rot.y(0), x_rot.x(0)), c_pos));
+        } else if (x_pos) {
+          pv = m_vol.placeVolume(c_vol, Position(x_pos.x(0), x_pos.y(0), x_pos.z(0) + zoff));
+        } else {
+          //the c_rot is a temporary adjustment I added
+          RotationX c_rot(M_PI/2);
+          pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, Position(0, 0, zoff)));
+        
+        }
+        c_vol.setVisAttributes(description, x_comp.visStr());
+      }
       
     }
     
   }
   delete parser;
-
-  
 
   // now build the layers
   for (xml_coll_t li(x_det, _U(layer)); li; ++li) {
@@ -345,61 +430,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
                           x_layer.visStr());
     lay_elt.setPlacement(pv);
   }
-  /*
-  //OLD CODE
-  //import the GDML file of the outer two layers
-  //probable change: I will import the two rings as two separate files
-  //xml_comp_t x_det_L3L4_gdmlfile = x_det.child("L3L4_gdmlfile");
-  //std::string L3L4_gdml_file =
-      //getAttrOrDefault<std::string>(x_det_L3L4_gdmlfile, _Unicode(file), " ");
-  //std::string L3L4_gdml_material =
-      //getAttrOrDefault<std::string>(x_det_L3L4_gdmlfile, _Unicode(material), " ");
-  //now parse the file
-  TGDMLParse* parser = new TGDMLParse();
-  std::string L3L4_name = "L3L4";
-  int L3L4_id = 10002;
-  Volume* L3L4_vol = new Volume(L3L4_name);
-   printout(WARNING, "BarrelTrackerOuter", "Parsing GDML may lead to segfault.");
-  *L3L4_vol = parser->GDMLReadFile(L3L4_gdml_file.c_str());
- 
-  if (!L3L4_vol->isValid()) {
-    printout(WARNING, "BarrelTrackerOuter", "%s", L3L4_gdml_file.c_str());
-    printout(WARNING, "BarrelTrackerOuter", "L3L4_vol invalid, GDML parser failed!");
-    std::_Exit(EXIT_FAILURE);
-  }
-  delete parser;
-  L3L4_vol->import();
-
-  //configure: set solid and material etc.
-  L3L4_vol->setVisAttributes(description, x_det.visStr());
-  TessellatedSolid L3L4_solid = L3L4_vol->solid();
-  L3L4_solid->CloseShape(true, true, true); // tesselated solid not closed by import!
-  //Material L3L4_material = description.material(L3L4_gdml_material.c_str());
-  //Material L3L4_material = silicon;
-  //L3L4_vol->setMaterial(L3L4_material);
-  L3L4_vol->setMaterial(air);
   
-
-  //TEMPORARY: SET THE ENTIRE THING AS SENSITIVE
-  L3L4_vol->setSensitiveDetector(sens);
-  
-/
- 
-
-  //for exercise, adding a volume that contains all the detector layers
-  Position L3L4_pos(0, 0, 0); //placed at the origin
-  pv = assembly.placeVolume(*L3L4_vol, L3L4_pos);
-  
-  delete L3L4_vol;
-		    
-			    
-  //make it a sensitive element by adding it to the detector
-  DetElement L3L4_elt(sdet, L3L4_name, L3L4_id); 
-  pv.addPhysVolID("L3L4Volume", L3L4_id);
-  L3L4_elt.setPlacement(pv);
-  */
-  
-
   //finally, place the world
 
   sdet.setAttributes(description, assembly, x_det.regionStr(), x_det.limitsStr(), x_det.visStr());
@@ -416,9 +447,4 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
 //@}
 // clang-format off
 //Macros to access the XML files
-//DECLARE_DETELEMENT(epic_BarrelTrackerWithFrame, create_BarrelTrackerOuter)
-//DECLARE_DETELEMENT(epic_TrackerBarrel,   create_BarrelTrackerOuter)
-//DECLARE_DETELEMENT(epic_VertexBarrelOuter,    create_BarrelTrackerOuter)
-//DECLARE_DETELEMENT(epic_TOFBarrel,       create_BarrelTrackerOuter)
-//DECLARE_DETELEMENT(epic_InnerMPGDBarrel,       create_BarrelTrackerOuter)
 DECLARE_DETELEMENT(epic_SiliconBarrel,    create_BarrelTrackerOuter)
