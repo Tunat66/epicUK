@@ -75,20 +75,20 @@
         <!-- The blank values are defined by the geometry the GDML file anyway, left them
          for consistency. file="install/share/epic/compact/tracking/L3-L4_gdml/centered_ePIC-L3-converted-ASCII.gdml
          file="install/share/epic/gdml/Tile01_Reduced.gdml"-->
-        <module_component name="L3Module_active_silicon"
+        <!--<module_component name="L3Module_active_silicon"
                           material="Silicon"
                           sensitive="true"
                           width="3 * mm"
                           length="840 * mm"
-                          thickness="3 * mm"
+                          thickness="30 * mm"
                           vis="TrackerLayerVis"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_active-converted-ASCII.gdml" />
-        <module_component name="L3Module_inactive_silicon"
+        --><module_component name="L3Module_inactive_silicon"
                           material="Silicon"
-                          sensitive="false"
+                          sensitive="true"
                           width="3 * mm"
                           length="840 * mm"
-                          thickness="3 * mm"
+                          thickness="30 * mm"
                           vis="TrackerLayerVis"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII.gdml" />
         <module_component name="L3Module_kapton"
@@ -96,7 +96,7 @@
                           sensitive="false"
                           width="3 * mm"
                           length="840 * mm"
-                          thickness="3 * mm"
+                          thickness="30 * mm"
                           vis="TrackerLayerVis"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyKapton_Electrical_Insulation-converted-ASCII.gdml" />
         <module_component name="L3Module_support"
@@ -104,10 +104,10 @@
                           sensitive="false"
                           width="3 * mm"
                           length="840 * mm"
-                          thickness="3 * mm"
+                          thickness="30 * mm"
                           vis="TrackerLayerVis"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-SupportPlaceholder-converted-ASCII.gdml" />
-        <!--<module_component name="L3Module_electronic"
+      <!--<module_component name="L3Module_electronic"
                           material="Carbon"
                           sensitive="false"
                           width="3 * mm"
@@ -121,9 +121,9 @@
         <!-- I just came up with a rough estimate of the thickness of the modules to 
          define an envelope, THIS WILL CHANGE-->
         <barrel_envelope
-          inner_r="244 * mm"
-          outer_r="308 * mm"
-          z_length="600 * mm" />
+          inner_r="SiBarrelLayer1_rmin-1.0*mm"
+          outer_r="SiBarrelLayer1_rmax"
+          z_length="SiBarrelLayer1_length" />
         <layer_material surface="inner" binning="binPhi,binZ" bins0="42" bins1="100" />
         <layer_material surface="outer" binning="binPhi,binZ" bins0="42" bins1="100" />
         <comment>
@@ -137,9 +137,9 @@
           nz       : Number of modules to place in z.
           dr       : Radial displacement parameter, of every other module.
         </comment>
-        <rphi_layout phi_tilt="0.0*degree" nphi="42" phi0="0.0" rc="270 * mm" dr="10 * mm"/> 
+        <rphi_layout phi_tilt="0.0*degree" nphi="42" phi0="0.0" rc="SiBarrelMod1_rmin" dr="0 * mm"/> 
         <comment>These values are unused, but left here just in case</comment>
-        <z_layout dr="20.0 * mm" z0="480.0 * mm / 2" nz="4"/>
+        <z_layout dr="0.0 * mm" z0="480.0 * mm / 2" nz="4"/>
       </layer>
     </detector>
 

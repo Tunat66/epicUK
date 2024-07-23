@@ -23,6 +23,7 @@
 #include "TVector3.h"
 //#include "TGDMLParse.h"
 #include "TGDMLParseBiggerFiles.h"
+//#include "CADPlugins.h"
 #include "FileLoaderHelper.h"
 
 using namespace std;
@@ -66,7 +67,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
 
   map<string, Volume> volumes;
   map<string, Placements> sensitives;
-  //map<string, std::vector<VolPlane>> volplane_surfaces;
+  map<string, std::vector<VolPlane>> volplane_surfaces;
   map<string, std::array<double, 2>> module_thicknesses;
 
   PlacedVolume pv;
@@ -109,7 +110,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
 
     int ncomponents        = 0;
     int sensor_number      = 1;
-    double total_thickness = 0;
+    //double total_thickness = 0;
 
     // Compute module total thickness from components
     xml_coll_t ci(x_mod, _U(module_component));
@@ -120,7 +121,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
     volumes[m_nam] = m_vol;
     m_vol.setVisAttributes(description.visAttributes(x_mod.visStr()));
 
-    double thickness_so_far = 0.0;
+    //double thickness_so_far = 0.0;
     //double thickness_sum    = -total_thickness / 2.0;
     for (xml_coll_t mci(x_mod, _U(module_component)); mci; ++mci, ++ncomponents) {
       xml_comp_t x_comp  = mci;
@@ -128,31 +129,18 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       xml_comp_t x_rot   = x_comp.rotation(false);
       const string c_nam = _toString(ncomponents, "component%d");
 
-      //old code which constructed pieces as boxes
-      //Box c_box(x_comp.width() / 2, x_comp.length() / 2, x_comp.thickness() / 2);
-      //Volume c_vol(c_nam, c_box, description.material(x_comp.materialStr()));
-
       //new code that consturcts them from GDML files
       //import the GDML file from the "file" attribute of the module_component
       std::string gdml_file =
           getAttrOrDefault<std::string>(x_comp, _Unicode(file), " ");
       printout(WARNING, "BarrelTrackerOuter", gdml_file);
-        
-      //std::string L3L4_name = "L3L4";
-      //int L3L4_id = 10002;
-
-      //note that I accumulate the GDML data in the heap with a Volume* object 
-      //as the gdml file might be big
-      //parse the file
       Volume c_vol(c_nam);
-      
         printout(WARNING, "BarrelTrackerOuter", "Parsing a large GDML file may lead to segfault or heap overflow.");
-      c_vol = parser->GDMLReadFile(gdml_file.c_str());
+      /*c_vol = parser->GDMLReadFile(gdml_file.c_str());
       //check the validity of the volume
       if (!c_vol.isValid()) {
         printout(WARNING, "BarrelTrackerOuter", "%s", gdml_file.c_str());
         printout(WARNING, "BarrelTrackerOuter", "c_vol invalid, GDML parser failed!");
-        
         std::_Exit(EXIT_FAILURE);
       }
       c_vol.import();
@@ -161,10 +149,25 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       TessellatedSolid c_sol = c_vol.solid();
       c_sol->CloseShape(true, true, true); //otherwise you get an infinite bounding box
       c_sol->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
-      c_vol.setSolid(c_sol);
-      //c_vol.setSolid(Box(12 * mm, 12 * mm, 120 * mm));
+      c_vol.setSolid(c_sol);*/
+      //for former testing purposes
+      c_vol.setSolid(Box(12 * mm, 12 * mm, 120 * mm));
       
-
+      /*
+      //newer code, now can import .stl files directly
+      //Still not ready :(
+      //some code from: https://github.com/AIDASoft/DD4hep/blob/master/DDCAD/src/plugins/CADPlugins.cpp
+      //create the component volume
+      Volume c_vol(c_nam);
+      //std::string stl_file =
+          //getAttrOrDefault<std::string>(x_comp, _Unicode(file), " ");
+      //double unit = mm; 
+      TessellatedSolid c_sol = create_CAD_Shape(description, x_comp);
+      //finally, refine the mesh
+      c_sol->CloseShape(true, true, true); //otherwise you get an infinite bounding box
+      c_sol->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
+      c_vol.setSolid(c_sol);*/
+     
       
       // Utility variable for the relative z-offset based off the previous components
       //const double zoff = thickness_sum + x_comp.thickness() / 2.0;
@@ -185,11 +188,6 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
         pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, Position(0, 0, zoff)));
       
       }
-      //pv = m_vol.placeVolume(*c_vol, Position(0, 0, zoff));
-      //printout(WARNING, "BarrelTrackerOuter", "L3/L4 Limits: %s", x_comp.limitsStr().c_str());
-      //printout(WARNING, "BarrelTrackerOuter", "L3/L4 Limits:");
-      //c_vol->setRegion(description, x_comp.regionStr());
-      //c_vol->setLimitSet(description, x_comp.limitsStr());
       c_vol.setVisAttributes(description, x_comp.visStr());
       if (x_comp.isSensitive()) {
         printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FOUND");
@@ -197,8 +195,8 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
         sensor_number = sensor_number + 1;
         c_vol.setSensitiveDetector(sens);
         sensitives[m_nam].push_back(pv);
-        module_thicknesses[m_nam] = {thickness_so_far + x_comp.thickness() / 2.0,
-                                     total_thickness - thickness_so_far - x_comp.thickness() / 2.0};
+        module_thicknesses[m_nam] = {10,
+                                     10};
 
         // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
         Vector3D u(-1., 0., 0.);
@@ -208,16 +206,16 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
 
         // compute the inner and outer thicknesses that need to be assigned to the tracking surface
         // depending on whether the support is above or below the sensor
-        //double inner_thickness = module_thicknesses[m_nam][0];
-        //double outer_thickness = module_thicknesses[m_nam][1];
+        double inner_thickness = module_thicknesses[m_nam][0];
+        double outer_thickness = module_thicknesses[m_nam][1];
 
         SurfaceType type(SurfaceType::Sensitive);
 
         // if( isStripDetector )
         //  type.setProperty( SurfaceType::Measurement1D , true ) ;
 
-        //VolPlane surf(*c_vol, type, inner_thickness, outer_thickness, u, v, n); //,o ) ;
-        //volplane_surfaces[m_nam].push_back(surf);
+        VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n); //,o ) ;
+        volplane_surfaces[m_nam].push_back(surf);
 
         //--------------------------------------------
         
@@ -229,10 +227,8 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
         //thickness_sum += x_pos.z(0);
         //thickness_so_far += x_pos.z(0);
       //}
-      //free the memory from the c_vol extracted from gdml
       
     }
-    // the module assembly volume
     
   }
   delete parser;
@@ -323,7 +319,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
                                  //xml_det_t(xmleles[m_nam]).visStr());
           //
 
-          //volSurfaceList(comp_de)->push_back(volplane_surfaces[m_nam][ic]);
+          volSurfaceList(comp_de)->push_back(volplane_surfaces[m_nam][ic]);
         }
 
         /// Increase counters etc.
@@ -412,9 +408,6 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
   pv.addPhysVolID("system", det_id); // Set the subdetector system ID.
   sdet.setPlacement(pv);
   printout(WARNING, "BarrelTrackerOuter", "DetElement instance \"sdet\" might be corrupted if the GDML design file is too big.");	
-  
-  //some debugging
-  acts::InitLogLevel=trace;
   
   return sdet;
 
