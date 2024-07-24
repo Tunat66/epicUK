@@ -69,23 +69,31 @@
       <dimensions
         rmin="210 * mm"
         rmax="350 * mm"
-        length="840 * mm" />
+        length="840 * mm" /> <!--840 default-->
       <comment>Silicon Barrel Modules</comment>
       <module name="L3Module" vis="TrackerLayerVis">
         <!-- The blank values are defined by the geometry the GDML file anyway, left them
          for consistency. file="install/share/epic/compact/tracking/L3-L4_gdml/centered_ePIC-L3-converted-ASCII.gdml
          file="install/share/epic/gdml/Tile01_Reduced.gdml"-->
-        <!--<module_component name="L3Module_active_silicon"
+        <module_component name="L3Module_active_silicon"
                           material="Silicon"
                           sensitive="true"
                           width="3 * mm"
                           length="840 * mm"
-                          thickness="30 * mm"
+                          thickness="3 * mm"
                           vis="TrackerLayerVis"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_active-converted-ASCII.gdml" />
-        --><module_component name="L3Module_inactive_silicon"
+        
+        <!--<module_component name="ITS3"
                           material="Silicon"
                           sensitive="true"
+                          width="SiBarrelStave1_width"
+                          length="SiBarrelMod1_length"
+                          thickness="SiBarrelSensor_thickness"
+                          vis="TrackerLayerVis" />      -->            
+        <module_component name="L3Module_inactive_silicon"
+                          material="Silicon"
+                          sensitive="false"
                           width="3 * mm"
                           length="840 * mm"
                           thickness="30 * mm"
@@ -121,9 +129,9 @@
         <!-- I just came up with a rough estimate of the thickness of the modules to 
          define an envelope, THIS WILL CHANGE-->
         <barrel_envelope
-          inner_r="SiBarrelLayer1_rmin-1.0*mm"
+          inner_r="SiBarrelLayer1_rmin-10.0*mm"
           outer_r="SiBarrelLayer1_rmax"
-          z_length="SiBarrelLayer1_length" />
+          z_length="840 * mm" />
         <layer_material surface="inner" binning="binPhi,binZ" bins0="42" bins1="100" />
         <layer_material surface="outer" binning="binPhi,binZ" bins0="42" bins1="100" />
         <comment>
@@ -225,7 +233,7 @@
   <readouts>
     <readout name="SiBarrelHits">
       <segmentation type="CartesianGridXY" grid_size_x="0.020*mm" grid_size_y="0.020*mm" />
-      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,y:-16</id>
+      <id>system:8,layer:4,module:12,sensor:8,x:32:-16,y:-16</id>
     </readout>
   </readouts>
 

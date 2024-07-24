@@ -18,6 +18,7 @@
 #include "XML/Utilities.h"
 #include <array>
 #include "DD4hepDetectorHelper.h"
+#include <cmath>
 
 
 #include "TVector3.h"
@@ -31,28 +32,32 @@ using namespace dd4hep;
 using namespace dd4hep::rec;
 using namespace dd4hep::detail;
 
+//typedef Object::Vertex_t Vertex;
 
 /* THIS BIT IS WORK IN PROGRESS */
-class TriangularPrism : public TessellatedSolid {
-  public:
-  Vertex normal;
-  Vertex extrusionVector;
-  Vertex compute_normal(vector<Vertex> vertices)
+struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated> 
+{
+  
+  TessellatedSolid::Vertex normal;
+  TessellatedSolid::Vertex extrusionVector;
+  
+  TessellatedSolid::Vertex getNormal() {return normal;}
+  TessellatedSolid::Vertex compute_normal(vector<TessellatedSolid::Vertex> vertices)
   {
     //figure out the castings here
-    Vertex vec1 = vertices.at(1) - vertices.at(2);
-    Vertex vec2 = vertices.at(0) - vertices.at(2);
+    TessellatedSolid::Vertex vec1 = vertices.at(1) - vertices.at(2);
+    TessellatedSolid::Vertex vec2 = vertices.at(0) - vertices.at(2);
     
     //take the cross product
     //note that cross is stored in the struct vertex so I needed to access it the static way
-    Vertex normal_return = Vertex::Cross(vec1, vec2);
+    TessellatedSolid::Vertex normal_return = TessellatedSolid::Vertex::Cross(vec1, vec2);
     if(!normal_return.IsNormalized()) {
       normal_return.Normalize();
     }
     return normal_return;
   }
 
-  TriangularPrism(vector<Vertex> vertices, double extrusion_length) : TessellatedSolid() {
+  TessellatedSolid return_TriangularPrism(vector<TessellatedSolid::Vertex> vertices, double extrusion_length) {
     
     if(vertices.size() > 3) {
       printout(ERROR, "BarrelTrackerOuter", "Trying to construct triangular prism with more or less than 3 vertices");
@@ -61,32 +66,36 @@ class TriangularPrism : public TessellatedSolid {
     else {
       normal = compute_normal(vertices);
       extrusionVector = extrusion_length * normal;
-      vector<Vertex> extruded_vertices;
+      vector<TessellatedSolid::Vertex> extruded_vertices;
       for(auto& element : vertices) 
       {
         extruded_vertices.push_back(element + extrusionVector);
       }
+      //vector<TessellatedSolid::Vertex> all_vertices(vertices.size() + extruded_vertices.size());
+      //merge(vertices.begin(), vertices.end(), extruded_vertices.begin(), extruded_vertices.end(), 
+          //all_vertices.begin()); 
+      TessellatedSolid prism("prism", 6);
       //Now add the facets:
       //Top and bottom
-      addFacet(vertices.at(0), vertices.at(1), vertices.at(2));
-      addFacet(extruded_vertices.at(2), extruded_vertices.at(1), extruded_vertices.at(0));
+      prism.addFacet(vertices.at(0), vertices.at(1), vertices.at(2));
+      //note the reversal of order to keep the normals well
+      prism.addFacet(extruded_vertices.at(2), extruded_vertices.at(1), extruded_vertices.at(0));
 
       //sides
       for(unsigned long i = 0; i < vertices.size(); i++) 
       {
         int next_i = (i + 1) % vertices.size();
-        addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
+        prism.addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
       }
       //finally, correct the normals and close the mesh if not closed
+      
       //this.CloseShape(true, true, true); //otherwise you get an infinite bounding box
       //this.CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
-      //this should be done outside this object?
-
+      //these functions should be passed outside this object?
+      return prism;
     }
     
   }
-
-  ~TriangularPrism() {}
 };
 
 /** Barrel Tracker imported from GDML file
@@ -199,7 +208,6 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       //STANDARD WHEN IMPORTING CAD MODELS: 
       //-> STAVE LONG AXIS MUST BE Z
       //-> STAVE FACES ALONG THE X AXIS
-      
       c_vol = parser->GDMLReadFile(gdml_file.c_str());
       //check the validity of the volume
       if (!c_vol.isValid()) {
@@ -210,7 +218,8 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       c_vol.import();
       c_vol.setMaterial(description.material(x_comp.materialStr()));
       //risky bit, might quickly fill up memory if too many solids are imported
-      TessellatedSolid c_sol = c_vol.solid();
+      TessellatedSolid c_sol(c_vol.solid());
+      //note: c_sol gets casted automatically to parent class TGeoTessellated by the copy constructor. IDK why?
       c_sol->CloseShape(true, true, true); //otherwise you get an infinite bounding box
       c_sol->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
       c_vol.setSolid(c_sol);
@@ -243,71 +252,102 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       // else, just place c_vol under m_vol
       if (x_comp.isSensitive()) { // sensitive volume, create the pixels
         printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FOUND");
-        Volume sc_vol(c_nam);
+        //Volume sc_vol(c_nam);
 
         //loop over the facets of c_vol to define volumes and set them as sensitive
         //note these facets won't be actual pixels, but rather just bits of the mesh
-        /*
-        for(int facet_index = 0; facet_index < c_sol->num_facet(); facet_index++) {
-          Volume sc_vol_tmp(c_nam + "_" + facet_index);
-          Facet current_facet = c_sol->facet(facet_index); 
+        
+        for(int facet_index = 0; facet_index < c_sol->GetNfacets(); facet_index++) {
+          //printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FACET FOUND");
+          Volume sc_vol_tmp(c_nam + "_" + to_string(facet_index));
+          TessellatedSolid::Facet current_facet = c_sol->GetFacet(facet_index); 
           //compute the normal to the facet
-          Vertex xhat(1., 0., 0.);
+          TessellatedSolid::Vertex xhat(1., 0., 0.);
+          TessellatedSolid::Vertex yhat(0., 1., 0.);
+          TessellatedSolid::Vertex zhat(0., 0., 1.);
           //construct a Triangular prisim from the facet
-          Vertex v1; 
-          Vertex v2;
-          Vertex v3;
-          Vertex v4;
+          vector<TessellatedSolid::Vertex> vertices;
+          //indices of the vertices
+          int iv0 = -1;
+          int iv1 = -1;
+          int iv2 = -1;
+          //int iv3 = -1;
+          double extrusion_length = x_comp.thickness(); //thickness will control this
           if(current_facet.GetNvert() == 3) //triangular facet
           {
-            //implement
+            //printout(WARNING, "BarrelTrackingOuter", "3333333SENSITIVE DETECTOR FACET FOUND");
+            //get the vertex indices
+            iv0 = current_facet.GetVertexIndex(0);
+            iv1 = current_facet.GetVertexIndex(1);
+            iv2 = current_facet.GetVertexIndex(2);
+            //add the vertices to a vector
+            vertices.push_back(c_sol->GetVertex(iv0));
+            vertices.push_back(c_sol->GetVertex(iv1));
+            vertices.push_back(c_sol->GetVertex(iv2));
+            //construct a triangular prisim from the vertices
+            struct TriangularPrism extruded_facet_access;
+            TessellatedSolid extruded_facet = extruded_facet_access.return_TriangularPrism(vertices, extrusion_length);
+            extruded_facet->CloseShape(true, true, true); //otherwise you get an infinite bounding box
+            extruded_facet->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
+            
+            //if the facet normal is not more than 90 deg off the x axis vector then keep it
+            //note the standard in importing the cad models I defined when importing them
+            double costheta = TessellatedSolid::Vertex::Dot(zhat, extruded_facet_access.getNormal());
+            if (abs(costheta) >= 1/(sqrt(2))) //currently programmed for 45 deg max angle
+            {
+              //now define a facet volume and place it under sc_vol
+              Volume sc_vol_facet("facet" + to_string(sensor_number));
+              sc_vol_facet.setSolid(extruded_facet); //note: the dereferenced pointer is also a pointer
+              sc_vol_facet.setMaterial(description.material(x_comp.materialStr()));
+              //now place the volume
+              RotationX c_rot(M_PI/2);
+              pv = m_vol.placeVolume(sc_vol_facet, Transform3D(c_rot, Position(0, 0, zoff)));
+              sc_vol_facet.setVisAttributes(description, x_comp.visStr());
+              pv.addPhysVolID("sensor", sensor_number);
+
+              sensor_number = sensor_number + 1;
+              sc_vol_facet.setSensitiveDetector(sens);
+              sensitives[m_nam].push_back(pv);
+              
+
+              //SURFACE WORK
+              module_thicknesses[m_nam] = {extrusion_length,
+                                          0};
+              // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
+              Vector3D u(-1., 0., 0.);
+              Vector3D v(0., -1., 0.);
+              Vector3D n(0., 0., 1.);
+              //    Vector3D o( 0. , 0. , 0. ) ;
+              // compute the inner and outer thicknesses that need to be assigned to the tracking surface
+              // depending on whether the support is above or below the sensor
+              double inner_thickness = module_thicknesses[m_nam][0];
+              double outer_thickness = module_thicknesses[m_nam][1];
+              SurfaceType type(SurfaceType::Sensitive);
+              VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n); //,o ) ;
+              volplane_surfaces[m_nam].push_back(surf);
+              printout(WARNING, "BarrelTrackingOuter", "AHAHAHAHAHHAHAHAHAHA");
+            }
+            else //for debugging
+              printout(WARNING, "BarrelTrackingOuter", "Facet is not facing right direction, skipping");
+            
+            
+
+
+            //release the facet extrusion*/
+            //delete extruded_facet;
           }
           else if (current_facet.GetNvert() == 4) //quadrilateral facet
           {
             //yet to be implemented with quad prisim class
+            printout(WARNING, "BarrelTrackingOuter", "Quadrilateral facets are not yet supported. Please revise your mesh.");
           }
           else throw runtime_error("Facet not triangular or quadrilateral.");
-          
-          //if the facet normal is not more than 90 deg off the x axis vector then keep it
-          //note the standard in importing the cad models I defined when importing them
-          if (Dot())
 
 
-
-        }*/
-
-
-        sensor_number = sensor_number + 1;
-        //c_vol.setSensitiveDetector(sens);
-        sensitives[m_nam].push_back(pv);
-        module_thicknesses[m_nam] = {10,
-                                     10};
-
-        // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
-        Vector3D u(-1., 0., 0.);
-        Vector3D v(0., -1., 0.);
-        Vector3D n(0., 0., 1.);
-        //    Vector3D o( 0. , 0. , 0. ) ;
-
-        // compute the inner and outer thicknesses that need to be assigned to the tracking surface
-        // depending on whether the support is above or below the sensor
-        double inner_thickness = module_thicknesses[m_nam][0];
-        double outer_thickness = module_thicknesses[m_nam][1];
-
-        SurfaceType type(SurfaceType::Sensitive);
-
-        // if( isStripDetector )
-        //  type.setProperty( SurfaceType::Measurement1D , true ) ;
-
-        VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n); //,o ) ;
-        volplane_surfaces[m_nam].push_back(surf);
-
-        //--------------------------------------------
-        pv.addPhysVolID("sensor", sensor_number);
-
+        }
+        
       }
       else { // not a sensitive volume
-
         //place the volume
         if (x_pos && x_rot) {
           Position c_pos(x_pos.x(0), x_pos.y(0), x_pos.z(0) + zoff);
@@ -346,7 +386,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
     Volume lay_vol(lay_nam, lay_tub, vacuum); // Create the layer envelope volume.
     Position lay_pos(0, 0, getAttrOrDefault(x_barrel, _U(z0), 0.));
     lay_vol.setVisAttributes(description.visAttributes(x_layer.visStr()));
-    //lay_vol.setSensitiveDetector(sens);
+    lay_vol.setSensitiveDetector(sens);
 
     //Assembly lay_vol(lay_nam);
     //Position lay_pos(0, 0, getAttrOrDefault(x_barrel, _U(z0), 0.));
