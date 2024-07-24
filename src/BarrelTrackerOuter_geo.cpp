@@ -33,10 +33,10 @@ using namespace dd4hep::detail;
 
 
 /* THIS BIT IS WORK IN PROGRESS */
-class TriangularPrism : public TesselatedSolid {
+class TriangularPrism : public TessellatedSolid {
   public:
-  Vector3D normal;
-  Vector3D extrusionVector;
+  Vertex normal;
+  Vertex extrusionVector;
   Vertex compute_normal(vector<Vertex> vertices)
   {
     //figure out the castings here
@@ -44,25 +44,27 @@ class TriangularPrism : public TesselatedSolid {
     Vertex vec2 = vertices.at(0) - vertices.at(2);
     
     //take the cross product
-    Vertex normal = Cross(vec1, vec2);
-    if(!normal.IsNormalized()) {
-      normal.Normalize()
+    //note that cross is stored in the struct vertex so I needed to access it the static way
+    Vertex normal_return = Vertex::Cross(vec1, vec2);
+    if(!normal_return.IsNormalized()) {
+      normal_return.Normalize();
     }
-    return normal;
+    return normal_return;
   }
 
-  TriangularPrism(vector<Vertex> vertices, double extrusion_length){
+  TriangularPrism(vector<Vertex> vertices, double extrusion_length) : TessellatedSolid() {
     
-    if(verices.size() > 3)
+    if(vertices.size() > 3) {
       printout(ERROR, "BarrelTrackerOuter", "Trying to construct triangular prism with more or less than 3 vertices");
       throw runtime_error("Triangular prisim construction failed.");
+    }
     else {
-      normal = compute_normal(vector<Vertex> vertices);
+      normal = compute_normal(vertices);
       extrusionVector = extrusion_length * normal;
-      vector<Vertex> extruded_vertices
+      vector<Vertex> extruded_vertices;
       for(auto& element : vertices) 
       {
-        extruded_vertices.push_back(vertices + extrusionVector);
+        extruded_vertices.push_back(element + extrusionVector);
       }
       //Now add the facets:
       //Top and bottom
@@ -70,14 +72,15 @@ class TriangularPrism : public TesselatedSolid {
       addFacet(extruded_vertices.at(2), extruded_vertices.at(1), extruded_vertices.at(0));
 
       //sides
-      for(int i = 0; i < vertices.size(); i++) 
+      for(unsigned long i = 0; i < vertices.size(); i++) 
       {
         int next_i = (i + 1) % vertices.size();
         addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
       }
       //finally, correct the normals and close the mesh if not closed
-      CloseShape(true, true, true); //otherwise you get an infinite bounding box
-      CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
+      //this.CloseShape(true, true, true); //otherwise you get an infinite bounding box
+      //this.CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
+      //this should be done outside this object?
 
     }
     
@@ -191,14 +194,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
           getAttrOrDefault<std::string>(x_comp, _Unicode(file), " ");
       printout(WARNING, "BarrelTrackerOuter", gdml_file);
 
-      //some branching needed there
-      if (x_comp.isSensitive()) {
-        Volume c_vol(c_nam_mesh);
-      }
-      else {
-        Volume c_vol(c_nam);
-      }
-      
+      Volume c_vol(c_nam);
       printout(WARNING, "BarrelTrackerOuter", "Parsing a large GDML file may lead to segfault or heap overflow.");
       //STANDARD WHEN IMPORTING CAD MODELS: 
       //-> STAVE LONG AXIS MUST BE Z
@@ -251,33 +247,38 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
 
         //loop over the facets of c_vol to define volumes and set them as sensitive
         //note these facets won't be actual pixels, but rather just bits of the mesh
+        /*
         for(int facet_index = 0; facet_index < c_sol->num_facet(); facet_index++) {
           Volume sc_vol_tmp(c_nam + "_" + facet_index);
           Facet current_facet = c_sol->facet(facet_index); 
           //compute the normal to the facet
           Vertex xhat(1., 0., 0.);
-          //construct a Triangular prisim from the facet]
+          //construct a Triangular prisim from the facet
+          Vertex v1; 
+          Vertex v2;
+          Vertex v3;
+          Vertex v4;
           if(current_facet.GetNvert() == 3) //triangular facet
-          TriangularPrism thickened_facet(current_facet[0])
+          {
+            //implement
+          }
           else if (current_facet.GetNvert() == 4) //quadrilateral facet
           {
-            //yet to be implemented
+            //yet to be implemented with quad prisim class
           }
+          else throw runtime_error("Facet not triangular or quadrilateral.");
           
-
-
           //if the facet normal is not more than 90 deg off the x axis vector then keep it
           //note the standard in importing the cad models I defined when importing them
           if (Dot())
 
 
 
-
-        }
+        }*/
 
 
         sensor_number = sensor_number + 1;
-        c_vol.setSensitiveDetector(sens);
+        //c_vol.setSensitiveDetector(sens);
         sensitives[m_nam].push_back(pv);
         module_thicknesses[m_nam] = {10,
                                      10};
