@@ -118,6 +118,12 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
  * @author Whitney Armstrong, Tuna Tasali
  */
 
+//a conversion function between Vector3D and TessellatedSolid::Vertex
+Vector3D Vertex_to_Vector3D(TessellatedSolid::Vertex vertex) 
+{
+  Vector3D vec(vertex[0], vertex[1], vertex[2]);
+  return(vec);
+}
 
 
 
@@ -360,16 +366,31 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
               module_thicknesses[m_nam] = {thickness_so_far + x_comp.thickness() / 2.0,
                                            total_thickness - thickness_so_far - x_comp.thickness() / 2.0};                   
               // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
-              Vector3D u(-1., 0., 0.);
-              Vector3D v(0., -1., 0.);
-              Vector3D n(0., 0., 1.);
+              //Vector3D u(-1., 0., 0.);
+              //Vector3D v(0., -1., 0.);
+              //Vector3D n(0., 0., 1.);
               //    Vector3D o( 0. , 0. , 0. ) ;
+              
+              //first compute a centroid
+              for(auto& element : vertices) 
+              {
+                extruded_vertices.push_back(element + extrusionVector);
+              }
+
+
+              Vector3D u(0., 0., 0.);
+              Vector3D v(0., 0., 0.);
+              Vector3D n(0., 0., 0.);
+              Vector3D o(0., 0., 0.);
+
+
+
               // compute the inner and outer thicknesses that need to be assigned to the tracking surface
               // depending on whether the support is above or below the sensor
               double inner_thickness = module_thicknesses[m_nam][0];
               double outer_thickness = module_thicknesses[m_nam][1];
               SurfaceType type(SurfaceType::Sensitive);
-              VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n); //,o ) ;
+              VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n, o ) ;
               volplane_surfaces[m_nam].push_back(surf);
               printout(WARNING, "BarrelTrackingOuter", "AHAHAHAHAHHAHAHAHAHA");
             }
