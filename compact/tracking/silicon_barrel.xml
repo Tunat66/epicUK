@@ -63,19 +63,43 @@
         length="SiBarrelLayer1_length" />
       <comment>Silicon Barrel Modules</comment>
       <module name="Module1" vis="TrackerLayerVis">
+        <module_component name="L3Module_kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          width="3 * mm"
+                          length="840 * mm"
+                          thickness="0 * mm"
+                          vis="TrackerLayerVis"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyKapton_Electrical_Insulation-converted-ASCII.gdml" />
+        <module_component name="L3Module_support"
+                          material="Carbon"
+                          sensitive="false"
+                          width="3 * mm"
+                          length="840 * mm"
+                          thickness="0 * mm"
+                          vis="TrackerLayerVis"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-SupportPlaceholder-converted-ASCII.gdml" />
         <module_component name="L3Module_active_silicon"
+                          material="Silicon"
+                          sensitive="true"
+                          width="3 * mm"
+                          length="SiBarrelLayer1_length"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_active-converted-ASCII.gdml" />
+        <module_component name="L3Module_inactive_silicon"
                           material="Silicon"
                           sensitive="false"
                           width="3 * mm"
-                          length="SiBarrelLayer1_length"
-                          thickness="3 * mm"
+                          length="840 * mm"
+                          thickness="-0.3 * mm"
                           vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_active-converted-ASCII.gdml" />
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII.gdml" />
       </module>
       <comment> Layers composed of many arrayed modules  </comment>
       <layer module="Module1" id="1" vis="TrackerLayerVis">
         <barrel_envelope
-          inner_r="SiBarrelLayer1_rmin-0.5*mm"
+          inner_r="SiBarrelLayer1_rmin-5.0*mm"
           outer_r="SiBarrelLayer1_rmax"
           z_length="SiBarrelLayer1_length" />
         <layer_material surface="inner" binning="binPhi,binZ" bins0="SiBarrelStave1_count" bins1="100" />
@@ -169,7 +193,7 @@
   <readouts>
     <readout name="SiBarrelHits">
       <segmentation type="CartesianGridXY" grid_size_x="0.020*mm" grid_size_y="0.020*mm" />
-      <id>system:8,layer:4,module:12,sensor:2,x:32:-12,y:-20</id>
+      <id>system:8,layer:4,module:12,sensor:8,x:32:-16,y:-16</id>
     </readout>
   </readouts>
 

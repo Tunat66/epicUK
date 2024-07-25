@@ -334,7 +334,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
             
             //if the facet normal is not more than 90 deg off the x axis vector then keep it
             //note the standard in importing the cad models I defined when importing them
-            double costheta = TessellatedSolid::Vertex::Dot(zhat, extruded_facet_access.getNormal());
+            double costheta = TessellatedSolid::Vertex::Dot(yhat, extruded_facet_access.getNormal());
             if (abs(costheta) >= 1/(sqrt(2))) //currently programmed for 45 deg max angle
             {
               //now define a facet volume and place it under sc_vol
@@ -344,7 +344,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
               sc_vol_facet.setRegion(description, x_comp.regionStr());
               sc_vol_facet.setLimitSet(description, x_comp.limitsStr());
               //now place the volume
-              RotationX c_rot(M_PI/2);
+              RotationZYX c_rot(M_PI, 0, M_PI/2);
               pv = m_vol.placeVolume(sc_vol_facet, Transform3D(c_rot, Position(0, 0, zoff)));
               sc_vol_facet.setVisAttributes(description, x_comp.visStr());
               pv.addPhysVolID("sensor", sensor_number);
@@ -407,7 +407,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
           pv = m_vol.placeVolume(c_vol, Position(x_pos.x(0), x_pos.y(0), x_pos.z(0) + zoff));
         } else {
           //the c_rot is a temporary adjustment I added
-          RotationX c_rot(M_PI/2);
+          RotationZYX c_rot(M_PI, 0, M_PI/2);
           pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, Position(0, 0, zoff)));
         
         }
