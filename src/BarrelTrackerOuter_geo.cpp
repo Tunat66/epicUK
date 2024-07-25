@@ -372,19 +372,22 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
               //    Vector3D o( 0. , 0. , 0. ) ;
               
               //first compute a centroid
-              for(auto& element : vertices) 
-              {
-                extruded_vertices.push_back(element + extrusionVector);
-              }
-
+              //for(auto& element : vertices) 
+              //{
+                //extruded_vertices.push_back(element + extrusionVector);
+              //}
 
               Vector3D u(0., 0., 0.);
               Vector3D v(0., 0., 0.);
               Vector3D n(0., 0., 0.);
               Vector3D o(0., 0., 0.);
 
+              u = Vertex_to_Vector3D(vertices.at(1) - vertices.at(2));
+              v = Vertex_to_Vector3D(vertices.at(0) - vertices.at(2));
+              n = Vertex_to_Vector3D(extruded_facet_access.normal);
+              o = Vertex_to_Vector3D(vertices.at(2));
 
-
+    
               // compute the inner and outer thicknesses that need to be assigned to the tracking surface
               // depending on whether the support is above or below the sensor
               double inner_thickness = module_thicknesses[m_nam][0];
@@ -392,14 +395,11 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
               SurfaceType type(SurfaceType::Sensitive);
               VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n, o ) ;
               volplane_surfaces[m_nam].push_back(surf);
-              printout(WARNING, "BarrelTrackingOuter", "AHAHAHAHAHHAHAHAHAHA");
+              printout(WARNING, "BarrelTrackingOuter", "Facet is facing the right direction, registered as sensitive.");
             }
             else //for debugging
-              printout(WARNING, "BarrelTrackingOuter", "Facet is not facing right direction, skipping");
+              printout(WARNING, "BarrelTrackingOuter", "Facet is not facing right direction, skipping facet.");
             
-            
-
-
             //release the facet extrusion*/
             //delete extruded_facet;
           }
