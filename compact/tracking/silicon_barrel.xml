@@ -45,19 +45,10 @@
     <constant name="SiBarrelStave1_count"        value="floor(180.*degree/asin(SiBarrelStave1_width*cos(SiBarrelStaveTilt_angle)/2/SiBarrelMod1_rmin))+2"/>
     <constant name="SiBarrelStave2_count"        value="floor(180.*degree/asin(SiBarrelStave2_width*cos(SiBarrelStaveTilt_angle)/2/SiBarrelMod2_rmin))+2"/>
   </define>
-  
-  <comment> 
-`   What is new:
-
-    I transplanted the modules and layers of VertexBarrelOuter into here and adjust the DECLARE_DETELEMENT
-    macros in the .cpp files to have these new structures of L3 and L4
-
-  </comment>
 
   <detectors>
     <documentation level="5">
         ### Actual detectors
-        Detector L3
     </documentation>
     <detector
       id="TrackerBarrel_0_ID"
@@ -67,102 +58,49 @@
       insideTrackingVolume="true">
       <type_flags type="DetType_TRACKER + DetType_BARREL"/>
       <dimensions
-        rmin="210 * mm"
-        rmax="350 * mm"
-        length="840 * mm" /> <!--840 default-->
+        rmin="SiBarrelLayer1_rmin"
+        rmax="SiBarrelLayer1_rmax"
+        length="SiBarrelLayer1_length" />
       <comment>Silicon Barrel Modules</comment>
-      <module name="L3Module" vis="TrackerLayerVis">
-        <!-- The blank values are defined by the geometry the GDML file anyway, left them
-         for consistency. file="install/share/epic/compact/tracking/L3-L4_gdml/centered_ePIC-L3-converted-ASCII.gdml
-         file="install/share/epic/gdml/Tile01_Reduced.gdml"-->
+      <module name="Module1" vis="TrackerLayerVis">
         <module_component name="L3Module_active_silicon"
                           material="Silicon"
-                          sensitive="true"
+                          sensitive="false"
                           width="3 * mm"
-                          length="840 * mm"
+                          length="SiBarrelLayer1_length"
                           thickness="3 * mm"
                           vis="TrackerLayerVis"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_active-converted-ASCII.gdml" />
-        
-        <!--<module_component name="ITS3"
-                          material="Silicon"
-                          sensitive="true"
-                          width="SiBarrelStave1_width"
-                          length="SiBarrelMod1_length"
-                          thickness="SiBarrelSensor_thickness"
-                          vis="TrackerLayerVis" />      -->            
-        <module_component name="L3Module_inactive_silicon"
-                          material="Silicon"
-                          sensitive="false"
-                          width="3 * mm"
-                          length="840 * mm"
-                          thickness="30 * mm"
-                          vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII.gdml" />
-        <module_component name="L3Module_kapton"
-                          material="Kapton"
-                          sensitive="false"
-                          width="3 * mm"
-                          length="840 * mm"
-                          thickness="30 * mm"
-                          vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyKapton_Electrical_Insulation-converted-ASCII.gdml" />
-        <module_component name="L3Module_support"
-                          material="Carbon"
-                          sensitive="false"
-                          width="3 * mm"
-                          length="840 * mm"
-                          thickness="30 * mm"
-                          vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-SupportPlaceholder-converted-ASCII.gdml" />
-      <!--<module_component name="L3Module_electronic"
-                          material="Carbon"
-                          sensitive="false"
-                          width="3 * mm"
-                          length="840 * mm"
-                          thickness="3 * mm"
-                          vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyAncillary_FPC-converted-ASCII.gdml" />-->
       </module>
-      <layer module="L3Module" id="3" vis="TrackerLayerVis">
-        <!-- IDK how to define the envelope values, but they might not be needed??-->
-        <!-- I just came up with a rough estimate of the thickness of the modules to 
-         define an envelope, THIS WILL CHANGE-->
+      <comment> Layers composed of many arrayed modules  </comment>
+      <layer module="Module1" id="1" vis="TrackerLayerVis">
         <barrel_envelope
-          inner_r="SiBarrelLayer1_rmin-10.0*mm"
+          inner_r="SiBarrelLayer1_rmin-0.5*mm"
           outer_r="SiBarrelLayer1_rmax"
-          z_length="840 * mm" />
-        <layer_material surface="inner" binning="binPhi,binZ" bins0="42" bins1="100" />
-        <layer_material surface="outer" binning="binPhi,binZ" bins0="42" bins1="100" />
+          z_length="SiBarrelLayer1_length" />
+        <layer_material surface="inner" binning="binPhi,binZ" bins0="SiBarrelStave1_count" bins1="100" />
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="SiBarrelStave1_count" bins1="100" />
         <comment>
           phi0     : Starting phi of first module.
           phi_tilt : Phi tilt of a module.
           rc       : Radius of the module center.
           nphi     : Number of modules in phi.
-          rphi_dr  : The delta radius of every other module. Will be very useful on our design.
-
+          rphi_dr  : The delta radius of every other module.
           z0       : Z position of first module in phi.
           nz       : Number of modules to place in z.
           dr       : Radial displacement parameter, of every other module.
         </comment>
-        <rphi_layout phi_tilt="0.0*degree" nphi="42" phi0="0.0" rc="SiBarrelMod1_rmin" dr="0 * mm"/> 
-        <comment>These values are unused, but left here just in case</comment>
-        <z_layout dr="0.0 * mm" z0="480.0 * mm / 2" nz="4"/>
+        <rphi_layout phi_tilt="SiBarrelStaveTilt_angle" nphi="SiBarrelStave1_count" phi0="0.0" rc="SiBarrelMod1_rmin" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
     </detector>
-
-
-
     <documentation level="5">
         ### Actual detectors
-        Detector L4
     </documentation>
-
-    <!--
-    <detector
+    <!--<detector
       id="TrackerBarrel_1_ID"
       name="OuterSiBarrel"
-      type="epic_SiliconBarrel"
+      type="epic_TrackerBarrel"
       readout="SiBarrelHits"
       insideTrackingVolume="true">
       <type_flags type="DetType_TRACKER + DetType_BARREL"/>
@@ -171,49 +109,48 @@
         rmax="SiBarrelLayer2_rmax"
         length="SiBarrelLayer2_length" />
       <comment>Silicon Barrel Modules</comment>
-      <module name="L4Module" vis="TrackerLayerVis">
-        <module_component name="L4Module_active_silicon"
+      <module name="Module1" vis="TrackerLayerVis">
+        <frame material="CarbonFiber"
+               vis="TrackerSupportVis"
+               width="SiBarrelStave2_width"
+               height="SiBarrelMod2Frame_height"
+               length="SiBarrelMod2_length"
+               thickness="SiBarrelMod2Frame_thickness" />
+        <module_component name="ITS3"
                           material="Silicon"
                           sensitive="true"
-                          width="3 * mm"
-                          length="840 * mm"
-                          thickness="3 * mm"
-                          vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_active-converted-ASCII.gdml" />
-        <module_component name="L4Module_inactive_silicon"
-                          material="Silicon"
+                          width="SiBarrelStave2_width"
+                          length="SiBarrelMod2_length"
+                          thickness="SiBarrelSensor_thickness"
+                          vis="TrackerLayerVis" />
+        <module_component name="Service"
+                          material="Aluminum"
                           sensitive="false"
-                          width="3 * mm"
-                          length="840 * mm"
-                          thickness="3 * mm"
-                          vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII.gdml" />
-        <module_component name="L4Module_kapton"
-                          material="Kapton"
-                          sensitive="false"
-                          width="3 * mm"
-                          length="840 * mm"
-                          thickness="3 * mm"
-                          vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyKapton_Electrical_Insulation-converted-ASCII.gdml" />
-        <module_component name="L4Module_support"
-                          material="Carbon"
-                          sensitive="false"
-                          width="3 * mm"
-                          length="840 * mm"
-                          thickness="3 * mm"
-                          vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-SupportPlaceholder-converted-ASCII.gdml" />
+                          width="SiBarrelStave2_width"
+                          length="SiBarrelMod2_length"
+                          thickness="SiBarrelMod2Service_thickness"
+                          vis="TrackerLayerVis"/>
       </module>
-      <layer module="L4Module" id="4" vis="TrackerLayerVis">
+      <comment> Layers composed of many arrayed modules  </comment>
+      <layer module="Module1" id="1" vis="TrackerLayerVis">
         <barrel_envelope
-          inner_r="410 * mm"
-          outer_r="430 * mm"
-          z_length="840 * mm" />
-        <layer_material surface="inner" binning="binPhi,binZ" bins0="64" bins1="100" />
-        <layer_material surface="outer" binning="binPhi,binZ" bins0="64" bins1="100" />
-        <rphi_layout phi_tilt="0.0*degree" nphi="64" phi0="0.0*degree" rc="420 * mm" dr="10.0 * mm"/>
-        <z_layout dr="20.0 * mm" z0="720.0 * mm / 2" nz="6"/>
+          inner_r="SiBarrelLayer2_rmin-1.0*mm"
+          outer_r="SiBarrelLayer2_rmax"
+          z_length="SiBarrelLayer2_length" />
+        <layer_material surface="inner" binning="binPhi,binZ" bins0="128" bins1="100" />
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="128" bins1="100" />
+        <comment>
+          phi0     : Starting phi of first module.
+          phi_tilt : Phi tilt of a module.
+          rc       : Radius of the module center.
+          nphi     : Number of modules in phi.
+          rphi_dr  : The delta radius of every other module.
+          z0       : Z position of first module in phi.
+          nz       : Number of modules to place in z.
+          dr       : Radial displacement parameter, of every other module.
+        </comment>
+        <rphi_layout phi_tilt="SiBarrelStaveTilt_angle" nphi="SiBarrelStave2_count" phi0="0.0" rc="SiBarrelMod2_rmin" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
     </detector>-->
   </detectors>
@@ -223,7 +160,6 @@
       <argument value="SagittaSiBarrel"/>
       <argument value="layer_pattern: str=SagittaSiBarrel_layer\d"/>
     </plugin>
-    
     <!--<plugin name="DD4hep_ParametersPlugin">
       <argument value="OuterSiBarrel"/>
       <argument value="layer_pattern: str=OuterSiBarrel_layer\d"/>
@@ -233,7 +169,7 @@
   <readouts>
     <readout name="SiBarrelHits">
       <segmentation type="CartesianGridXY" grid_size_x="0.020*mm" grid_size_y="0.020*mm" />
-      <id>system:8,layer:4,module:12,sensor:8,x:32:-16,y:-16</id>
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-12,y:-20</id>
     </readout>
   </readouts>
 

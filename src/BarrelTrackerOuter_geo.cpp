@@ -161,9 +161,49 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
   //
   //
 
+  // Loop over the suports
+  for (xml_coll_t su(x_det, _U(support)); su; ++su) {
+    xml_comp_t x_support     = su;
+    double support_thickness = getAttrOrDefault(x_support, _U(thickness), 2.0 * mm);
+    double support_length    = getAttrOrDefault(x_support, _U(length), 2.0 * mm);
+    double support_rmin      = getAttrOrDefault(x_support, _U(rmin), 2.0 * mm);
+    double support_zstart    = getAttrOrDefault(x_support, _U(zstart), 2.0 * mm);
+    std::string support_name =
+        getAttrOrDefault<std::string>(x_support, _Unicode(name), "support_tube");
+    std::string support_vis = getAttrOrDefault<std::string>(x_support, _Unicode(vis), "AnlRed");
+    xml_dim_t pos(x_support.child(_U(position), false));
+    xml_dim_t rot(x_support.child(_U(rotation), false));
+    Solid support_solid;
+    if (x_support.hasChild(_U(shape))) {
+      xml_comp_t shape(x_support.child(_U(shape)));
+      string shape_type = shape.typeStr();
+      support_solid     = xml::createShape(description, shape_type, shape);
+    } else {
+      support_solid = Tube(support_rmin, support_rmin + support_thickness, support_length / 2);
+    }
+    Transform3D tr =
+        Transform3D(Rotation3D(), Position(0, 0, (support_zstart + support_length / 2)));
+    if (pos.ptr() && rot.ptr()) {
+      Rotation3D rot3D(RotationZYX(rot.z(0), rot.y(0), rot.x(0)));
+      Position pos3D(pos.x(0), pos.y(0), pos.z(0));
+      tr = Transform3D(rot3D, pos3D);
+    } else if (pos.ptr()) {
+      tr = Transform3D(Rotation3D(), Position(pos.x(0), pos.y(0), pos.z(0)));
+    } else if (rot.ptr()) {
+      Rotation3D rot3D(RotationZYX(rot.z(0), rot.y(0), rot.x(0)));
+      tr = Transform3D(rot3D, Position());
+    }
+    Material support_mat = description.material(x_support.materialStr());
+    Volume support_vol(support_name, support_solid, support_mat);
+    support_vol.setVisAttributes(description.visAttributes(support_vis));
+    pv = assembly.placeVolume(support_vol, tr);
+    // pv = assembly.placeVolume(support_vol, Position(0, 0, support_zstart + support_length / 2));
+  }
+
+
+
   // loop over the modules
   // to parse GDML files
-  
   TGDMLParseBiggerFiles* parser = new TGDMLParseBiggerFiles();
   for (xml_coll_t mi(x_det, _U(module)); mi; ++mi) {
     xml_comp_t x_mod = mi;
@@ -177,19 +217,19 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
 
     int ncomponents        = 0;
     int sensor_number      = 1;
-    //double total_thickness = 0;
+    double total_thickness = 0;
 
     // Compute module total thickness from components
     xml_coll_t ci(x_mod, _U(module_component));
-    //for (ci.reset(), total_thickness = 0.0; ci; ++ci) {
-      //total_thickness += xml_comp_t(ci).thickness();
-    //}
+    for (ci.reset(), total_thickness = 0.0; ci; ++ci) {
+      total_thickness += xml_comp_t(ci).thickness();
+    }
     Assembly m_vol(m_nam);
     volumes[m_nam] = m_vol;
     m_vol.setVisAttributes(description.visAttributes(x_mod.visStr()));
 
-    //double thickness_so_far = 0.0;
-    //double thickness_sum    = -total_thickness / 2.0;
+    double thickness_so_far = 0.0;
+    double thickness_sum    = -total_thickness / 2.0;
     for (xml_coll_t mci(x_mod, _U(module_component)); mci; ++mci, ++ncomponents) {
       xml_comp_t x_comp  = mci;
       xml_comp_t x_pos   = x_comp.position(false);
@@ -223,6 +263,8 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       c_sol->CloseShape(true, true, true); //otherwise you get an infinite bounding box
       c_sol->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
       c_vol.setSolid(c_sol);
+      c_vol.setRegion(description, x_comp.regionStr());
+      c_vol.setLimitSet(description, x_comp.limitsStr());
       //for former testing purposes
       //c_vol.setSolid(Box(12 * mm, 12 * mm, 120 * mm));
       
@@ -243,8 +285,8 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
      
       
       // Utility variable for the relative z-offset based off the previous components
-      //const double zoff = thickness_sum + x_comp.thickness() / 2.0;
-      const double zoff = 0; //this value might cause issues, keep an eye out
+      const double zoff = thickness_sum + x_comp.thickness() / 2.0;
+      //const double zoff = 0; //this value might cause issues, keep an eye out
 
       //now, the code branches in the following way:
       // if the volume is sensitive, build the tesselated solid into thickened pixels of extruded polyogons
@@ -299,6 +341,8 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
               Volume sc_vol_facet("facet" + to_string(sensor_number));
               sc_vol_facet.setSolid(extruded_facet); //note: the dereferenced pointer is also a pointer
               sc_vol_facet.setMaterial(description.material(x_comp.materialStr()));
+              sc_vol_facet.setRegion(description, x_comp.regionStr());
+              sc_vol_facet.setLimitSet(description, x_comp.limitsStr());
               //now place the volume
               RotationX c_rot(M_PI/2);
               pv = m_vol.placeVolume(sc_vol_facet, Transform3D(c_rot, Position(0, 0, zoff)));
@@ -311,8 +355,10 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
               
 
               //SURFACE WORK
-              module_thicknesses[m_nam] = {extrusion_length,
-                                          0};
+              //module_thicknesses[m_nam] = {extrusion_length,
+                                          //0};
+              module_thicknesses[m_nam] = {thickness_so_far + x_comp.thickness() / 2.0,
+                                           total_thickness - thickness_so_far - x_comp.thickness() / 2.0};                   
               // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
               Vector3D u(-1., 0., 0.);
               Vector3D v(0., -1., 0.);
@@ -367,7 +413,13 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
         }
         c_vol.setVisAttributes(description, x_comp.visStr());
       }
-      
+      thickness_sum += x_comp.thickness();
+      thickness_so_far += x_comp.thickness();
+      // apply relative offsets in z-position used to stack components side-by-side
+      if (x_pos) {
+        thickness_sum += x_pos.z(0);
+        thickness_so_far += x_pos.z(0);
+      }
     }
     
   }
@@ -386,7 +438,6 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
     Volume lay_vol(lay_nam, lay_tub, vacuum); // Create the layer envelope volume.
     Position lay_pos(0, 0, getAttrOrDefault(x_barrel, _U(z0), 0.));
     lay_vol.setVisAttributes(description.visAttributes(x_layer.visStr()));
-    lay_vol.setSensitiveDetector(sens);
 
     //Assembly lay_vol(lay_nam);
     //Position lay_pos(0, 0, getAttrOrDefault(x_barrel, _U(z0), 0.));
@@ -405,8 +456,6 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
     Volume module_env = volumes[m_nam];
     DetElement lay_elt(sdet, lay_nam, lay_id);
     Placements& sensVols = sensitives[m_nam];
-
-    //module_env.setSensitiveDetector(sens);
 
     // the local coordinate systems of modules in dd4hep and acts differ
     // see http://acts.web.cern.ch/ACTS/latest/doc/group__DD4hepPlugins.html
@@ -494,7 +543,6 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
   printout(WARNING, "BarrelTrackerOuter", "DetElement instance \"sdet\" might be corrupted if the GDML design file is too big.");	
   
   return sdet;
-
 }
 
 //@}
