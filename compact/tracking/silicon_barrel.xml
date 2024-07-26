@@ -68,14 +68,16 @@
                           sensitive="false"
                           width="3 * mm"
                           length="840 * mm"
-                          thickness="0 * mm"
+                          offset="0 * mm"
                           vis="TrackerLayerVis"
+                          thickness="0 * mm"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyKapton_Electrical_Insulation-converted-ASCII.gdml" />
         <module_component name="L3Module_support"
                           material="Carbon"
                           sensitive="false"
                           width="3 * mm"
                           length="840 * mm"
+                          offset="0 * mm"
                           thickness="0 * mm"
                           vis="TrackerLayerVis"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-SupportPlaceholder-converted-ASCII.gdml" />
@@ -85,6 +87,7 @@
                           width="3 * mm"
                           length="SiBarrelLayer1_length"
                           thickness="0.09996 * mm"
+                          offset="0 * mm"
                           vis="TrackerLayerVis"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_active-converted-ASCII.gdml" />
         <module_component name="L3Module_inactive_silicon"
@@ -92,7 +95,8 @@
                           sensitive="false"
                           width="3 * mm"
                           length="840 * mm"
-                          thickness="-0.3 * mm"
+                          offset="-0.3 * mm"
+                          thickness="0 * mm"
                           vis="TrackerLayerVis"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/placeholder-gdml/SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII.gdml" />
       </module>

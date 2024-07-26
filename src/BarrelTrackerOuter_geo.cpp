@@ -288,10 +288,13 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       c_sol->CloseShape(true, true, true); //otherwise you get an infinite bounding box
       c_sol->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
       c_vol.setSolid(c_sol);*/
-     
+
+      //an important offset variable that allows radial offsetting to prevent overlaps:
+      const double radial_offset =
+          getAttrOrDefault<double>(x_comp, _Unicode(offset), 0);
       
       // Utility variable for the relative z-offset based off the previous components
-      const double zoff = thickness_sum + x_comp.thickness() / 2.0;
+      const double zoff = thickness_sum + radial_offset / 2.0;
       //const double zoff = 0; //this value might cause issues, keep an eye out
 
       //now, the code branches in the following way:
@@ -377,15 +380,15 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
                 //extruded_vertices.push_back(element + extrusionVector);
               //}
 
-              Vector3D u(0., 0., 0.);
-              Vector3D v(0., 0., 0.);
-              Vector3D n(0., 0., 0.);
-              Vector3D o(0., 0., 0.);
+              //Vector3D u(-1., 0., 0.);
+              //Vector3D v(0., 0., -1.);
+              //Vector3D n(0., 1., 0.);
+              //Vector3D o(0., 0., 0.);
 
-              u = Vertex_to_Vector3D(vertices.at(1) - vertices.at(2));
-              v = Vertex_to_Vector3D(vertices.at(0) - vertices.at(2));
-              n = Vertex_to_Vector3D(extruded_facet_access.normal);
-              o = Vertex_to_Vector3D(vertices.at(2));
+              Vector3D u = Vertex_to_Vector3D(vertices.at(1) - vertices.at(2));
+              Vector3D v = Vertex_to_Vector3D(vertices.at(0) - vertices.at(2));
+              Vector3D n = Vertex_to_Vector3D(extruded_facet_access.normal);
+              Vector3D o = Vertex_to_Vector3D(0.333333333 * (vertices.at(0) + vertices.at(1) + vertices.at(2)));
 
     
               // compute the inner and outer thicknesses that need to be assigned to the tracking surface
@@ -393,7 +396,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
               double inner_thickness = module_thicknesses[m_nam][0];
               double outer_thickness = module_thicknesses[m_nam][1];
               SurfaceType type(SurfaceType::Sensitive);
-              VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n, o ) ;
+              VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n, o);
               volplane_surfaces[m_nam].push_back(surf);
               printout(WARNING, "BarrelTrackingOuter", "Facet is facing the right direction, registered as sensitive.");
             }
@@ -412,7 +415,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
 
 
         }
-        
+
       }
       else { // not a sensitive volume
         //place the volume
@@ -433,9 +436,11 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
         
         }
         c_vol.setVisAttributes(description, x_comp.visStr());
+        
       }
-      thickness_sum += x_comp.thickness();
-      thickness_so_far += x_comp.thickness();
+      //NOTE: HAVE THICKNESS ATTRIBUTE FOR ALL COMPONENTS
+      thickness_sum += radial_offset +  x_comp.thickness();
+      thickness_so_far += radial_offset + x_comp.thickness();
       // apply relative offsets in z-position used to stack components side-by-side
       if (x_pos) {
         thickness_sum += x_pos.z(0);
