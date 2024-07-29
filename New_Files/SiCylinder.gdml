@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+
+ <define>
+ 
+  <position name="TargetinWorldp" unit="mm" x="0" y="0" z="0" />
+  <rotation name="TargetinWorldr" unit="degree" x="0" y="0" z="0" />
+ </define>
+
+ <materials>
+  <element Z="7" formula="N" name="Nitrogen" >
+   <atom value="14.01" />
+  </element>
+  <element Z="8" formula="O" name="Oxygen" >
+   <atom value="16" />
+  </element>
+  <material formula=" " name="Air" >
+   <D value="0.00129" />
+   <fraction n="0.7" ref="Nitrogen" />
+   <fraction n="0.3" ref="Oxygen" />
+  </material>
+  <material Z="14" formula=" " name="Silicon" >
+   <D value="2.329" />
+   <atom value="28.085" />
+  </material>
+ 
+ </materials>
+
+ <solids>
+  <box aunit="radian" lunit="mm" name="world" x="1500" y="1500" z="1500" />
+  <tube aunit="radian" lunit="mm" name="cylinder" rmin="270" rmax="270.1" deltaphi="6.28" z="540" />
+ </solids>
+
+ <structure>
+
+  <volume name="Cylinder" >
+   <materialref ref="Silicon" />
+   <solidref ref="cylinder" />
+   <auxiliary auxtype="SensDet" auxvalue="Tracker"/>
+   <auxiliary auxtype="Color" auxvalue="Blue"/>
+  </volume>
+
+  <volume name="World" >
+   <materialref ref="Air" />
+   <solidref ref="world" />
+
+   <physvol>
+    <volumeref ref="Cylinder" />
+  
+   </physvol>
+
+  </volume>
+
+ </structure>
+
+ <setup name="Default" version="1.0" >
+  <world ref="World" />
+ </setup>
+</gdml>

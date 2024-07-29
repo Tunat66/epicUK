@@ -1,0 +1,98 @@
+<!-- SPDX-License-Identifier: LGPL-3.0-or-later -->
+<!-- Copyright (C) 2022 Sylvester Joosten, Whitney Armstrong, Shujie Li -->
+
+<lccdd>
+  <define>
+    <comment>
+      Main parameters
+    </comment>
+
+    <constant name="VertexBarrelMod_length"             value="VertexBarrel_length"/>
+    <constant name="VertexBarrelMod_rmin"               value="VertexBarrel_rmin"/>
+
+    <constant name="SiVertexSensor_thickness"           value="40*um"/>
+
+
+    <constant name="VertexBarrelMod1_rmin"              value="VertexBarrelMod_rmin"/>
+    <constant name="VertexBarrelMod2_rmin"              value="VertexBarrelMod_rmin + 1.2*cm"/>
+    <constant name="VertexBarrelMod3_rmin"              value="12.0*cm"/>
+
+    <comment> ensure we are within the vertex envelope with some margin. </comment>
+    <constant name="VertexCheck"                        value="sqrt(VertexBarrel_rmax - VertexBarrelMod3_rmin - .1*cm)"/>
+
+    <documentation>
+      - Currently there are 3 sensor layers. Each is composed of 2 half-cylinders modules with only 40um of silicon thickness.
+      - Both support shells are 300um thick, implemented as the integrated tracker support/service setup
+
+    </documentation>
+
+    <constant name="VertexBarrelEnvelope_length"    value="VertexTrackingRegion_length"/>
+    <constant name="VertexBarrelLayer_length"       value="VertexBarrelMod_length + 1*um"/>
+
+    <constant name="VertexBarrelLayer_thickness"    value="0.2*cm"/>
+    <constant name="VertexBarrelMod_thickness"      value="0.1*cm"/>
+
+    <comment> Layer 3 already set as main parameter </comment>
+
+    <constant name="VertexBarrelLayer1_rmin"        value="VertexBarrelMod1_rmin - VertexBarrelLayer_thickness/2.0"/>
+    <constant name="VertexBarrelLayer1_rmax"        value="VertexBarrelLayer1_rmin + VertexBarrelLayer_thickness"/>
+    <constant name="VertexBarrelLayer2_rmin"        value="VertexBarrelMod2_rmin - VertexBarrelLayer_thickness/2.0"/>
+    <constant name="VertexBarrelLayer2_rmax"        value="VertexBarrelLayer2_rmin + VertexBarrelLayer_thickness"/>
+    <constant name="VertexBarrelLayer3_rmin"        value="VertexBarrelMod3_rmin - VertexBarrelLayer_thickness/2.0"/>
+    <constant name="VertexBarrelLayer3_rmax"        value="VertexBarrelLayer3_rmin + VertexBarrelLayer_thickness"/>
+
+    <comment>
+      Extra parameters to approximate a cylinder as a set of skinny staves
+      due to ACTS limitations.
+      FIXME: this shouldn't be needed anymore, need to update the cylindrical plugin.
+    </comment>
+    <constant name="VertexBarrelStave_count1"       value="128"/>
+    <constant name="VertexBarrelStave_count2"       value="128"/>
+    <constant name="VertexBarrelStave_count3"       value="128"/>
+    <constant name="VertexBarrelStave1_width"      value="2*VertexBarrelMod1_rmin * tan(180*degree/VertexBarrelStave_count1)"/>
+    <constant name="VertexBarrelStave2_width"      value="2*VertexBarrelMod2_rmin * tan(180*degree/VertexBarrelStave_count2)"/>
+    <constant name="VertexBarrelStave3_width"      value="2*VertexBarrelMod3_rmin * tan(180*degree/VertexBarrelStave_count3)"/>
+  </define>
+
+  <detectors>
+    <documentation level="5">
+        ### Actual detectors
+    </documentation>
+
+    <detector
+      id="VertexBarrel_1_ID"
+      name="VertexBarrelOuter"
+      type="epic_VertexBarrelOuter"
+      readout="VertexBarrelOuterHits"
+      insideTrackingVolume="true">
+      <type_flags type="DetType_TRACKER + DetType_BARREL"/>
+      <comment> I entered these dimensions manually from the ePIC wiki </comment>
+      <dimensions
+        rmin="270 * mm"
+        rmax="420 * mm"
+        length="840 * mm" />
+      <comment>Vertex Barrel Modules (L3 and L4) to be added later separately. I just dropped the gdml file down here now</comment>
+      <L3L4_gdmlfile file="compact/tracking/L3-L4_gdml/epic2.gdml" material="Silicon"/>
+
+    </detector>
+
+
+  </detectors>
+
+  <plugins>
+    <plugin name="DD4hep_ParametersPlugin">
+      <argument value="VertexBarrel"/>
+      <argument value="layer_pattern: str=VertexBarrel_layer\d"/>
+    </plugin>
+  </plugins>
+
+  <readouts>
+
+    <readout name="VertexBarrelOuterHits">
+      <segmentation type="CartesianGridXY" grid_size_x="0.020*mm" grid_size_y="0.020*mm" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,y:-16</id>
+    </readout>
+
+  </readouts>
+
+</lccdd>

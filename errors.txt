@@ -1,0 +1,9 @@
+[acts] [error] Error during DD4Hep -> ACTS geometry conversion: CylinderVolumeBounds: invalid extrusion thickness.
+[acts] [info] Set parameter acts::InitLogLevel=trace to see conversion info and possibly identify failing geometry
+
+
+TOFSubAssembly
+[acts] [info] CONV           Translating DD4hep sub detector: OuterBarrelMPGDSubAssembly
+[acts] [info] CONV           Translating DD4hep sub detector: B0TrackerSubAssembly
+[acts] [error] Error during DD4Hep -> ACTS geometry conversion: CylinderBounds: invalid length setup.
+[acts] [info] Set parameter acts::InitLogLevel=trace to see conversion info and possibly identify failing geometry
