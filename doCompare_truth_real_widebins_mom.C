@@ -23,8 +23,8 @@ void doCompare_truth_real_widebins_mom(TString particle = "pi-",double etamin=-1
    gStyle->SetOptFit(1);
    gStyle->SetOptStat(1);
   
-   const Int_t nfiles = 6;
-   double mom[nfiles] ={0.5,1.0,2.0,5.0,10.0,15.0};
+   const Int_t nfiles = 15;
+   double mom[nfiles] ={0.5, 0.75, 1.0, 1.25, 1.75, 2.0, 2.50, 3.0, 4.0, 5.0, 7.0, 8.5, 10.0, 12.5, 15.0};
    std::vector<double> momV_truth, momV_real, momresolV_truth, err_momresolV_truth, momresolV_real, err_momresolV_real;
    momV_truth.clear(); momV_real.clear(); momresolV_truth.clear(); err_momresolV_truth.clear(); momresolV_real.clear(); err_momresolV_real.clear();
    TString symbolname = "";
@@ -62,8 +62,8 @@ void doCompare_truth_real_widebins_mom(TString particle = "pi-",double etamin=-1
    TCanvas *cp = new TCanvas("cp","cp",1400,1000);
    cp->SetMargin(0.10, 0.05 ,0.1,0.07);
 
-	 fmom_truth[i] = TFile::Open(Form("./truthseed/pi-/mom/Performances_mom_%1.1f_mom_resol_truth_%s.root",mom[i],particle.Data()));
-	 fmom_real[i] = TFile::Open(Form("./realseed/pi-/mom/Performances_mom_%1.1f_mom_resol_realseed_%s.root",mom[i],particle.Data()));
+	 fmom_truth[i] = TFile::Open(Form("truthseed/pi-/mom/Performances_mom_%1.1f_mom_resol_truth_%s.root",mom[i],particle.Data()));
+	 fmom_real[i] = TFile::Open(Form("realseed/pi-/mom/Performances_mom_%1.1f_mom_resol_realseed_%s.root",mom[i],particle.Data()));
 	 
 	 TH1D *hist_truth = (TH1D*) fmom_truth[i]->Get(Form("hist_mom_%1.1f_%1.1f_pmax_%1.1f",mom[i],etamin,etamax));
 	 hist_truth->Rebin(2);
@@ -111,6 +111,7 @@ void doCompare_truth_real_widebins_mom(TString particle = "pi-",double etamin=-1
 	 cp->cd();
 	 hist_real->Draw();
 	 cp->SaveAs(Form("Debug_Plots/real/%s/mom/real_mom_resol_mom%1.1f_%1.1f_eta_%1.1f.png",particle.Data(),mom[i],etamin,etamax));
+	 delete cp;
  } // all files
  	 
 	const int size_truth = momV_truth.size();

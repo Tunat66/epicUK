@@ -9,6 +9,8 @@
 #include "TMath.h"
 #define mpi 0.139  // 1.864 GeV/c^2
 
+#include <iostream>
+
 void draw_req_DCA(double etamin, double etamax, double xmin=0., double xmax=0.);
 void doCompare_truth_real_widebins_dcaz(TString particle = "pi-",double etamin=-1.0, double etamax=1.0, Bool_t drawreq=1, TString epic ="", TString eicrecon = "") // name = p, pt for getting p or pt dependence fitted results
 {
@@ -57,8 +59,8 @@ void doCompare_truth_real_widebins_dcaz(TString particle = "pi-",double etamin=-
 	  lDCAZ->SetBorderSize(0);
 	  lDCAZ->SetHeader(Form("%s ePIC(%s/%s): %1.1f < #eta < %1.1f",symbolname.Data(),epic.Data(),eicrecon.Data(),etamin,etamax),"C");
       
-    fDCA_truth = TFile::Open(Form("./truthseed/%s/dca/final_hist_dca_truthseed.root",particle.Data()));
-	  fDCA_real = TFile::Open(Form("./realseed/%s/dca/final_hist_dca_realseed.root",particle.Data()));
+    fDCA_truth = TFile::Open(Form("truthseed/%s/dca/final_hist_dca_truthseed.root",particle.Data()));
+	  fDCA_real = TFile::Open(Form("realseed/%s/dca/final_hist_dca_realseed.root",particle.Data()));
 	 
 	 // Truth seeding histograms
 	 TH3D *hist_d0z_truth = (TH3D*) fDCA_truth->Get("h_d0z_3d");
@@ -72,6 +74,7 @@ void doCompare_truth_real_widebins_dcaz(TString particle = "pi-",double etamin=-
      TF1 *func_real = new TF1("func_real","gaus",-0.5,0.5);
 	
     for(int iptbin=0; iptbin<nptbins; ++iptbin){
+     
     	
    TCanvas *cp = new TCanvas("cp","cp",1400,1000);
    cp->SetMargin(0.10, 0.05 ,0.1,0.07);
@@ -85,7 +88,9 @@ void doCompare_truth_real_widebins_dcaz(TString particle = "pi-",double etamin=-
     TH1D *histd0z_truth_1d = (TH1D*)hist_d0z_truth->ProjectionX(Form("histd0z_truth_eta%1.1f_%1.1f_pt%1.1f_%1.1f",etamin,etamax,ptmin,ptmax),etamin_bin,etamax_bin,ptmin_bin,ptmax_bin,"o");
     histd0z_truth_1d->SetTitle(Form("d0_{z} (truth): %1.1f <#eta< %1.1f && %1.2f <p_{T}< %1.2f",etamin,etamax,ptmin,ptmax));   
     histd0z_truth_1d->SetName(Form("eta_%1.1f_%1.1f_d0z_truth_pt_%1.1f",etamin,etamax,pt[iptbin]));  
-   if (histd0z_truth_1d->GetEntries()<100) continue;
+     
+   //if (histd0z_truth_1d->GetEntries()<100) continue;
+   //std::cout << "debug!" <<std::endl;
    double mu_truth = histd0z_truth_1d->GetMean(); 
    double sigma_truth = histd0z_truth_1d->GetStdDev();
    func_truth->SetRange(mu_truth-2.0*sigma_truth,mu_truth+2.0*sigma_truth); // fit with in 2 sigma range
@@ -104,7 +109,8 @@ void doCompare_truth_real_widebins_dcaz(TString particle = "pi-",double etamin=-
     histd0z_real_1d->SetTitle(Form("d0_{z} (real): %1.1f <#eta< %1.1f && %1.2f <p_{T}< %1.2f",etamin,etamax,ptmin,ptmax));   
     histd0z_real_1d->SetName(Form("eta_%1.1f_%1.1f_d0z_real_pt_%1.1f",etamin,etamax,pt[iptbin])); 
    
-   if (histd0z_real_1d->GetEntries()<100) continue; 
+   //if (histd0z_real_1d->GetEntries()<100) continue; 
+   
    double mu_real = histd0z_real_1d->GetMean(); 
    double sigma_real = histd0z_real_1d->GetStdDev();
    func_real->SetRange(mu_real-2.0*sigma_real,mu_real+2.0*sigma_real); // fit with in 2 sigma range
@@ -126,6 +132,7 @@ void doCompare_truth_real_widebins_dcaz(TString particle = "pi-",double etamin=-
    cp->cd();
    histd0z_real_1d->Draw();
    cp->SaveAs(Form("Debug_Plots/real/%s/dca/real_dcaz_resol_mom%1.1f_%1.1f_eta_%1.1f.png",particle.Data(),pt[iptbin],etamin,etamax));
+   delete cp;
    }   // ptbin
       
 	const int size_truth = momV_truth.size();

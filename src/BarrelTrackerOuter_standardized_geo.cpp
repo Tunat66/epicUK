@@ -15,34 +15,13 @@
 #include "TGDMLParseBiggerFiles.h"
 //#include "CADPlugins.h"
 #include "FileLoaderHelper.h"
-#include "ImportCADHelper.h" //include utilities, such as struct TriangularPrism
+#include "ImportCADHelper.h" //include utilities
 
 using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::rec;
 using namespace dd4hep::detail;
 
-/** Barrel Tracker imported from GDML file
- *
- *
- * The shapes are created using createShape which can be one of many basic geomtries.
- * See the examples Check_shape_*.xml in
- * [dd4hep's examples/ClientTests/compact](https://github.com/AIDASoft/DD4hep/tree/master/examples/ClientTests/compact)
- * directory.
- *
- *
- * 
- *
- * \ingroup trackers
- *
- * \code
- * \endcode
- *
- *
- * @author Whitney Armstrong, Tuna Tasali
- */
-
-/* THIS BIT IS WORK IN PROGRESS */
 struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated> 
 {
   
@@ -106,14 +85,25 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
   }
 };
 
-//a conversion function between Vector3D and TessellatedSolid::Vertex
-Vector3D vertex_to_vector3D(TessellatedSolid::Vertex vertex) 
-{
-  Vector3D vec(vertex[0], vertex[1], vertex[2]);
-  return(vec);
-}
-
-
+/** Barrel Tracker imported from GDML file
+ *
+ *
+ * The shapes are created using createShape which can be one of many basic geomtries.
+ * See the examples Check_shape_*.xml in
+ * [dd4hep's examples/ClientTests/compact](https://github.com/AIDASoft/DD4hep/tree/master/examples/ClientTests/compact)
+ * directory.
+ *
+ *
+ * 
+ *
+ * \ingroup trackers
+ *
+ * \code
+ * \endcode
+ *
+ *
+ * @author Whitney Armstrong, Tuna Tasali
+ */
 
 static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, SensitiveDetector sens) {
 
@@ -563,4 +553,4 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
 //@}
 // clang-format off
 //Macros to access the XML files
-DECLARE_DETELEMENT(epic_SiliconBarrel,    create_BarrelTrackerOuter)
+DECLARE_DETELEMENT(epic_SiliconBarrelStandardized,    create_BarrelTrackerOuter)
