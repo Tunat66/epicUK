@@ -43,13 +43,26 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
     }
     return normal_return;
   }
+  double compute_area(vector<TessellatedSolid::Vertex> vertices)
+  {
+    //figure out the castings here
+    TessellatedSolid::Vertex vec1 = vertices.at(1) - vertices.at(2);
+    TessellatedSolid::Vertex vec2 = vertices.at(0) - vertices.at(2);
+    
+    //take the cross product
+    //note that cross is stored in the struct vertex so I needed to access it the static way
+    TessellatedSolid::Vertex normal_return = TessellatedSolid::Vertex::Cross(vec1, vec2);
+    return(normal_return.Mag()/2);
+  }
 
   TessellatedSolid return_TriangularPrism(vector<TessellatedSolid::Vertex> vertices, double extrusion_length) {
     
+    double facet_area = compute_area(vertices);
     if(vertices.size() > 3) {
       printout(ERROR, "BarrelTrackerOuter", "Trying to construct triangular prism with more or less than 3 vertices");
       throw runtime_error("Triangular prisim construction failed.");
     }
+    else if(facet_area < 0.1) return NULL;
     else {
       normal = compute_normal(vertices);
       extrusionVector = extrusion_length * normal;
@@ -64,9 +77,9 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
       TessellatedSolid prism("prism", 6);
       //Now add the facets:
       //Top and bottom
-      prism.addFacet(vertices.at(0), vertices.at(1), vertices.at(2));
+      prism.addFacet(vertices.at(2), vertices.at(1), vertices.at(0));
       //note the reversal of order to keep the normals well
-      prism.addFacet(extruded_vertices.at(2), extruded_vertices.at(1), extruded_vertices.at(0));
+      prism.addFacet(extruded_vertices.at(0), extruded_vertices.at(1), extruded_vertices.at(2));
 
       //sides
       for(unsigned long i = 0; i < vertices.size(); i++) 
@@ -75,7 +88,7 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
         prism.addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
       }
       //finally, correct the normals and close the mesh if not closed
-      
+      //prism.FlipFacets();
       //this.CloseShape(true, true, true); //otherwise you get an infinite bounding box
       //this.CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
       //these functions should be passed outside this object?
@@ -105,7 +118,7 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
  * @author Whitney Armstrong, Tuna Tasali
  */
 
-static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, SensitiveDetector sens) {
+static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h e, SensitiveDetector sens) {
 
   typedef vector<PlacedVolume> Placements;
   xml_det_t x_det = e;
@@ -226,6 +239,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       std::string gdml_file =
           getAttrOrDefault<std::string>(x_comp, _Unicode(file), " ");
       printout(WARNING, "BarrelTrackerOuter", gdml_file);
+      std::string given_name = getAttrOrDefault<std::string>(x_comp, _Unicode(name), " ");
 
       Volume c_vol(c_nam);
       printout(WARNING, "BarrelTrackerOuter", "Parsing a large GDML file may lead to segfault or heap overflow.");
@@ -294,6 +308,21 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
           TessellatedSolid::Vertex xhat(1., 0., 0.);
           TessellatedSolid::Vertex yhat(0., 1., 0.);
           TessellatedSolid::Vertex zhat(0., 0., 1.);
+
+          //depending on which direction the stave is facing:
+          double extrusion_length = x_comp.thickness(); //thickness will control this
+          if(given_name == "L4Module0_active_silicon_inside"){
+            //flip the y vector with which we will take a dot product
+            TessellatedSolid::Vertex tmp(0., -1., 0.);
+            yhat = tmp;
+            extrusion_length *= -1;
+          }
+          else if(given_name == "L4Module0_active_silicon_outside") 
+            printout(WARNING, "BarrelTrackingOuterStandardized", "Sensitive name valid.");
+          else
+            printout(WARNING, "BarrelTrackingOuterStandardized", "Sensitive name invalid. Must be L4Module0_active_silicon_outside or L4Module0_active_silicon_inside");
+
+
           //construct a Triangular prisim from the facet
           vector<TessellatedSolid::Vertex> vertices;
           //indices of the vertices
@@ -301,7 +330,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
           int iv1 = -1;
           int iv2 = -1;
           //int iv3 = -1;
-          double extrusion_length = x_comp.thickness(); //thickness will control this
+          
           if(current_facet.GetNvert() == 3) //triangular facet
           {
             //printout(WARNING, "BarrelTrackingOuter", "3333333SENSITIVE DETECTOR FACET FOUND");
@@ -316,13 +345,17 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
             //construct a triangular prisim from the vertices
             struct TriangularPrism extruded_facet_access;
             TessellatedSolid extruded_facet = extruded_facet_access.return_TriangularPrism(vertices, extrusion_length);
-            extruded_facet->CloseShape(true, true, true); //otherwise you get an infinite bounding box
-            extruded_facet->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
+            
+            if(extruded_facet) {
+              extruded_facet->CloseShape(true, true, true); //otherwise you get an infinite bounding box
+              extruded_facet->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
+            }
             
             //if the facet normal is not more than 90 deg off the x axis vector then keep it
             //note the standard in importing the cad models I defined when importing them
             double costheta = TessellatedSolid::Vertex::Dot(yhat, extruded_facet_access.getNormal());
-            if (abs(costheta) >= 1/(sqrt(2))) //currently programmed for 45 deg max angle
+            double facet_area = extruded_facet_access.compute_area(vertices);
+            if (abs(costheta) >= 0.88 && facet_area > 0.1) //note the null check
             {
               //now define a facet volume and place it under sc_vol
               Volume sc_vol_facet("facet" + to_string(sensor_number));
@@ -331,7 +364,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
               sc_vol_facet.setRegion(description, x_comp.regionStr());
               sc_vol_facet.setLimitSet(description, x_comp.limitsStr());
               //now place the volume
-              RotationZYX c_rot(M_PI, 0, M_PI/2);
+              RotationZYX c_rot(0, 0, -M_PI/2);
               pv = m_vol.placeVolume(sc_vol_facet, Transform3D(c_rot, Position(0, 0, zoff)));
               sc_vol_facet.setVisAttributes(description, x_comp.visStr());
               pv.addPhysVolID("sensor", sensor_number);
@@ -409,7 +442,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
           pv = m_vol.placeVolume(c_vol, Position(x_pos.x(0), x_pos.y(0), x_pos.z(0) + zoff));
         } else {
           //the c_rot is a temporary adjustment I added
-          RotationZYX c_rot(M_PI, 0, M_PI/2);
+          RotationZYX c_rot(0, 0, -M_PI/2);
           pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, Position(0, 0, zoff)));
         
         }
@@ -492,7 +525,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
         string module_name = _toString(module, "module%d");
         DetElement mod_elt(lay_elt, module_name, module);
 
-        Transform3D tr(RotationZYX(M_PI/2, ((M_PI / 2) - phic - phi_tilt), -M_PI/2), /*RotationZ(phic)*/
+        Transform3D tr(RotationZYX(0, ((M_PI / 2) - phic - phi_tilt), -M_PI/2), /*RotationZ(phic)*/
                         Position(x, y, module_z));
 
         pv = lay_vol.placeVolume(module_env, tr);
@@ -553,4 +586,4 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
 //@}
 // clang-format off
 //Macros to access the XML files
-DECLARE_DETELEMENT(epic_SiliconBarrelStandardized,    create_BarrelTrackerOuter)
+DECLARE_DETELEMENT(epic_SiliconBarrelStandardized,    create_BarrelTrackerOuterStandardized)

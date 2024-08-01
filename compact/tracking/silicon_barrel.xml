@@ -77,7 +77,7 @@
                           thickness="0 * mm"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/L3Stave_placeholder/SensorModules/Sensor0/L3Stave_placeholder-L3StaveKapton_Electrical_Insulation_ASCII.gdml" />
         <module_component name="L3Module0_support"
-                          material="Carbon"
+                          material="CarbonFiber"
                           sensitive="false"
                           width="3 * mm"
                           length="840 * mm"
@@ -134,6 +134,110 @@
     <!--<detector
       id="TrackerBarrel_1_ID"
       name="OuterSiBarrel"
+      type="epic_SiliconBarrelStandardized"
+      readout="SiBarrelHits"
+      insideTrackingVolume="true">
+      <type_flags type="DetType_TRACKER + DetType_BARREL"/>
+      <dimensions
+        rmin="SiBarrelLayer2_rmin"
+        rmax="SiBarrelLayer2_rmax"
+        length="SiBarrelLayer2_length" />
+      <comment>Silicon Barrel Modules</comment>
+      <comment> L4 Stave </comment>
+      <module name="L4Module" vis="TrackerLayerVis">
+
+        <module_component name="L4Module_support0"
+                          material="CarbonFiber"
+                          sensitive="false"
+                          width="3 * mm"
+                          length="840 * mm"
+                          offset="0 * mm"
+                          thickness="0 * mm"
+                          vis="TrackerLayerVis"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CarbonComposite/L4Stave-CarbonComposite_ASCII.gdml" />
+       
+        <module_component name="L4Module0_active_silicon_outside"
+                          material="Silicon"
+                          sensitive="false"
+                          width="3 * mm"
+                          length="SiBarrelLayer1_length"
+                          thickness="0.09996 * mm"
+                          offset="0 * mm"
+                          vis="TrackerLayerVis"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/Active_Silicon_out_ASCII.gdml" />
+        <module_component name="L4Module0_active_silicon_inside"
+                          material="Silicon"
+                          sensitive="false"
+                          width="3 * mm"
+                          length="SiBarrelLayer1_length"
+                          thickness="0.09996 * mm"
+                          offset="0 * mm"
+                          vis="TrackerLayerVis"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/Active_Silicon_in_ASCII.gdml" />
+
+        <module_component name="L4Module0_kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          width="3 * mm"
+                          length="840 * mm"
+                          offset="0 * mm"
+                          vis="TrackerLayerVis"
+                          thickness="0 * mm"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/Kapton_ASCII.gdml" />
+        <module_component name="L4Module0_K9"
+                          material="Polystyrene"
+                          sensitive="false"
+                          width="3 * mm"
+                          length="840 * mm"
+                          offset="0 * mm"
+                          vis="TrackerLayerVis"
+                          thickness="0 * mm"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/K9_ASCII.gdml" />
+        <module_component name="L4Module0_Ultem"
+                          material="ZDC_Polyethylene"
+                          sensitive="false"
+                          width="3 * mm"
+                          length="840 * mm"
+                          offset="0 * mm"
+                          vis="TrackerLayerVis"
+                          thickness="0 * mm"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/Ultem_ASCII.gdml" />
+        <module_component name="L4Module0_FPC"
+                          material="Kapton"
+                          sensitive="false"
+                          width="3 * mm"
+                          length="840 * mm"
+                          offset="0 * mm"
+                          vis="TrackerLayerVis"
+                          thickness="0 * mm"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/FPC_ASCII.gdml" />
+        
+      </module>
+      <comment> Layers composed of many arrayed modules  </comment>
+      <layer module="L4Module" id="1" vis="TrackerLayerVis">
+        <barrel_envelope
+          inner_r="SiBarrelLayer2_rmin-5.0*mm"
+          outer_r="SiBarrelLayer2_rmax"
+          z_length="SiBarrelLayer2_length" />
+        <layer_material surface="inner" binning="binPhi,binZ" bins0="128" bins1="100" />
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="128" bins1="100" />
+        <comment>
+          phi0     : Starting phi of first module.
+          phi_tilt : Phi tilt of a module.
+          rc       : Radius of the module center.
+          nphi     : Number of modules in phi.
+          rphi_dr  : The delta radius of every other module.
+          z0       : Z position of first module in phi.
+          nz       : Number of modules to place in z.
+          dr       : Radial displacement parameter, of every other module.
+        </comment>
+        <rphi_layout phi_tilt="SiBarrelStaveTilt_angle" nphi="70" phi0="0.0" rc="SiBarrelMod2_rmin" dr="6.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
+      </layer>
+    </detector>-->
+    <detector
+      id="TrackerBarrel_1_ID"
+      name="OuterSiBarrel"
       type="epic_TrackerBarrel"
       readout="SiBarrelHits"
       insideTrackingVolume="true">
@@ -186,7 +290,7 @@
         <rphi_layout phi_tilt="SiBarrelStaveTilt_angle" nphi="SiBarrelStave2_count" phi0="0.0" rc="SiBarrelMod2_rmin" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
-    </detector>-->
+    </detector>
   </detectors>
 
   <plugins>
@@ -194,10 +298,10 @@
       <argument value="SagittaSiBarrel"/>
       <argument value="layer_pattern: str=SagittaSiBarrel_layer\d"/>
     </plugin>
-    <!--<plugin name="DD4hep_ParametersPlugin">
+    <plugin name="DD4hep_ParametersPlugin">
       <argument value="OuterSiBarrel"/>
       <argument value="layer_pattern: str=OuterSiBarrel_layer\d"/>
-    </plugin>-->
+    </plugin>
   </plugins>
 
   <readouts>
