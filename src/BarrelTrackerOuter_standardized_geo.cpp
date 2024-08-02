@@ -59,7 +59,7 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
     
     double facet_area = compute_area(vertices);
     if(vertices.size() > 3) {
-      printout(ERROR, "BarrelTrackerOuter", "Trying to construct triangular prism with more or less than 3 vertices");
+      printout(ERROR, "BarrelTrackerOuter_standardized", "Trying to construct triangular prism with more or less than 3 vertices");
       throw runtime_error("Triangular prisim construction failed.");
     }
     else if(facet_area < 0.1) return NULL;
@@ -76,22 +76,42 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
           //all_vertices.begin()); 
       TessellatedSolid prism("prism", 6);
       //Now add the facets:
-      //Top and bottom
-      prism.addFacet(vertices.at(2), vertices.at(1), vertices.at(0));
-      //note the reversal of order to keep the normals well
-      prism.addFacet(extruded_vertices.at(0), extruded_vertices.at(1), extruded_vertices.at(2));
-
-      //sides
-      for(unsigned long i = 0; i < vertices.size(); i++) 
+      //depending on the extrusion, change the orientation
+      if(extrusion_length > 0)
       {
-        int next_i = (i + 1) % vertices.size();
-        prism.addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
+        //Top and bottom
+        prism.addFacet(vertices.at(2), vertices.at(1), vertices.at(0));
+        //note the reversal of order to keep the normals well
+        prism.addFacet(extruded_vertices.at(0), extruded_vertices.at(1), extruded_vertices.at(2));
+        //sides
+        for(unsigned long i = 0; i < vertices.size(); i++) 
+        {
+          int next_i = (i + 1) % vertices.size();
+          prism.addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
+        }
       }
-      //finally, correct the normals and close the mesh if not closed
-      //prism.FlipFacets();
-      //this.CloseShape(true, true, true); //otherwise you get an infinite bounding box
-      //this.CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
-      //these functions should be passed outside this object?
+      else if(extrusion_length < 0)
+      {
+        //Top and bottom
+        prism.addFacet(vertices.at(0), vertices.at(1), vertices.at(2));
+        //note the reversal of order to keep the normals well
+        prism.addFacet(extruded_vertices.at(2), extruded_vertices.at(1), extruded_vertices.at(0));
+        //sides
+        for(unsigned long i = 0; i < vertices.size(); i++) 
+        {
+          int next_i = (i + 1) % vertices.size();
+          prism.addFacet(vertices.at(i), vertices.at(next_i), extruded_vertices.at(next_i), extruded_vertices.at(i)); 
+        }
+      }
+      else
+      {
+        printout(ERROR, "BarrelTrackerOuter_standardized", "Trying to construct triangular prism with zero extrusion_length!!!");
+        throw runtime_error("Triangular prisim construction failed.");
+      }
+      
+
+
+
       return prism;
     }
     
@@ -313,12 +333,14 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
           double extrusion_length = x_comp.thickness(); //thickness will control this
           if(given_name == "L4Module0_active_silicon_inside"){
             //flip the y vector with which we will take a dot product
+            printout(INFO, "BarrelTrackingOuterStandardized", "Sensitive name valid.");
             TessellatedSolid::Vertex tmp(0., -1., 0.);
             yhat = tmp;
+          }
+          else if(given_name == "L4Module0_active_silicon_outside") {
+            printout(INFO, "BarrelTrackingOuterStandardized", "Sensitive name valid.");
             extrusion_length *= -1;
           }
-          else if(given_name == "L4Module0_active_silicon_outside") 
-            printout(WARNING, "BarrelTrackingOuterStandardized", "Sensitive name valid.");
           else
             printout(WARNING, "BarrelTrackingOuterStandardized", "Sensitive name invalid. Must be L4Module0_active_silicon_outside or L4Module0_active_silicon_inside");
 
