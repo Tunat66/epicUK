@@ -13,18 +13,18 @@ filename=("tracking_output")
 etabin_array=(-3.5 -2.5 -1.0 1.0 2.5 3.5)
 nevents=10000
 
-rm -rf truthseed/ realseed/ *.root
-mkdir -p truthseed/pi-/mom realseed/pi-/mom truthseed/pi-/dca realseed/pi-/dca
-
-# run the simulation
-source ../epic/install/bin/thisepic.sh 
-dd_web_display --export -o epic_craterlake_tracking_only.root ../epic/install/share/epic/epic_craterlake_tracking_only.xml
-for ((i=0; i<${#mom_array[@]}; i++)); do
-npsim --compactFile ../epic/install/share/epic/epic_craterlake_tracking_only.xml --outputFile sim${mom_array[i]}.edm4hep.root --numberOfEvents $nevents --enableGun --gun.thetaMin 3*deg --gun.thetaMax 177*deg --gun.distribution eta --gun.particle pi- --gun.momentumMin ${mom_array[i]}*GeV --gun.momentumMax ${mom_array[i]}*GeV --gun.multiplicity 1 --random.seed 100000
-done
-# run the reconstruction
-source ../epic/install/setup.sh 
-#source ../EICrecon/install/bin/eicrecon-this.sh
+#rm -rf truthseed/ realseed/ *.root
+#mkdir -p truthseed/pi-/mom realseed/pi-/mom truthseed/pi-/dca realseed/pi-/dca
+#
+## run the simulation
+#source ../epic/install/bin/thisepic.sh 
+#dd_web_display --export -o epic_craterlake_tracking_only.root ../epic/install/share/epic/epic_craterlake_tracking_only.xml
+#for ((i=0; i<${#mom_array[@]}; i++)); do
+#npsim --compactFile ../epic/install/share/epic/epic_craterlake_tracking_only.xml --outputFile sim${mom_array[i]}.edm4hep.root --numberOfEvents $nevents --enableGun --gun.thetaMin 3*deg --gun.thetaMax 177*deg --gun.distribution eta --gun.particle pi- --gun.momentumMin ${mom_array[i]}*GeV --gun.momentumMax ${mom_array[i]}*GeV --gun.multiplicity 1 --random.seed 100000
+#done
+## run the reconstruction
+#source ../epic/install/setup.sh 
+##source ../EICrecon/install/bin/eicrecon-this.sh
 
 for ((i=0; i<${#mom_array[@]}; i++)); do
 /opt/local/bin/eicrecon \

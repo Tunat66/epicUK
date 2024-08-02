@@ -290,7 +290,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
       // and place those under m_vol
       // else, just place c_vol under m_vol
       if (x_comp.isSensitive()) { // sensitive volume, create the pixels
-        printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FOUND");
+        //printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FOUND");
         //Volume sc_vol(c_nam);
 
         //loop over the facets of c_vol to define volumes and set them as sensitive
@@ -386,10 +386,10 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
               SurfaceType type(SurfaceType::Sensitive);
               VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n, o);
               volplane_surfaces[m_nam].push_back(surf);
-              printout(WARNING, "BarrelTrackingOuter", "Facet is facing the right direction, registered as sensitive.");
+              //printout(WARNING, "BarrelTrackingOuter", "Facet is facing the right direction, registered as sensitive.");
             }
-            else //for debugging
-              printout(WARNING, "BarrelTrackingOuter", "Facet is not facing right direction, skipping facet.");
+            //else //for debugging
+              //printout(WARNING, "BarrelTrackingOuter", "Facet is not facing right direction, skipping facet.");
             
             //release the facet extrusion*/
             //delete extruded_facet;
@@ -555,7 +555,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
   pv = description.pickMotherVolume(sdet).placeVolume(assembly);
   pv.addPhysVolID("system", det_id); // Set the subdetector system ID.
   sdet.setPlacement(pv);
-  printout(WARNING, "BarrelTrackerOuter", "DetElement instance \"sdet\" might be corrupted if the GDML design file is too big.");	
+  //printout(WARNING, "BarrelTrackerOuter", "DetElement instance \"sdet\" might be corrupted if the GDML design file is too big.");	
   
   return sdet;
 }

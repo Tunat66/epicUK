@@ -314,7 +314,7 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
       // and place those under m_vol
       // else, just place c_vol under m_vol
       if (x_comp.isSensitive()) { // sensitive volume, create the pixels
-        printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FOUND");
+        //printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FOUND");
         //Volume sc_vol(c_nam);
 
         //loop over the facets of c_vol to define volumes and set them as sensitive
@@ -333,13 +333,13 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
           double extrusion_length = x_comp.thickness(); //thickness will control this
           if(given_name == "L4Module0_active_silicon_inside"){
             //flip the y vector with which we will take a dot product
-            printout(INFO, "BarrelTrackingOuterStandardized", "Sensitive name valid.");
+            //printout(INFO, "BarrelTrackingOuterStandardized", "Sensitive name valid.");
             TessellatedSolid::Vertex tmp(0., -1., 0.);
             yhat = tmp;
           }
           else if(given_name == "L4Module0_active_silicon_outside") {
-            printout(INFO, "BarrelTrackingOuterStandardized", "Sensitive name valid.");
-            extrusion_length *= -1;
+            //printout(INFO, "BarrelTrackingOuterStandardized", "Sensitive name valid.");
+            //extrusion_length *= -1;
           }
           else
             printout(WARNING, "BarrelTrackingOuterStandardized", "Sensitive name invalid. Must be L4Module0_active_silicon_outside or L4Module0_active_silicon_inside");
@@ -431,10 +431,10 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
               SurfaceType type(SurfaceType::Sensitive);
               VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n, o);
               volplane_surfaces[m_nam].push_back(surf);
-              printout(WARNING, "BarrelTrackingOuter", "Facet is facing the right direction, registered as sensitive.");
+              //printout(WARNING, "BarrelTrackingOuter", "Facet is facing the right direction, registered as sensitive.");
             }
-            else //for debugging
-              printout(WARNING, "BarrelTrackingOuter", "Facet is not facing right direction, skipping facet.");
+            //else //for debugging
+              //printout(WARNING, "BarrelTrackingOuter", "Facet is not facing right direction, skipping facet.");
             
             //release the facet extrusion*/
             //delete extruded_facet;
@@ -600,7 +600,7 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
   pv = description.pickMotherVolume(sdet).placeVolume(assembly);
   pv.addPhysVolID("system", det_id); // Set the subdetector system ID.
   sdet.setPlacement(pv);
-  printout(WARNING, "BarrelTrackerOuter", "DetElement instance \"sdet\" might be corrupted if the GDML design file is too big.");	
+  //printout(WARNING, "BarrelTrackerOuter", "DetElement instance \"sdet\" might be corrupted if the GDML design file is too big.");	
   
   return sdet;
 }

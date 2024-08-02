@@ -99,7 +99,7 @@
                           sensitive="false"
                           width="3 * mm"
                           length="840 * mm"
-                          offset="-0.3 * mm"
+                          offset="-3 * mm"
                           thickness="0 * mm"
                           vis="TrackerLayerVis"
                           file="install/share/epic/compact/tracking/L3-L4_gdml/L3Stave_placeholder/SensorModules/Sensor0/L3Stave_placeholder-L3StaveALICE_SENSOR_ASSEMBLY001_ASCII.gdml" />
@@ -125,13 +125,13 @@
           dr       : Radial displacement parameter, of every other module.
         </comment>
         <rphi_layout phi_tilt="SiBarrelStaveTilt_angle" nphi="46" phi0="0.0" rc="SiBarrelMod1_rmin" dr="7.0 * mm"/>
-        <z_layout dr="0.0 * mm" z0="186.0 * mm" nz="4"/>
+        <z_layout dr="0.0 * mm" z0="195.0 * mm" nz="4"/>
       </layer>
     </detector>
     <documentation level="5">
         ### Actual detectors
     </documentation>
-    <!--<detector
+    <detector
       id="TrackerBarrel_1_ID"
       name="OuterSiBarrel"
       type="epic_SiliconBarrelStandardized"
@@ -154,26 +154,36 @@
                           offset="0 * mm"
                           thickness="0 * mm"
                           vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CarbonComposite/L4Stave-CarbonComposite_ASCII.gdml" />
-       
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/CarbonComposite_skin_ASCII.gdml" />
+        <module_component name="L4Module_support1"
+                          material="CarbonFiber"
+                          sensitive="false"
+                          width="3 * mm"
+                          length="840 * mm"
+                          offset="0 * mm"
+                          thickness="0 * mm"
+                          vis="TrackerLayerVis"
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/CarbonComposite_Ibeam_ASCII.gdml" />
+
+
         <module_component name="L4Module0_active_silicon_outside"
                           material="Silicon"
-                          sensitive="false"
+                          sensitive="true"
                           width="3 * mm"
                           length="SiBarrelLayer1_length"
                           thickness="0.09996 * mm"
                           offset="0 * mm"
                           vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/Active_Silicon_out_ASCII.gdml" />
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/Active_Silicon_out_correctpos_ASCII.gdml" />
         <module_component name="L4Module0_active_silicon_inside"
                           material="Silicon"
-                          sensitive="false"
+                          sensitive="true"
                           width="3 * mm"
                           length="SiBarrelLayer1_length"
                           thickness="0.09996 * mm"
                           offset="0 * mm"
                           vis="TrackerLayerVis"
-                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/Active_Silicon_in_ASCII.gdml" />
+                          file="install/share/epic/compact/tracking/L3-L4_gdml/L4Stave/CorrectPos/Active_Silicon_in_correctpos_ASCII.gdml" />
 
         <module_component name="L4Module0_kapton"
                           material="Kapton"
@@ -216,9 +226,9 @@
       <comment> Layers composed of many arrayed modules  </comment>
       <layer module="L4Module" id="1" vis="TrackerLayerVis">
         <barrel_envelope
-          inner_r="SiBarrelLayer2_rmin-5.0*mm"
+          inner_r="SiBarrelLayer2_rmin-10.0*mm"
           outer_r="SiBarrelLayer2_rmax"
-          z_length="SiBarrelLayer2_length" />
+          z_length="SiBarrelLayer2_length + 50*mm" />
         <layer_material surface="inner" binning="binPhi,binZ" bins0="128" bins1="100" />
         <layer_material surface="outer" binning="binPhi,binZ" bins0="128" bins1="100" />
         <comment>
@@ -234,8 +244,8 @@
         <rphi_layout phi_tilt="SiBarrelStaveTilt_angle" nphi="70" phi0="0.0" rc="SiBarrelMod2_rmin" dr="6.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
-    </detector>-->
-    <detector
+    </detector>
+    <!--<detector
       id="TrackerBarrel_1_ID"
       name="OuterSiBarrel"
       type="epic_TrackerBarrel"
@@ -290,7 +300,7 @@
         <rphi_layout phi_tilt="SiBarrelStaveTilt_angle" nphi="SiBarrelStave2_count" phi0="0.0" rc="SiBarrelMod2_rmin" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
-    </detector>
+    </detector>-->
   </detectors>
 
   <plugins>
@@ -307,7 +317,8 @@
   <readouts>
     <readout name="SiBarrelHits">
       <segmentation type="CartesianGridXY" grid_size_x="0.020*mm" grid_size_y="0.020*mm" />
-      <id>system:8,layer:4,module:12,sensor:8,x:32:-16,y:-16</id>
+      <comment>bitfieldsizes for indexing sensors and modules, max values are 2 exp bitfieldsize</comment>
+      <id>system:8,layer:4,module:8,sensor:9,x:32:-16,y:-16</id>
     </readout>
   </readouts>
 
