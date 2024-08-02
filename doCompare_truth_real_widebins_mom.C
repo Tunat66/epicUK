@@ -7,10 +7,15 @@
 #include "TCanvas.h"
 #include "TLegend.h"
 #include "TMath.h"
+#include <vector>
 #define mpi 0.139  // 1.864 GeV/c^2
 
 void draw_req_Mom(double etamin, double etamax, double xmin=0., double xmax=0.);
-void doCompare_truth_real_widebins_mom(TString particle = "pi-",double etamin=-1.0, double etamax=1.0, double range =0.3, Bool_t drawreq=1, TString epic ="", TString eicrecon = "") // name = p, pt for getting p or pt dependence fitted results
+void doCompare_truth_real_widebins_mom(TString particle = "pi-",double etamin=-1.0, double etamax=1.0, double range =0.3, 
+//some new arguments
+const Int_t nfiles=1,
+std::vector<double> mom={0}, //note that this change is fine since [] is overloaded in vector
+Bool_t drawreq=1, TString epic ="", TString eicrecon = "") // name = p, pt for getting p or pt dependence fitted results
 {
 
 //=== style of the plot=========
@@ -23,8 +28,8 @@ void doCompare_truth_real_widebins_mom(TString particle = "pi-",double etamin=-1
    gStyle->SetOptFit(1);
    gStyle->SetOptStat(1);
   
-   const Int_t nfiles = 15;
-   double mom[nfiles] ={0.5, 0.75, 1.0, 1.25, 1.75, 2.0, 2.50, 3.0, 4.0, 5.0, 7.0, 8.5, 10.0, 12.5, 15.0};
+   //const Int_t nfiles = 15;
+   //double mom[nfiles] ={0.5, 0.75, 1.0, 1.25, 1.75, 2.0, 2.50, 3.0, 4.0, 5.0, 7.0, 8.5, 10.0, 12.5, 15.0};
    std::vector<double> momV_truth, momV_real, momresolV_truth, err_momresolV_truth, momresolV_real, err_momresolV_real;
    momV_truth.clear(); momV_real.clear(); momresolV_truth.clear(); err_momresolV_truth.clear(); momresolV_real.clear(); err_momresolV_real.clear();
    TString symbolname = "";
@@ -157,7 +162,9 @@ void doCompare_truth_real_widebins_mom(TString particle = "pi-",double etamin=-1
 	mgMom->Add(gr2);
 	c_mom->cd();
 	mgMom->GetXaxis()->SetRangeUser(0.40,15.2);
-	mgMom->GetYaxis()->SetRangeUser(0.,10.0);
+	// Reduce this range to better see the increase
+	//mgMom->GetYaxis()->SetRangeUser(0.,10.0);
+	mgMom->GetYaxis()->SetRangeUser(0.,2.0);
 	mgMom->Draw("AP");
 	lmom->AddEntry(gr1,"Truth Seeding");
 	lmom->AddEntry(gr2,"Realistic Seeding");
