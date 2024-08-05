@@ -69,7 +69,8 @@
         "doCompare_truth_real_widebins_dcaT.C": "cpp",
         "doCompare_truth_real_widebins_dcaz.C": "cpp",
         "doCompare_truth_real_widebins_mom.C": "cpp",
-        "unordered_set": "cpp"
+        "unordered_set": "cpp",
+        "Tracking_Hits_xy.C": "cpp"
     }
     //"C_Cpp.default.compilerPath": "/bin/g++", 
 }
