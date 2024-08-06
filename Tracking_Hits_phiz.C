@@ -9,9 +9,8 @@
 #include "TLegend.h"
 #include "TMath.h"
 #define mpi 0.139  // 1.864 GeV/c^2
-#include <cmath>
 
-void Tracking_Hits_xy(TString filename="tracking_output.root",TString particle="pi-", double mom=0.1, Double_t pTcut = 0.15, TString name = "")
+void Tracking_Hits_phiz(TString filename="tracking_output.root",TString particle="pi-", double mom=0.1, Double_t pTcut = 0.15, TString name = "")
 { //slice z determintes where the slice of hits is going to be extracted
 
    // style of the plot
@@ -23,6 +22,7 @@ void Tracking_Hits_xy(TString filename="tracking_output.root",TString particle="
    gStyle->SetHistLineWidth(2);
    gStyle->SetOptFit(1);
    gStyle->SetOptStat(1);
+   
    
    bool debug=true;	 
    TFile* file = TFile::Open(filename.Data());
@@ -41,39 +41,42 @@ void Tracking_Hits_xy(TString filename="tracking_output.root",TString particle="
     TTreeReaderArray<Double_t> SiBarrelHits_posx(myReader, "SiBarrelHits.position.x");
     TTreeReaderArray<Double_t> SiBarrelHits_posy(myReader, "SiBarrelHits.position.y");
     TTreeReaderArray<Double_t> SiBarrelHits_posz(myReader, "SiBarrelHits.position.z");
-    //if(!SiBarrelHits_posx.IsEmpty()) cout << "debug" << endl;
-    //cout << SiBarrelHits_posx.At(0) << endl;
-    cout << "debug2" << endl;
-    // Variables to hold the flattened data
-    Double_t flatVariable1;
-    // Create branches in the output tree for the flattened data
-    outputTree->Branch("variable1", &flatVariable1, "variable1/F");
+
     // Loop over the entries in the input tree
     
-    auto hit_plot = new TGraph();
-    hit_plot->SetMarkerColor(kBlue);
-    hit_plot->SetMarkerStyle(kFullCircle);
+    auto hit_plot_1 = new TGraph();
+    hit_plot_1->SetMarkerColor(kBlue);
+    hit_plot_1->SetMarkerStyle(kFullCircle);
+    hit_plot_1->SetMarkerSize(0.5);
+    
+    auto hit_plot_2 = new TGraph();
+    hit_plot_2->SetMarkerColor(kRed);
+    hit_plot_2->SetMarkerStyle(kFullCircle);
+    hit_plot_2->SetMarkerSize(0.5);
+
     //so why is this while loop needed:
     //essentially, SiBarrelHits_posx etc are unflattened 2d arrays, the while loop traverses each element of an 
     //array. The elements of this array are also arrays, which are then handled by the for loop
-    int null_count = 0;
-    int zero_count = 0;
     while (myReader.Next()) {
         // everything, for some reason, needs to be in this while loop
-        if(SiBarrelHits_posx.IsEmpty()) {
-            null_count++;
-            continue;
-        }
         Double_t *x_coord = new Double_t[SiBarrelHits_posx.GetSize()];
         Double_t *y_coord = new Double_t[SiBarrelHits_posy.GetSize()];
         
         for (size_t i = 0; i < SiBarrelHits_posx.GetSize(); ++i) {
-            if (abs(SiBarrelHits_posx[i]) < 30. && abs(SiBarrelHits_posy[i]) < 30.) {
-                zero_count++;
+            
+            double x = static_cast<double>(SiBarrelHits_posx[i]);
+            double y = static_cast<double>(SiBarrelHits_posy[i]);
+            Double_t phi = atan2(y, x);
+            cout << phi << endl;
+            //some radius settings and coloring
+            Double_t hit_radius = sqrt(x*x + y*y);
+            if (hit_radius < 300) {
+               hit_plot_2->AddPoint(SiBarrelHits_posz[i], hit_radius*phi);
             }
-            else if (!SiBarrelHits_posx.IsEmpty()) {
-                hit_plot->AddPoint(SiBarrelHits_posx[i], SiBarrelHits_posy[i]);
+            else { 
+               hit_plot_1->AddPoint(SiBarrelHits_posz[i], hit_radius*phi);
             }
+
             //x_coord[i] = SiBarrelHits_posx[i];
             //y_coord[i] = SiBarrelHits_posy[i];
         }
@@ -81,16 +84,17 @@ void Tracking_Hits_xy(TString filename="tracking_output.root",TString particle="
         delete[] x_coord;
         delete[] y_coord;
     }
+    TMultiGraph *mg = new TMultiGraph();
+    mg->Add(hit_plot_1);
+    mg->Add(hit_plot_2);
+    mg->GetXaxis()->SetTitle("z (mm)");
+    mg->GetYaxis()->SetTitle("Unrolled position hit_phi*hit_r (mm)");
     
-    hit_plot->SetTitle(Form("HitsCrossSection_xy_L3New_L4New"));
-    hit_plot->SetName(Form("HitsCrossSection_xy"));
-    hit_plot->Draw("ap"); //a for all, p for a scatter plot
+    mg->SetTitle("HitsUnrolledDetectors_L3New_L4New");
+    mg->SetName("HitsUnrolledDetectors_phiz");
+    mg->Draw("ap"); //a for all, p for a scatter plot
     // Write the output tree to the output file
     outputTree->Write();
-
-    //some prints for debugging
-    cout << "Zero Count: " << zero_count << endl;
-    cout << "Null Count: " << null_count << endl;
 
     // Close the files
     outputFile->Close();
