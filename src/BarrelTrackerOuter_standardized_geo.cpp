@@ -319,6 +319,10 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
 
         //loop over the facets of c_vol to define volumes and set them as sensitive
         //note these facets won't be actual pixels, but rather just bits of the mesh
+
+        //some variables to monitor if any sensitive area is lost
+        double sensitive_area = 0;
+        double total_surface_area = 0;
         
         for(int facet_index = 0; facet_index < c_sol->GetNfacets(); facet_index++) {
           //printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FACET FOUND");
@@ -367,6 +371,7 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
             //construct a triangular prisim from the vertices
             struct TriangularPrism extruded_facet_access;
             TessellatedSolid extruded_facet = extruded_facet_access.return_TriangularPrism(vertices, extrusion_length);
+
             
             if(extruded_facet) {
               extruded_facet->CloseShape(true, true, true); //otherwise you get an infinite bounding box
@@ -377,9 +382,11 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
             //note the standard in importing the cad models I defined when importing them
             double costheta = TessellatedSolid::Vertex::Dot(yhat, extruded_facet_access.getNormal());
             double facet_area = extruded_facet_access.compute_area(vertices);
+            total_surface_area += facet_area;
             if (abs(costheta) >= 0.88 && facet_area > 0.1) //note the null check
             {
               //now define a facet volume and place it under sc_vol
+              sensitive_area += facet_area;
               Volume sc_vol_facet("facet" + to_string(sensor_number));
               sc_vol_facet.setSolid(extruded_facet); //note: the dereferenced pointer is also a pointer
               sc_vol_facet.setMaterial(description.material(x_comp.materialStr()));
@@ -413,11 +420,6 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
                 //extruded_vertices.push_back(element + extrusionVector);
               //}
 
-              //Vector3D u(-1., 0., 0.);
-              //Vector3D v(0., 0., -1.);
-              //Vector3D n(0., 1., 0.);
-              //Vector3D o(0., 0., 0.);
-
               Vector3D u = vertex_to_vector3D(vertices.at(1) - vertices.at(2));
               Vector3D v = vertex_to_vector3D(vertices.at(0) - vertices.at(2));
               Vector3D n = vertex_to_vector3D(extruded_facet_access.normal);
@@ -445,9 +447,12 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
             printout(WARNING, "BarrelTrackingOuter", "Quadrilateral facets are not yet supported. Please revise your mesh.");
           }
           else throw runtime_error("Facet not triangular or quadrilateral.");
-
+          
 
         }
+        printout(WARNING, "BarrelTrackingOuter", "Please check the following values, they should be very close: ");
+        printout(WARNING, "BarrelTrackingOuter", "Total Area of Facets / 2 : %f", total_surface_area/2);
+        printout(WARNING, "BarrelTrackingOuter", "Total Sensitive Area: %f", sensitive_area/2);
 
       }
       else { // not a sensitive volume
