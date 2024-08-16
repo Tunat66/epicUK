@@ -7,9 +7,9 @@ mom_value=$mom_value_global
 particle_array=("pi-")
 filename=("tracking_output") 
 etabin_array=(-3.5 -2.5 -1.0 1.0 2.5 3.5)
-nevents=1
+nevents=10000
 #ADJUST THESE VALUES!!!!!!
-results_dir="ParallelResults_n1000000"
+results_dir="ParallelResults_n10000"
 compact_file_name="epic_craterlake_tracking_only.xml"
 
 source ../epic/install/bin/thisepic.sh
