@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+
+    <define>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v0" unit="mm" x="54.165000915527344" y="4.349383354187012" z="0.33370912075042725"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v1" unit="mm" x="54.165000915527344" y="4.344448089599609" z="1.0011091232299805"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v2" unit="mm" x="54.165000915527344" y="4.244454383850098" z="1"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v3" unit="mm" x="54.165000915527344" y="4.249383926391602" z="0.3333394229412079"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v4" unit="mm" x="54.165000915527344" y="4.349383354187012" z="-0.33370912075042725"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v5" unit="mm" x="54.165000915527344" y="4.249383926391602" z="-0.3333394229412079"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v6" unit="mm" x="54.165000915527344" y="4.344448089599609" z="-1.0011091232299805"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v7" unit="mm" x="54.165000915527344" y="4.244454383850098" z="-1"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v8" unit="mm" x="-54.165000915527344" y="4.244454383850098" z="-1"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v9" unit="mm" x="-54.165000915527344" y="4.344448089599609" z="-1.0011091232299805"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v10" unit="mm" x="-54.165000915527344" y="4.244454383850098" z="1"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v11" unit="mm" x="-54.165000915527344" y="4.249383926391602" z="0.3333394229412079"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v12" unit="mm" x="-54.165000915527344" y="4.249383926391602" z="-0.3333394229412079"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v13" unit="mm" x="-54.165000915527344" y="4.344448089599609" z="1.0011091232299805"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v14" unit="mm" x="-54.165000915527344" y="4.349383354187012" z="0.33370912075042725"/>
+        <position name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v15" unit="mm" x="-54.165000915527344" y="4.349383354187012" z="-0.33370912075042725"/>
+    </define>
+
+    <solids>
+        <tessellated aunit="deg" lunit="mm" name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII-SOL">
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v0" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v1" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v2"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v0" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v2" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v3"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v4" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v3" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v5"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v4" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v0" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v3"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v6" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v5" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v7"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v6" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v4" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v5"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v6" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v7" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v8"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v6" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v8" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v9"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v10" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v11" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v2"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v2" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v11" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v3"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v3" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v12" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v5"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v11" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v12" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v3"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v5" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v8" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v7"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v12" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v8" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v5"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v2" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v1" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v13"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v2" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v13" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v10"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v14" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v1" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v0"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v14" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v13" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v1"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v15" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v0" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v4"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v15" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v14" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v0"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v9" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v4" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v6"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v9" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v15" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v4"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v12" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v9" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v8"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v15" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v9" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v12"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v11" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v15" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v12"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v14" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v15" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v11"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v10" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v14" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v11"/>
+             <triangular vertex1="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v13" vertex2="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v14" vertex3="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII_v10"/>
+        </tessellated>
+    </solids>
+
+    <structure>
+        <volume name="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII">
+            <materialref ref="Vacuum"/>
+            <solidref ref="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII-SOL"/>
+        </volume>
+    </structure>
+
+    <setup name="Default" version="1.0">
+        <world ref="SensorModulePlaceholder-Sensor_Module_AssemblyALICE_inactive-converted-ASCII"/>
+    </setup>
+</gdml>

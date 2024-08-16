@@ -1,0 +1,2092 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+
+  <define/>
+
+  <materials>
+    <isotope N="28" Z="14" name="Si280x55760359a320">
+      <atom unit="g/mole" value="27.9769"/>
+    </isotope>
+    <isotope N="29" Z="14" name="Si290x5576039c3380">
+      <atom unit="g/mole" value="28.9765"/>
+    </isotope>
+    <isotope N="30" Z="14" name="Si300x5576039d0020">
+      <atom unit="g/mole" value="29.9738"/>
+    </isotope>
+    <element name="Si0x5576039b0430">
+      <fraction n="0.922296077703922" ref="Si280x55760359a320"/>
+      <fraction n="0.0468319531680468" ref="Si290x5576039c3380"/>
+      <fraction n="0.0308719691280309" ref="Si300x5576039d0020"/>
+    </element>
+    <material name="Silicon0x5576039d8e70" state="solid">
+      <T unit="K" value="293.15"/>
+      <P unit="pascal" value="101325.009296588"/>
+      <MEE unit="eV" value="173"/>
+      <D unit="g/cm3" value="2.33"/>
+      <fraction n="1" ref="Si0x5576039b0430"/>
+    </material>
+    <isotope N="14" Z="7" name="N140x557603a0e080">
+      <atom unit="g/mole" value="14.0031"/>
+    </isotope>
+    <isotope N="15" Z="7" name="N150x557603a07730">
+      <atom unit="g/mole" value="15.0001"/>
+    </isotope>
+    <element name="N0x5576039b0370">
+      <fraction n="0.99632" ref="N140x557603a0e080"/>
+      <fraction n="0.00368" ref="N150x557603a07730"/>
+    </element>
+    <isotope N="16" Z="8" name="O160x5576039ab390">
+      <atom unit="g/mole" value="15.9949"/>
+    </isotope>
+    <isotope N="17" Z="8" name="O170x5576039ab3e0">
+      <atom unit="g/mole" value="16.9991"/>
+    </isotope>
+    <isotope N="18" Z="8" name="O180x5576039a53a0">
+      <atom unit="g/mole" value="17.9992"/>
+    </isotope>
+    <element name="O0x5576039bfdc0">
+      <fraction n="0.99757" ref="O160x5576039ab390"/>
+      <fraction n="0.00038" ref="O170x5576039ab3e0"/>
+      <fraction n="0.00205" ref="O180x5576039a53a0"/>
+    </element>
+    <isotope N="36" Z="18" name="Ar360x5576039b4310">
+      <atom unit="g/mole" value="35.9675"/>
+    </isotope>
+    <isotope N="38" Z="18" name="Ar380x5576039b40c0">
+      <atom unit="g/mole" value="37.9627"/>
+    </isotope>
+    <isotope N="40" Z="18" name="Ar400x5576039b4360">
+      <atom unit="g/mole" value="39.9624"/>
+    </isotope>
+    <element name="Ar0x5576039cbde0">
+      <fraction n="0.003365" ref="Ar360x5576039b4310"/>
+      <fraction n="0.000632" ref="Ar380x5576039b40c0"/>
+      <fraction n="0.996003" ref="Ar400x5576039b4360"/>
+    </element>
+    <material name="Air0x5576034f9730" state="gas">
+      <T unit="K" value="293.15"/>
+      <P unit="pascal" value="101325.009296588"/>
+      <MEE unit="eV" value="85.643664635028"/>
+      <D unit="g/cm3" value="0.0012"/>
+      <fraction n="0.754" ref="N0x5576039b0370"/>
+      <fraction n="0.234" ref="O0x5576039bfdc0"/>
+      <fraction n="0.012" ref="Ar0x5576039cbde0"/>
+    </material>
+  </materials>
+
+  <solids>
+    <box lunit="mm" name="component0_shape_0x557603114d100x5576039d2530" x="1.76750079184263" y="270" z="0.04"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="VertexBarrel_layer1_shape_0x5576031475200x5576039bacb0" rmax="37" rmin="35" startphi="0" z="270.001"/>
+    <box lunit="mm" name="component0_shape_0x557603114c300x5576039b93f0" x="2.35666772245684" y="270" z="0.04"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="VertexBarrel_layer2_shape_0x55760313b0200x5576039c0aa0" rmax="49" rmin="47" startphi="0" z="270.001"/>
+    <box lunit="mm" name="component0_shape_0x557602d552600x5576039b9170" x="5.89166930614211" y="270" z="0.04"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="VertexBarrel_layer4_shape_0x5576031b60000x5576039d76a0" rmax="121" rmin="119" startphi="0" z="270.001"/>
+    <box lunit="mm" name="world_volume_shape_0x557602d0c1900x5576039a96f0" x="60000" y="60000" z="200000"/>
+  </solids>
+
+  <structure>
+    <volume name="component00x557603a0f120">
+      <materialref ref="Silicon0x5576039d8e70"/>
+      <solidref ref="component0_shape_0x557603114d100x5576039d2530"/>
+      <auxiliary auxtype="gammaECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="electronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="positronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="protonECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="SensDet" auxvalue="VertexBarrel"/>
+    </volume>
+    <volume name="VertexBarrel_layer10x5576039db0c0">
+      <materialref ref="Air0x5576034f9730"/>
+      <solidref ref="VertexBarrel_layer1_shape_0x5576031475200x5576039bacb0"/>
+      <physvol copynumber="126" name="AV_1!Module1_125_125!component0_0_00x557603a02bb0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_1!Module1_125_125!component0_0_00x557603a02bb0_pos" unit="mm" x="35.6103543587321" y="-5.28229708039346" z="0"/>
+        <rotation name="AV_1!Module1_125_125!component0_0_00x557603a02bb0_rot" unit="deg" x="-90" y="-81.5624999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="52" name="AV_2!Module1_51_51!component0_0_00x557603a12770">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_2!Module1_51_51!component0_0_00x557603a12770_pos" unit="mm" x="-28.9154711333032" y="21.4451749617276" z="0"/>
+        <rotation name="AV_2!Module1_51_51!component0_0_00x557603a12770_rot" unit="deg" x="90" y="53.4375" z="0"/>
+      </physvol>
+      <physvol copynumber="53" name="AV_3!Module1_52_52!component0_0_00x557603a129a0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_3!Module1_52_52!component0_0_00x557603a129a0_pos" unit="mm" x="-29.9329060428916" y="20.0005283887057" z="0"/>
+        <rotation name="AV_3!Module1_52_52!component0_0_00x557603a129a0_rot" unit="deg" x="90" y="56.25" z="0"/>
+      </physvol>
+      <physvol copynumber="54" name="AV_4!Module1_53_53!component0_0_00x557603a12b60">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_4!Module1_53_53!component0_0_00x557603a12b60_pos" unit="mm" x="-30.8782299600098" y="18.507698790956" z="0"/>
+        <rotation name="AV_4!Module1_53_53!component0_0_00x557603a12b60_rot" unit="deg" x="90" y="59.0625" z="0"/>
+      </physvol>
+      <physvol copynumber="55" name="AV_5!Module1_54_54!component0_0_00x557603a12cf0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_5!Module1_54_54!component0_0_00x557603a12cf0_pos" unit="mm" x="-31.7491655165408" y="16.9702825257359" z="0"/>
+        <rotation name="AV_5!Module1_54_54!component0_0_00x557603a12cf0_rot" unit="deg" x="90" y="61.875" z="0"/>
+      </physvol>
+      <physvol copynumber="56" name="AV_6!Module1_55_55!component0_0_00x557603a12f20">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_6!Module1_55_55!component0_0_00x557603a12f20_pos" unit="mm" x="-32.5436145524439" y="15.3919833634902" z="0"/>
+        <rotation name="AV_6!Module1_55_55!component0_0_00x557603a12f20_rot" unit="deg" x="90" y="64.6875" z="0"/>
+      </physvol>
+      <physvol copynumber="57" name="AV_7!Module1_56_56!component0_0_00x557603a130d0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_7!Module1_56_56!component0_0_00x557603a130d0_pos" unit="mm" x="-33.2596631704063" y="13.7766035651433" z="0"/>
+        <rotation name="AV_7!Module1_56_56!component0_0_00x557603a130d0_rot" unit="deg" x="90" y="67.4999999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="58" name="AV_8!Module1_57_57!component0_0_00x557603a132b0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_8!Module1_57_57!component0_0_00x557603a132b0_pos" unit="mm" x="-33.8955863465887" y="12.12803472212" z="0"/>
+        <rotation name="AV_8!Module1_57_57!component0_0_00x557603a132b0_rot" unit="deg" x="90" y="70.3124999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="59" name="AV_9!Module1_58_58!component0_0_00x557603a13490">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_9!Module1_58_58!component0_0_00x557603a13490_pos" unit="mm" x="-34.4498520863595" y="10.4502483811607" z="0"/>
+        <rotation name="AV_9!Module1_58_58!component0_0_00x557603a13490_rot" unit="deg" x="90" y="73.1249999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="60" name="AV_10!Module1_59_59!component0_0_00x557603a13670">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_10!Module1_59_59!component0_0_00x557603a13670_pos" unit="mm" x="-34.9211251150036" y="8.74728647651755" z="0"/>
+        <rotation name="AV_10!Module1_59_59!component0_0_00x557603a13670_rot" unit="deg" x="90" y="75.9374999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="61" name="AV_11!Module1_60_60!component0_0_00x557603a13800">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_11!Module1_60_60!component0_0_00x557603a13800_pos" unit="mm" x="-35.3082700945163" y="7.02325159258068" z="0"/>
+        <rotation name="AV_11!Module1_60_60!component0_0_00x557603a13800_rot" unit="deg" x="90" y="78.7499999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="62" name="AV_12!Module1_61_61!component0_0_00x557603a139e0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_12!Module1_61_61!component0_0_00x557603a139e0_pos" unit="mm" x="-35.6103543587321" y="5.28229708039309" z="0"/>
+        <rotation name="AV_12!Module1_61_61!component0_0_00x557603a139e0_rot" unit="deg" x="90" y="81.5624999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="63" name="AV_13!Module1_62_62!component0_0_00x557603a13bc0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_13!Module1_62_62!component0_0_00x557603a13bc0_pos" unit="mm" x="-35.8266501601991" y="3.52861705186425" z="0"/>
+        <rotation name="AV_13!Module1_62_62!component0_0_00x557603a13bc0_rot" unit="deg" x="90" y="84.3749999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="64" name="AV_14!Module1_63_63!component0_0_00x557603a13da0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_14!Module1_63_63!component0_0_00x557603a13da0_pos" unit="mm" x="-35.9566364233862" y="1.76643627578713" z="0"/>
+        <rotation name="AV_14!Module1_63_63!component0_0_00x557603a13da0_rot" unit="deg" x="90" y="87.1874999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="65" name="AV_15!Module1_64_64!component0_0_00x557603a13f80">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_15!Module1_64_64!component0_0_00x557603a13f80_pos" unit="mm" x="-36" y="8.43447862499417e-14" z="0"/>
+        <rotation name="AV_15!Module1_64_64!component0_0_00x557603a13f80_rot" unit="deg" x="90" y="89.9999999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="66" name="AV_16!Module1_65_65!component0_0_00x557603a14160">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_16!Module1_65_65!component0_0_00x557603a14160_pos" unit="mm" x="-35.9566364233862" y="-1.76643627578696" z="0"/>
+        <rotation name="AV_16!Module1_65_65!component0_0_00x557603a14160_rot" unit="deg" x="-90" y="87.1875000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="67" name="AV_17!Module1_66_66!component0_0_00x557603a14340">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_17!Module1_66_66!component0_0_00x557603a14340_pos" unit="mm" x="-35.8266501601991" y="-3.52861705186409" z="0"/>
+        <rotation name="AV_17!Module1_66_66!component0_0_00x557603a14340_rot" unit="deg" x="-90" y="84.3750000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="68" name="AV_18!Module1_67_67!component0_0_00x557603a14520">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_18!Module1_67_67!component0_0_00x557603a14520_pos" unit="mm" x="-35.6103543587321" y="-5.28229708039292" z="0"/>
+        <rotation name="AV_18!Module1_67_67!component0_0_00x557603a14520_rot" unit="deg" x="-90" y="81.5625000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="69" name="AV_19!Module1_68_68!component0_0_00x557603a14700">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_19!Module1_68_68!component0_0_00x557603a14700_pos" unit="mm" x="-35.3082700945163" y="-7.02325159258051" z="0"/>
+        <rotation name="AV_19!Module1_68_68!component0_0_00x557603a14700_rot" unit="deg" x="-90" y="78.7500000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="70" name="AV_20!Module1_69_69!component0_0_00x557603a148e0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_20!Module1_69_69!component0_0_00x557603a148e0_pos" unit="mm" x="-34.9211251150036" y="-8.74728647651739" z="0"/>
+        <rotation name="AV_20!Module1_69_69!component0_0_00x557603a148e0_rot" unit="deg" x="-90" y="75.9375000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="71" name="AV_21!Module1_70_70!component0_0_00x557603a14ac0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_21!Module1_70_70!component0_0_00x557603a14ac0_pos" unit="mm" x="-34.4498520863596" y="-10.4502483811605" z="0"/>
+        <rotation name="AV_21!Module1_70_70!component0_0_00x557603a14ac0_rot" unit="deg" x="-90" y="73.1250000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="72" name="AV_22!Module1_71_71!component0_0_00x557603a14ca0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_22!Module1_71_71!component0_0_00x557603a14ca0_pos" unit="mm" x="-33.8955863465888" y="-12.1280347221198" z="0"/>
+        <rotation name="AV_22!Module1_71_71!component0_0_00x557603a14ca0_rot" unit="deg" x="-90" y="70.3125000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="73" name="AV_23!Module1_72_72!component0_0_00x557603a14e80">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_23!Module1_72_72!component0_0_00x557603a14e80_pos" unit="mm" x="-33.2596631704064" y="-13.7766035651431" z="0"/>
+        <rotation name="AV_23!Module1_72_72!component0_0_00x557603a14e80_rot" unit="deg" x="-90" y="67.5000000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="74" name="AV_24!Module1_73_73!component0_0_00x557603a15060">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_24!Module1_73_73!component0_0_00x557603a15060_pos" unit="mm" x="-32.543614552444" y="-15.39198336349" z="0"/>
+        <rotation name="AV_24!Module1_73_73!component0_0_00x557603a15060_rot" unit="deg" x="-90" y="64.6875000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="75" name="AV_25!Module1_74_74!component0_0_00x557603a15240">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_25!Module1_74_74!component0_0_00x557603a15240_pos" unit="mm" x="-31.7491655165409" y="-16.9702825257358" z="0"/>
+        <rotation name="AV_25!Module1_74_74!component0_0_00x557603a15240_rot" unit="deg" x="-90" y="61.8750000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="76" name="AV_26!Module1_75_75!component0_0_00x557603a15420">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_26!Module1_75_75!component0_0_00x557603a15420_pos" unit="mm" x="-30.8782299600099" y="-18.5076987909559" z="0"/>
+        <rotation name="AV_26!Module1_75_75!component0_0_00x557603a15420_rot" unit="deg" x="-90" y="59.0625000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="77" name="AV_27!Module1_76_76!component0_0_00x557603a15600">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_27!Module1_76_76!component0_0_00x557603a15600_pos" unit="mm" x="-29.9329060428917" y="-20.0005283887056" z="0"/>
+        <rotation name="AV_27!Module1_76_76!component0_0_00x557603a15600_rot" unit="deg" x="-90" y="56.2500000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="78" name="AV_28!Module1_77_77!component0_0_00x557603a157e0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_28!Module1_77_77!component0_0_00x557603a157e0_pos" unit="mm" x="-28.9154711333033" y="-21.4451749617275" z="0"/>
+        <rotation name="AV_28!Module1_77_77!component0_0_00x557603a157e0_rot" unit="deg" x="-90" y="53.4375000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="79" name="AV_29!Module1_78_78!component0_0_00x557603a159c0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_29!Module1_78_78!component0_0_00x557603a159c0_pos" unit="mm" x="-27.8283763210586" y="-22.8381582298911" z="0"/>
+        <rotation name="AV_29!Module1_78_78!component0_0_00x557603a159c0_rot" unit="deg" x="-90" y="50.6250000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="80" name="AV_30!Module1_79_79!component0_0_00x557603a15ba0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_30!Module1_79_79!component0_0_00x557603a15ba0_pos" unit="mm" x="-26.6742405127786" y="-24.1761223744925" z="0"/>
+        <rotation name="AV_30!Module1_79_79!component0_0_00x557603a15ba0_rot" unit="deg" x="-90" y="47.8125000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="81" name="AV_31!Module1_80_80!component0_0_00x557603a15d80">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_31!Module1_80_80!component0_0_00x557603a15d80_pos" unit="mm" x="-25.4558441227158" y="-25.4558441227156" z="0"/>
+        <rotation name="AV_31!Module1_80_80!component0_0_00x557603a15d80_rot" unit="deg" x="-90" y="45.0000000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="82" name="AV_32!Module1_81_81!component0_0_00x557603a15f60">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_32!Module1_81_81!component0_0_00x557603a15f60_pos" unit="mm" x="-24.1761223744928" y="-26.6742405127784" z="0"/>
+        <rotation name="AV_32!Module1_81_81!component0_0_00x557603a15f60_rot" unit="deg" x="-90" y="42.1875000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="83" name="AV_33!Module1_82_82!component0_0_00x557603a16140">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_33!Module1_82_82!component0_0_00x557603a16140_pos" unit="mm" x="-22.8381582298914" y="-27.8283763210584" z="0"/>
+        <rotation name="AV_33!Module1_82_82!component0_0_00x557603a16140_rot" unit="deg" x="-90" y="39.3750000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="84" name="AV_34!Module1_83_83!component0_0_00x557603a16b30">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_34!Module1_83_83!component0_0_00x557603a16b30_pos" unit="mm" x="-21.4451749617277" y="-28.9154711333031" z="0"/>
+        <rotation name="AV_34!Module1_83_83!component0_0_00x557603a16b30_rot" unit="deg" x="-90" y="36.5625000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="85" name="AV_35!Module1_84_84!component0_0_00x557603a16d10">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_35!Module1_84_84!component0_0_00x557603a16d10_pos" unit="mm" x="-20.0005283887058" y="-29.9329060428915" z="0"/>
+        <rotation name="AV_35!Module1_84_84!component0_0_00x557603a16d10_rot" unit="deg" x="-90" y="33.7500000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="86" name="AV_36!Module1_85_85!component0_0_00x557603a16ef0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_36!Module1_85_85!component0_0_00x557603a16ef0_pos" unit="mm" x="-18.5076987909562" y="-30.8782299600097" z="0"/>
+        <rotation name="AV_36!Module1_85_85!component0_0_00x557603a16ef0_rot" unit="deg" x="-90" y="30.9375000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="87" name="AV_37!Module1_86_86!component0_0_00x557603a170d0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_37!Module1_86_86!component0_0_00x557603a170d0_pos" unit="mm" x="-16.9702825257361" y="-31.7491655165407" z="0"/>
+        <rotation name="AV_37!Module1_86_86!component0_0_00x557603a170d0_rot" unit="deg" x="-90" y="28.1250000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="88" name="AV_38!Module1_87_87!component0_0_00x557603a172b0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_38!Module1_87_87!component0_0_00x557603a172b0_pos" unit="mm" x="-15.3919833634903" y="-32.5436145524439" z="0"/>
+        <rotation name="AV_38!Module1_87_87!component0_0_00x557603a172b0_rot" unit="deg" x="-90" y="25.3125000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="89" name="AV_39!Module1_88_88!component0_0_00x557603a17490">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_39!Module1_88_88!component0_0_00x557603a17490_pos" unit="mm" x="-13.7766035651434" y="-33.2596631704062" z="0"/>
+        <rotation name="AV_39!Module1_88_88!component0_0_00x557603a17490_rot" unit="deg" x="-90" y="22.5000000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="90" name="AV_40!Module1_89_89!component0_0_00x557603a17670">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_40!Module1_89_89!component0_0_00x557603a17670_pos" unit="mm" x="-12.1280347221201" y="-33.8955863465887" z="0"/>
+        <rotation name="AV_40!Module1_89_89!component0_0_00x557603a17670_rot" unit="deg" x="-90" y="19.6875000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="91" name="AV_41!Module1_90_90!component0_0_00x557603a17850">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_41!Module1_90_90!component0_0_00x557603a17850_pos" unit="mm" x="-10.4502483811609" y="-34.4498520863595" z="0"/>
+        <rotation name="AV_41!Module1_90_90!component0_0_00x557603a17850_rot" unit="deg" x="-90" y="16.8750000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="92" name="AV_42!Module1_91_91!component0_0_00x557603a17a30">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_42!Module1_91_91!component0_0_00x557603a17a30_pos" unit="mm" x="-8.74728647651773" y="-34.9211251150035" z="0"/>
+        <rotation name="AV_42!Module1_91_91!component0_0_00x557603a17a30_rot" unit="deg" x="-90" y="14.0625000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="93" name="AV_43!Module1_92_92!component0_0_00x557603a17c10">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_43!Module1_92_92!component0_0_00x557603a17c10_pos" unit="mm" x="-7.02325159258085" y="-35.3082700945163" z="0"/>
+        <rotation name="AV_43!Module1_92_92!component0_0_00x557603a17c10_rot" unit="deg" x="-90" y="11.2500000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="94" name="AV_44!Module1_93_93!component0_0_00x557603a17df0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_44!Module1_93_93!component0_0_00x557603a17df0_pos" unit="mm" x="-5.28229708039326" y="-35.6103543587321" z="0"/>
+        <rotation name="AV_44!Module1_93_93!component0_0_00x557603a17df0_rot" unit="deg" x="-90" y="8.43750000000038" z="-180"/>
+      </physvol>
+      <physvol copynumber="95" name="AV_45!Module1_94_94!component0_0_00x557603a17fd0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_45!Module1_94_94!component0_0_00x557603a17fd0_pos" unit="mm" x="-3.52861705186443" y="-35.8266501601991" z="0"/>
+        <rotation name="AV_45!Module1_94_94!component0_0_00x557603a17fd0_rot" unit="deg" x="-90" y="5.62500000000039" z="-180"/>
+      </physvol>
+      <physvol copynumber="96" name="AV_46!Module1_95_95!component0_0_00x557603a181b0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_46!Module1_95_95!component0_0_00x557603a181b0_pos" unit="mm" x="-1.7664362757873" y="-35.9566364233862" z="0"/>
+        <rotation name="AV_46!Module1_95_95!component0_0_00x557603a181b0_rot" unit="deg" x="-90" y="2.8125000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="97" name="AV_47!Module1_96_96!component0_0_00x557603a18390">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_47!Module1_96_96!component0_0_00x557603a18390_pos" unit="mm" x="-2.62408477589032e-13" y="-36" z="0"/>
+        <rotation name="AV_47!Module1_96_96!component0_0_00x557603a18390_rot" unit="deg" x="-90" y="4.0711099922733e-13" z="-180"/>
+      </physvol>
+      <physvol copynumber="98" name="AV_48!Module1_97_97!component0_0_00x557603a18570">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_48!Module1_97_97!component0_0_00x557603a18570_pos" unit="mm" x="1.76643627578678" y="-35.9566364233862" z="0"/>
+        <rotation name="AV_48!Module1_97_97!component0_0_00x557603a18570_rot" unit="deg" x="-90" y="-2.81249999999958" z="-180"/>
+      </physvol>
+      <physvol copynumber="99" name="AV_49!Module1_98_98!component0_0_00x557603a18750">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_49!Module1_98_98!component0_0_00x557603a18750_pos" unit="mm" x="3.52861705186391" y="-35.8266501601991" z="0"/>
+        <rotation name="AV_49!Module1_98_98!component0_0_00x557603a18750_rot" unit="deg" x="-90" y="-5.62499999999957" z="-180"/>
+      </physvol>
+      <physvol copynumber="100" name="AV_50!Module1_99_99!component0_0_00x557603a18930">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_50!Module1_99_99!component0_0_00x557603a18930_pos" unit="mm" x="5.28229708039274" y="-35.6103543587322" z="0"/>
+        <rotation name="AV_50!Module1_99_99!component0_0_00x557603a18930_rot" unit="deg" x="-90" y="-8.43749999999956" z="-180"/>
+      </physvol>
+      <physvol copynumber="101" name="AV_51!Module1_100_100!component0_0_00x557603a18b10">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_51!Module1_100_100!component0_0_00x557603a18b10_pos" unit="mm" x="7.02325159258034" y="-35.3082700945164" z="0"/>
+        <rotation name="AV_51!Module1_100_100!component0_0_00x557603a18b10_rot" unit="deg" x="-90" y="-11.2499999999996" z="-180"/>
+      </physvol>
+      <physvol copynumber="102" name="AV_52!Module1_101_101!component0_0_00x557603a18cf0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_52!Module1_101_101!component0_0_00x557603a18cf0_pos" unit="mm" x="8.74728647651722" y="-34.9211251150037" z="0"/>
+        <rotation name="AV_52!Module1_101_101!component0_0_00x557603a18cf0_rot" unit="deg" x="-90" y="-14.0624999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="103" name="AV_53!Module1_102_102!component0_0_00x557603a18ed0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_53!Module1_102_102!component0_0_00x557603a18ed0_pos" unit="mm" x="10.4502483811604" y="-34.4498520863596" z="0"/>
+        <rotation name="AV_53!Module1_102_102!component0_0_00x557603a18ed0_rot" unit="deg" x="-90" y="-16.8749999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="104" name="AV_54!Module1_103_103!component0_0_00x557603a190b0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_54!Module1_103_103!component0_0_00x557603a190b0_pos" unit="mm" x="12.1280347221196" y="-33.8955863465888" z="0"/>
+        <rotation name="AV_54!Module1_103_103!component0_0_00x557603a190b0_rot" unit="deg" x="-90" y="-19.6874999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="105" name="AV_55!Module1_104_104!component0_0_00x557603a19290">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_55!Module1_104_104!component0_0_00x557603a19290_pos" unit="mm" x="13.7766035651429" y="-33.2596631704064" z="0"/>
+        <rotation name="AV_55!Module1_104_104!component0_0_00x557603a19290_rot" unit="deg" x="-90" y="-22.4999999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="106" name="AV_56!Module1_105_105!component0_0_00x557603a19470">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_56!Module1_105_105!component0_0_00x557603a19470_pos" unit="mm" x="15.3919833634899" y="-32.5436145524441" z="0"/>
+        <rotation name="AV_56!Module1_105_105!component0_0_00x557603a19470_rot" unit="deg" x="-90" y="-25.3124999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="107" name="AV_57!Module1_106_106!component0_0_00x557603a19650">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_57!Module1_106_106!component0_0_00x557603a19650_pos" unit="mm" x="16.9702825257356" y="-31.7491655165409" z="0"/>
+        <rotation name="AV_57!Module1_106_106!component0_0_00x557603a19650_rot" unit="deg" x="-90" y="-28.1249999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="108" name="AV_58!Module1_107_107!component0_0_00x557603a19830">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_58!Module1_107_107!component0_0_00x557603a19830_pos" unit="mm" x="18.5076987909557" y="-30.87822996001" z="0"/>
+        <rotation name="AV_58!Module1_107_107!component0_0_00x557603a19830_rot" unit="deg" x="-90" y="-30.9374999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="109" name="AV_59!Module1_108_108!component0_0_00x557603a19a10">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_59!Module1_108_108!component0_0_00x557603a19a10_pos" unit="mm" x="20.0005283887054" y="-29.9329060428918" z="0"/>
+        <rotation name="AV_59!Module1_108_108!component0_0_00x557603a19a10_rot" unit="deg" x="-90" y="-33.7499999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="110" name="AV_60!Module1_109_109!component0_0_00x557603a19bf0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_60!Module1_109_109!component0_0_00x557603a19bf0_pos" unit="mm" x="21.4451749617273" y="-28.9154711333034" z="0"/>
+        <rotation name="AV_60!Module1_109_109!component0_0_00x557603a19bf0_rot" unit="deg" x="-90" y="-36.5624999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="111" name="AV_61!Module1_110_110!component0_0_00x557603a19dd0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_61!Module1_110_110!component0_0_00x557603a19dd0_pos" unit="mm" x="22.838158229891" y="-27.8283763210588" z="0"/>
+        <rotation name="AV_61!Module1_110_110!component0_0_00x557603a19dd0_rot" unit="deg" x="-90" y="-39.3749999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="112" name="AV_62!Module1_111_111!component0_0_00x557603a19fb0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_62!Module1_111_111!component0_0_00x557603a19fb0_pos" unit="mm" x="24.1761223744924" y="-26.6742405127788" z="0"/>
+        <rotation name="AV_62!Module1_111_111!component0_0_00x557603a19fb0_rot" unit="deg" x="-90" y="-42.1874999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="113" name="AV_63!Module1_112_112!component0_0_00x557603a1a190">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_63!Module1_112_112!component0_0_00x557603a1a190_pos" unit="mm" x="25.4558441227155" y="-25.455844122716" z="0"/>
+        <rotation name="AV_63!Module1_112_112!component0_0_00x557603a1a190_rot" unit="deg" x="-90" y="-44.9999999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="114" name="AV_64!Module1_113_113!component0_0_00x557603a1a370">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_64!Module1_113_113!component0_0_00x557603a1a370_pos" unit="mm" x="26.6742405127783" y="-24.1761223744929" z="0"/>
+        <rotation name="AV_64!Module1_113_113!component0_0_00x557603a1a370_rot" unit="deg" x="-90" y="-47.8124999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="115" name="AV_65!Module1_114_114!component0_0_00x557603a1a550">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_65!Module1_114_114!component0_0_00x557603a1a550_pos" unit="mm" x="27.8283763210583" y="-22.8381582298915" z="0"/>
+        <rotation name="AV_65!Module1_114_114!component0_0_00x557603a1a550_rot" unit="deg" x="-90" y="-50.6249999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="116" name="AV_66!Module1_115_115!component0_0_00x557603a16320">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_66!Module1_115_115!component0_0_00x557603a16320_pos" unit="mm" x="28.915471133303" y="-21.4451749617279" z="0"/>
+        <rotation name="AV_66!Module1_115_115!component0_0_00x557603a16320_rot" unit="deg" x="-90" y="-53.4374999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="117" name="AV_67!Module1_116_116!component0_0_00x557603a16500">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_67!Module1_116_116!component0_0_00x557603a16500_pos" unit="mm" x="29.9329060428914" y="-20.000528388706" z="0"/>
+        <rotation name="AV_67!Module1_116_116!component0_0_00x557603a16500_rot" unit="deg" x="-90" y="-56.2499999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="118" name="AV_68!Module1_117_117!component0_0_00x557603a166e0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_68!Module1_117_117!component0_0_00x557603a166e0_pos" unit="mm" x="30.8782299600096" y="-18.5076987909563" z="0"/>
+        <rotation name="AV_68!Module1_117_117!component0_0_00x557603a166e0_rot" unit="deg" x="-90" y="-59.0624999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="119" name="AV_69!Module1_118_118!component0_0_00x557603a168c0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_69!Module1_118_118!component0_0_00x557603a168c0_pos" unit="mm" x="31.7491655165406" y="-16.9702825257363" z="0"/>
+        <rotation name="AV_69!Module1_118_118!component0_0_00x557603a168c0_rot" unit="deg" x="-90" y="-61.8749999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="120" name="AV_70!Module1_119_119!component0_0_00x557603a16aa0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_70!Module1_119_119!component0_0_00x557603a16aa0_pos" unit="mm" x="32.5436145524438" y="-15.3919833634905" z="0"/>
+        <rotation name="AV_70!Module1_119_119!component0_0_00x557603a16aa0_rot" unit="deg" x="-90" y="-64.6874999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="121" name="AV_71!Module1_120_120!component0_0_00x557603a1b8a0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_71!Module1_120_120!component0_0_00x557603a1b8a0_pos" unit="mm" x="33.2596631704062" y="-13.7766035651436" z="0"/>
+        <rotation name="AV_71!Module1_120_120!component0_0_00x557603a1b8a0_rot" unit="deg" x="-90" y="-67.4999999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="122" name="AV_72!Module1_121_121!component0_0_00x557603a1ba80">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_72!Module1_121_121!component0_0_00x557603a1ba80_pos" unit="mm" x="33.8955863465886" y="-12.1280347221203" z="0"/>
+        <rotation name="AV_72!Module1_121_121!component0_0_00x557603a1ba80_rot" unit="deg" x="-90" y="-70.3124999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="123" name="AV_73!Module1_122_122!component0_0_00x557603a1bc60">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_73!Module1_122_122!component0_0_00x557603a1bc60_pos" unit="mm" x="34.4498520863594" y="-10.450248381161" z="0"/>
+        <rotation name="AV_73!Module1_122_122!component0_0_00x557603a1bc60_rot" unit="deg" x="-90" y="-73.1249999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="124" name="AV_74!Module1_123_123!component0_0_00x557603a1be40">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_74!Module1_123_123!component0_0_00x557603a1be40_pos" unit="mm" x="34.9211251150035" y="-8.74728647651791" z="0"/>
+        <rotation name="AV_74!Module1_123_123!component0_0_00x557603a1be40_rot" unit="deg" x="-90" y="-75.9374999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="125" name="AV_75!Module1_124_124!component0_0_00x557603a1c020">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_75!Module1_124_124!component0_0_00x557603a1c020_pos" unit="mm" x="35.3082700945162" y="-7.02325159258104" z="0"/>
+        <rotation name="AV_75!Module1_124_124!component0_0_00x557603a1c020_rot" unit="deg" x="-90" y="-78.7499999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="127" name="AV_79!Module1_126_126!component0_0_00x557603a1c870">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_79!Module1_126_126!component0_0_00x557603a1c870_pos" unit="mm" x="35.826650160199" y="-3.52861705186462" z="0"/>
+        <rotation name="AV_79!Module1_126_126!component0_0_00x557603a1c870_rot" unit="deg" x="-90" y="-84.3749999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="128" name="AV_80!Module1_127_127!component0_0_00x557603a1ca00">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_80!Module1_127_127!component0_0_00x557603a1ca00_pos" unit="mm" x="35.9566364233862" y="-1.7664362757875" z="0"/>
+        <rotation name="AV_80!Module1_127_127!component0_0_00x557603a1ca00_rot" unit="deg" x="-90" y="-87.1874999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="10" name="AV_87!Module1_9_9!component0_0_00x557603a1d740">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_87!Module1_9_9!component0_0_00x557603a1d740_pos" unit="mm" x="32.543614552444" y="15.3919833634902" z="0"/>
+        <rotation name="AV_87!Module1_9_9!component0_0_00x557603a1d740_rot" unit="deg" x="90" y="-64.6875" z="0"/>
+      </physvol>
+      <physvol copynumber="11" name="AV_88!Module1_10_10!component0_0_00x557603a1d8d0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_88!Module1_10_10!component0_0_00x557603a1d8d0_pos" unit="mm" x="31.7491655165408" y="16.9702825257359" z="0"/>
+        <rotation name="AV_88!Module1_10_10!component0_0_00x557603a1d8d0_rot" unit="deg" x="90" y="-61.875" z="0"/>
+      </physvol>
+      <physvol copynumber="12" name="AV_89!Module1_11_11!component0_0_00x557603a1dab0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_89!Module1_11_11!component0_0_00x557603a1dab0_pos" unit="mm" x="30.8782299600098" y="18.507698790956" z="0"/>
+        <rotation name="AV_89!Module1_11_11!component0_0_00x557603a1dab0_rot" unit="deg" x="90" y="-59.0625" z="0"/>
+      </physvol>
+      <physvol copynumber="13" name="AV_90!Module1_12_12!component0_0_00x557603a1dc90">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_90!Module1_12_12!component0_0_00x557603a1dc90_pos" unit="mm" x="29.9329060428916" y="20.0005283887057" z="0"/>
+        <rotation name="AV_90!Module1_12_12!component0_0_00x557603a1dc90_rot" unit="deg" x="90" y="-56.25" z="0"/>
+      </physvol>
+      <physvol copynumber="14" name="AV_91!Module1_13_13!component0_0_00x557603a1de70">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_91!Module1_13_13!component0_0_00x557603a1de70_pos" unit="mm" x="28.9154711333032" y="21.4451749617276" z="0"/>
+        <rotation name="AV_91!Module1_13_13!component0_0_00x557603a1de70_rot" unit="deg" x="90" y="-53.4375" z="0"/>
+      </physvol>
+      <physvol copynumber="15" name="AV_92!Module1_14_14!component0_0_00x557603a1e050">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_92!Module1_14_14!component0_0_00x557603a1e050_pos" unit="mm" x="27.8283763210585" y="22.8381582298912" z="0"/>
+        <rotation name="AV_92!Module1_14_14!component0_0_00x557603a1e050_rot" unit="deg" x="90" y="-50.625" z="0"/>
+      </physvol>
+      <physvol copynumber="16" name="AV_93!Module1_15_15!component0_0_00x557603a1e230">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_93!Module1_15_15!component0_0_00x557603a1e230_pos" unit="mm" x="26.6742405127785" y="24.1761223744927" z="0"/>
+        <rotation name="AV_93!Module1_15_15!component0_0_00x557603a1e230_rot" unit="deg" x="90" y="-47.8125" z="0"/>
+      </physvol>
+      <physvol copynumber="17" name="AV_94!Module1_16_16!component0_0_00x557603a1e410">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_94!Module1_16_16!component0_0_00x557603a1e410_pos" unit="mm" x="25.4558441227157" y="25.4558441227157" z="0"/>
+        <rotation name="AV_94!Module1_16_16!component0_0_00x557603a1e410_rot" unit="deg" x="90" y="-45" z="0"/>
+      </physvol>
+      <physvol copynumber="18" name="AV_95!Module1_17_17!component0_0_00x557603a1e5f0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_95!Module1_17_17!component0_0_00x557603a1e5f0_pos" unit="mm" x="24.1761223744927" y="26.6742405127785" z="0"/>
+        <rotation name="AV_95!Module1_17_17!component0_0_00x557603a1e5f0_rot" unit="deg" x="90" y="-42.1875" z="0"/>
+      </physvol>
+      <physvol copynumber="87" name="AV_96!Module1_0_0!component0_0_00x557603a1e7d0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_96!Module1_0_0!component0_0_00x557603a1e7d0_pos" unit="mm" x="36" y="0" z="0"/>
+        <rotation name="AV_96!Module1_0_0!component0_0_00x557603a1e7d0_rot" unit="deg" x="90" y="-90" z="0"/>
+      </physvol>
+      <physvol copynumber="2" name="AV_97!Module1_1_1!component0_0_00x557603a1e9b0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_97!Module1_1_1!component0_0_00x557603a1e9b0_pos" unit="mm" x="35.9566364233862" y="1.76643627578705" z="0"/>
+        <rotation name="AV_97!Module1_1_1!component0_0_00x557603a1e9b0_rot" unit="deg" x="90" y="-87.1875" z="0"/>
+      </physvol>
+      <physvol copynumber="3" name="AV_98!Module1_2_2!component0_0_00x557603a1eb90">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_98!Module1_2_2!component0_0_00x557603a1eb90_pos" unit="mm" x="35.8266501601991" y="3.52861705186418" z="0"/>
+        <rotation name="AV_98!Module1_2_2!component0_0_00x557603a1eb90_rot" unit="deg" x="90" y="-84.375" z="0"/>
+      </physvol>
+      <physvol copynumber="4" name="AV_99!Module1_3_3!component0_0_00x557603a1ed70">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_99!Module1_3_3!component0_0_00x557603a1ed70_pos" unit="mm" x="35.6103543587321" y="5.28229708039302" z="0"/>
+        <rotation name="AV_99!Module1_3_3!component0_0_00x557603a1ed70_rot" unit="deg" x="90" y="-81.5625" z="0"/>
+      </physvol>
+      <physvol copynumber="5" name="AV_100!Module1_4_4!component0_0_00x557603a1ef50">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_100!Module1_4_4!component0_0_00x557603a1ef50_pos" unit="mm" x="35.3082700945163" y="7.02325159258062" z="0"/>
+        <rotation name="AV_100!Module1_4_4!component0_0_00x557603a1ef50_rot" unit="deg" x="90" y="-78.75" z="0"/>
+      </physvol>
+      <physvol copynumber="6" name="AV_101!Module1_5_5!component0_0_00x557603a1f130">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_101!Module1_5_5!component0_0_00x557603a1f130_pos" unit="mm" x="34.9211251150036" y="8.7472864765175" z="0"/>
+        <rotation name="AV_101!Module1_5_5!component0_0_00x557603a1f130_rot" unit="deg" x="90" y="-75.9375" z="0"/>
+      </physvol>
+      <physvol copynumber="7" name="AV_102!Module1_6_6!component0_0_00x557603a1f960">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_102!Module1_6_6!component0_0_00x557603a1f960_pos" unit="mm" x="34.4498520863595" y="10.4502483811606" z="0"/>
+        <rotation name="AV_102!Module1_6_6!component0_0_00x557603a1f960_rot" unit="deg" x="90" y="-73.125" z="0"/>
+      </physvol>
+      <physvol copynumber="8" name="AV_103!Module1_7_7!component0_0_00x557603a1fb40">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_103!Module1_7_7!component0_0_00x557603a1fb40_pos" unit="mm" x="33.8955863465888" y="12.1280347221199" z="0"/>
+        <rotation name="AV_103!Module1_7_7!component0_0_00x557603a1fb40_rot" unit="deg" x="90" y="-70.3125" z="0"/>
+      </physvol>
+      <physvol copynumber="9" name="AV_104!Module1_8_8!component0_0_00x557603a1fd20">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_104!Module1_8_8!component0_0_00x557603a1fd20_pos" unit="mm" x="33.2596631704063" y="13.7766035651432" z="0"/>
+        <rotation name="AV_104!Module1_8_8!component0_0_00x557603a1fd20_rot" unit="deg" x="90" y="-67.5" z="0"/>
+      </physvol>
+      <physvol copynumber="19" name="AV_105!Module1_18_18!component0_0_00x557603a1ff00">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_105!Module1_18_18!component0_0_00x557603a1ff00_pos" unit="mm" x="22.8381582298912" y="27.8283763210585" z="0"/>
+        <rotation name="AV_105!Module1_18_18!component0_0_00x557603a1ff00_rot" unit="deg" x="90" y="-39.375" z="0"/>
+      </physvol>
+      <physvol copynumber="20" name="AV_106!Module1_19_19!component0_0_00x557603a200e0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_106!Module1_19_19!component0_0_00x557603a200e0_pos" unit="mm" x="21.4451749617276" y="28.9154711333032" z="0"/>
+        <rotation name="AV_106!Module1_19_19!component0_0_00x557603a200e0_rot" unit="deg" x="90" y="-36.5625" z="0"/>
+      </physvol>
+      <physvol copynumber="21" name="AV_107!Module1_20_20!component0_0_00x557603a202c0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_107!Module1_20_20!component0_0_00x557603a202c0_pos" unit="mm" x="20.0005283887057" y="29.9329060428916" z="0"/>
+        <rotation name="AV_107!Module1_20_20!component0_0_00x557603a202c0_rot" unit="deg" x="90" y="-33.75" z="0"/>
+      </physvol>
+      <physvol copynumber="22" name="AV_108!Module1_21_21!component0_0_00x557603a204a0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_108!Module1_21_21!component0_0_00x557603a204a0_pos" unit="mm" x="18.507698790956" y="30.8782299600098" z="0"/>
+        <rotation name="AV_108!Module1_21_21!component0_0_00x557603a204a0_rot" unit="deg" x="90" y="-30.9375" z="0"/>
+      </physvol>
+      <physvol copynumber="23" name="AV_109!Module1_22_22!component0_0_00x557603a20680">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_109!Module1_22_22!component0_0_00x557603a20680_pos" unit="mm" x="16.9702825257359" y="31.7491655165408" z="0"/>
+        <rotation name="AV_109!Module1_22_22!component0_0_00x557603a20680_rot" unit="deg" x="90" y="-28.125" z="0"/>
+      </physvol>
+      <physvol copynumber="24" name="AV_110!Module1_23_23!component0_0_00x557603a20860">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_110!Module1_23_23!component0_0_00x557603a20860_pos" unit="mm" x="15.3919833634901" y="32.543614552444" z="0"/>
+        <rotation name="AV_110!Module1_23_23!component0_0_00x557603a20860_rot" unit="deg" x="90" y="-25.3125" z="0"/>
+      </physvol>
+      <physvol copynumber="25" name="AV_111!Module1_24_24!component0_0_00x557603a20a40">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_111!Module1_24_24!component0_0_00x557603a20a40_pos" unit="mm" x="13.7766035651432" y="33.2596631704063" z="0"/>
+        <rotation name="AV_111!Module1_24_24!component0_0_00x557603a20a40_rot" unit="deg" x="90" y="-22.5" z="0"/>
+      </physvol>
+      <physvol copynumber="26" name="AV_112!Module1_25_25!component0_0_00x557603a20c20">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_112!Module1_25_25!component0_0_00x557603a20c20_pos" unit="mm" x="12.1280347221199" y="33.8955863465888" z="0"/>
+        <rotation name="AV_112!Module1_25_25!component0_0_00x557603a20c20_rot" unit="deg" x="90" y="-19.6875" z="0"/>
+      </physvol>
+      <physvol copynumber="27" name="AV_113!Module1_26_26!component0_0_00x557603a20e00">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_113!Module1_26_26!component0_0_00x557603a20e00_pos" unit="mm" x="10.4502483811606" y="34.4498520863595" z="0"/>
+        <rotation name="AV_113!Module1_26_26!component0_0_00x557603a20e00_rot" unit="deg" x="90" y="-16.875" z="0"/>
+      </physvol>
+      <physvol copynumber="28" name="AV_114!Module1_27_27!component0_0_00x557603a20fe0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_114!Module1_27_27!component0_0_00x557603a20fe0_pos" unit="mm" x="8.74728647651747" y="34.9211251150036" z="0"/>
+        <rotation name="AV_114!Module1_27_27!component0_0_00x557603a20fe0_rot" unit="deg" x="90" y="-14.0625" z="0"/>
+      </physvol>
+      <physvol copynumber="29" name="AV_115!Module1_28_28!component0_0_00x557603a211c0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_115!Module1_28_28!component0_0_00x557603a211c0_pos" unit="mm" x="7.02325159258059" y="35.3082700945163" z="0"/>
+        <rotation name="AV_115!Module1_28_28!component0_0_00x557603a211c0_rot" unit="deg" x="90" y="-11.2499999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="30" name="AV_116!Module1_29_29!component0_0_00x557603a213a0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_116!Module1_29_29!component0_0_00x557603a213a0_pos" unit="mm" x="5.28229708039299" y="35.6103543587321" z="0"/>
+        <rotation name="AV_116!Module1_29_29!component0_0_00x557603a213a0_rot" unit="deg" x="90" y="-8.43749999999994" z="0"/>
+      </physvol>
+      <physvol copynumber="31" name="AV_117!Module1_30_30!component0_0_00x557603a21580">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_117!Module1_30_30!component0_0_00x557603a21580_pos" unit="mm" x="3.52861705186415" y="35.8266501601991" z="0"/>
+        <rotation name="AV_117!Module1_30_30!component0_0_00x557603a21580_rot" unit="deg" x="90" y="-5.62499999999994" z="0"/>
+      </physvol>
+      <physvol copynumber="32" name="AV_118!Module1_31_31!component0_0_00x557603a21760">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_118!Module1_31_31!component0_0_00x557603a21760_pos" unit="mm" x="1.76643627578701" y="35.9566364233862" z="0"/>
+        <rotation name="AV_118!Module1_31_31!component0_0_00x557603a21760_rot" unit="deg" x="90" y="-2.81249999999994" z="0"/>
+      </physvol>
+      <physvol copynumber="33" name="AV_119!Module1_32_32!component0_0_00x557603a21940">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_119!Module1_32_32!component0_0_00x557603a21940_pos" unit="mm" x="-3.77636646480404e-14" y="36" z="0"/>
+        <rotation name="AV_119!Module1_32_32!component0_0_00x557603a21940_rot" unit="deg" x="90" y="6.36110936292703e-14" z="0"/>
+      </physvol>
+      <physvol copynumber="34" name="AV_120!Module1_33_33!component0_0_00x557603a21b20">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_120!Module1_33_33!component0_0_00x557603a21b20_pos" unit="mm" x="-1.76643627578709" y="35.9566364233862" z="0"/>
+        <rotation name="AV_120!Module1_33_33!component0_0_00x557603a21b20_rot" unit="deg" x="90" y="2.81250000000007" z="0"/>
+      </physvol>
+      <physvol copynumber="35" name="AV_121!Module1_34_34!component0_0_00x557603a21d00">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_121!Module1_34_34!component0_0_00x557603a21d00_pos" unit="mm" x="-3.52861705186422" y="35.8266501601991" z="0"/>
+        <rotation name="AV_121!Module1_34_34!component0_0_00x557603a21d00_rot" unit="deg" x="90" y="5.62500000000007" z="0"/>
+      </physvol>
+      <physvol copynumber="36" name="AV_122!Module1_35_35!component0_0_00x557603a21ee0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_122!Module1_35_35!component0_0_00x557603a21ee0_pos" unit="mm" x="-5.28229708039307" y="35.6103543587321" z="0"/>
+        <rotation name="AV_122!Module1_35_35!component0_0_00x557603a21ee0_rot" unit="deg" x="90" y="8.43750000000007" z="0"/>
+      </physvol>
+      <physvol copynumber="37" name="AV_123!Module1_36_36!component0_0_00x557603a220c0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_123!Module1_36_36!component0_0_00x557603a220c0_pos" unit="mm" x="-7.02325159258066" y="35.3082700945163" z="0"/>
+        <rotation name="AV_123!Module1_36_36!component0_0_00x557603a220c0_rot" unit="deg" x="90" y="11.2500000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="38" name="AV_124!Module1_37_37!component0_0_00x557603a222a0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_124!Module1_37_37!component0_0_00x557603a222a0_pos" unit="mm" x="-8.74728647651755" y="34.9211251150036" z="0"/>
+        <rotation name="AV_124!Module1_37_37!component0_0_00x557603a222a0_rot" unit="deg" x="90" y="14.0625000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="39" name="AV_125!Module1_38_38!component0_0_00x557603a22480">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_125!Module1_38_38!component0_0_00x557603a22480_pos" unit="mm" x="-10.4502483811607" y="34.4498520863595" z="0"/>
+        <rotation name="AV_125!Module1_38_38!component0_0_00x557603a22480_rot" unit="deg" x="90" y="16.8750000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="40" name="AV_126!Module1_39_39!component0_0_00x557603a22660">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_126!Module1_39_39!component0_0_00x557603a22660_pos" unit="mm" x="-12.12803472212" y="33.8955863465887" z="0"/>
+        <rotation name="AV_126!Module1_39_39!component0_0_00x557603a22660_rot" unit="deg" x="90" y="19.6875000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="41" name="AV_127!Module1_40_40!component0_0_00x557603a22840">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_127!Module1_40_40!component0_0_00x557603a22840_pos" unit="mm" x="-13.7766035651433" y="33.2596631704063" z="0"/>
+        <rotation name="AV_127!Module1_40_40!component0_0_00x557603a22840_rot" unit="deg" x="90" y="22.5000000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="42" name="AV_128!Module1_41_41!component0_0_00x557603a22a20">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_128!Module1_41_41!component0_0_00x557603a22a20_pos" unit="mm" x="-15.3919833634902" y="32.5436145524439" z="0"/>
+        <rotation name="AV_128!Module1_41_41!component0_0_00x557603a22a20_rot" unit="deg" x="90" y="25.3125000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="43" name="AV_129!Module1_42_42!component0_0_00x557603a22c00">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_129!Module1_42_42!component0_0_00x557603a22c00_pos" unit="mm" x="-16.970282525736" y="31.7491655165408" z="0"/>
+        <rotation name="AV_129!Module1_42_42!component0_0_00x557603a22c00_rot" unit="deg" x="90" y="28.1250000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="44" name="AV_130!Module1_43_43!component0_0_00x557603a22de0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_130!Module1_43_43!component0_0_00x557603a22de0_pos" unit="mm" x="-18.507698790956" y="30.8782299600098" z="0"/>
+        <rotation name="AV_130!Module1_43_43!component0_0_00x557603a22de0_rot" unit="deg" x="90" y="30.9375000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="45" name="AV_131!Module1_44_44!component0_0_00x557603a22fc0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_131!Module1_44_44!component0_0_00x557603a22fc0_pos" unit="mm" x="-20.0005283887057" y="29.9329060428916" z="0"/>
+        <rotation name="AV_131!Module1_44_44!component0_0_00x557603a22fc0_rot" unit="deg" x="90" y="33.7500000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="46" name="AV_132!Module1_45_45!component0_0_00x557603a231a0">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_132!Module1_45_45!component0_0_00x557603a231a0_pos" unit="mm" x="-21.4451749617276" y="28.9154711333032" z="0"/>
+        <rotation name="AV_132!Module1_45_45!component0_0_00x557603a231a0_rot" unit="deg" x="90" y="36.5625" z="0"/>
+      </physvol>
+      <physvol copynumber="47" name="AV_133!Module1_46_46!component0_0_00x557603a23380">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_133!Module1_46_46!component0_0_00x557603a23380_pos" unit="mm" x="-22.8381582298913" y="27.8283763210585" z="0"/>
+        <rotation name="AV_133!Module1_46_46!component0_0_00x557603a23380_rot" unit="deg" x="90" y="39.375" z="0"/>
+      </physvol>
+      <physvol copynumber="48" name="AV_134!Module1_47_47!component0_0_00x557603a23560">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_134!Module1_47_47!component0_0_00x557603a23560_pos" unit="mm" x="-24.1761223744927" y="26.6742405127785" z="0"/>
+        <rotation name="AV_134!Module1_47_47!component0_0_00x557603a23560_rot" unit="deg" x="90" y="42.1875" z="0"/>
+      </physvol>
+      <physvol copynumber="49" name="AV_135!Module1_48_48!component0_0_00x557603a23740">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_135!Module1_48_48!component0_0_00x557603a23740_pos" unit="mm" x="-25.4558441227157" y="25.4558441227157" z="0"/>
+        <rotation name="AV_135!Module1_48_48!component0_0_00x557603a23740_rot" unit="deg" x="90" y="45" z="0"/>
+      </physvol>
+      <physvol copynumber="50" name="AV_136!Module1_49_49!component0_0_00x557603a23920">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_136!Module1_49_49!component0_0_00x557603a23920_pos" unit="mm" x="-26.6742405127785" y="24.1761223744927" z="0"/>
+        <rotation name="AV_136!Module1_49_49!component0_0_00x557603a23920_rot" unit="deg" x="90" y="47.8125" z="0"/>
+      </physvol>
+      <physvol copynumber="51" name="AV_137!Module1_50_50!component0_0_00x557603a23b00">
+        <volumeref ref="component00x557603a0f120"/>
+        <position name="AV_137!Module1_50_50!component0_0_00x557603a23b00_pos" unit="mm" x="-27.8283763210585" y="22.8381582298912" z="0"/>
+        <rotation name="AV_137!Module1_50_50!component0_0_00x557603a23b00_rot" unit="deg" x="90" y="50.625" z="0"/>
+      </physvol>
+      <auxiliary auxtype="gammaECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="electronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="positronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="protonECut" auxunit="MeV" auxvalue="-1"/>
+    </volume>
+    <volume name="component00x5576039e3450">
+      <materialref ref="Silicon0x5576039d8e70"/>
+      <solidref ref="component0_shape_0x557603114c300x5576039b93f0"/>
+      <auxiliary auxtype="gammaECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="electronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="positronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="protonECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="SensDet" auxvalue="VertexBarrel"/>
+    </volume>
+    <volume name="VertexBarrel_layer20x5576039db4a0">
+      <materialref ref="Air0x5576034f9730"/>
+      <solidref ref="VertexBarrel_layer2_shape_0x55760313b0200x5576039c0aa0"/>
+      <physvol copynumber="125" name="AV_76!Module2_124_124!component0_0_00x557603a1c200">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_76!Module2_124_124!component0_0_00x557603a1c200_pos" unit="mm" x="47.0776934593549" y="-9.36433545677472" z="0"/>
+        <rotation name="AV_76!Module2_124_124!component0_0_00x557603a1c200_rot" unit="deg" x="-90" y="-78.7499999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="126" name="AV_77!Module2_125_125!component0_0_00x557603a1c480">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_77!Module2_125_125!component0_0_00x557603a1c480_pos" unit="mm" x="47.4804724783094" y="-7.04306277385794" z="0"/>
+        <rotation name="AV_77!Module2_125_125!component0_0_00x557603a1c480_rot" unit="deg" x="-90" y="-81.5624999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="127" name="AV_78!Module2_126_126!component0_0_00x557603a1c6b0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_78!Module2_126_126!component0_0_00x557603a1c6b0_pos" unit="mm" x="47.7688668802654" y="-4.7048227358195" z="0"/>
+        <rotation name="AV_78!Module2_126_126!component0_0_00x557603a1c6b0_rot" unit="deg" x="-90" y="-84.3749999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="4" name="AV_81!Module2_0_0!component0_0_00x557603a1cbe0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_81!Module2_0_0!component0_0_00x557603a1cbe0_pos" unit="mm" x="48" y="0" z="0"/>
+        <rotation name="AV_81!Module2_0_0!component0_0_00x557603a1cbe0_rot" unit="deg" x="90" y="-90" z="0"/>
+      </physvol>
+      <physvol copynumber="2" name="AV_82!Module2_1_1!component0_0_00x557603a1cdc0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_82!Module2_1_1!component0_0_00x557603a1cdc0_pos" unit="mm" x="47.9421818978483" y="2.35524836771606" z="0"/>
+        <rotation name="AV_82!Module2_1_1!component0_0_00x557603a1cdc0_rot" unit="deg" x="90" y="-87.1875" z="0"/>
+      </physvol>
+      <physvol copynumber="3" name="AV_83!Module2_2_2!component0_0_00x557603a1cff0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_83!Module2_2_2!component0_0_00x557603a1cff0_pos" unit="mm" x="47.7688668802654" y="4.70482273581891" z="0"/>
+        <rotation name="AV_83!Module2_2_2!component0_0_00x557603a1cff0_rot" unit="deg" x="90" y="-84.375" z="0"/>
+      </physvol>
+      <physvol copynumber="4" name="AV_84!Module2_3_3!component0_0_00x557603a1d1a0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_84!Module2_3_3!component0_0_00x557603a1d1a0_pos" unit="mm" x="47.4804724783095" y="7.04306277385736" z="0"/>
+        <rotation name="AV_84!Module2_3_3!component0_0_00x557603a1d1a0_rot" unit="deg" x="90" y="-81.5625" z="0"/>
+      </physvol>
+      <physvol copynumber="5" name="AV_85!Module2_4_4!component0_0_00x557603a1d380">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_85!Module2_4_4!component0_0_00x557603a1d380_pos" unit="mm" x="47.0776934593551" y="9.36433545677416" z="0"/>
+        <rotation name="AV_85!Module2_4_4!component0_0_00x557603a1d380_rot" unit="deg" x="90" y="-78.75" z="0"/>
+      </physvol>
+      <physvol copynumber="6" name="AV_86!Module2_5_5!component0_0_00x557603a1d560">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_86!Module2_5_5!component0_0_00x557603a1d560_pos" unit="mm" x="46.5615001533381" y="11.6630486353567" z="0"/>
+        <rotation name="AV_86!Module2_5_5!component0_0_00x557603a1d560_rot" unit="deg" x="90" y="-75.9375" z="0"/>
+      </physvol>
+      <physvol copynumber="7" name="AV_138!Module2_6_6!component0_0_00x557603a23ce0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_138!Module2_6_6!component0_0_00x557603a23ce0_pos" unit="mm" x="45.933136115146" y="13.9336645082142" z="0"/>
+        <rotation name="AV_138!Module2_6_6!component0_0_00x557603a23ce0_rot" unit="deg" x="90" y="-73.125" z="0"/>
+      </physvol>
+      <physvol copynumber="8" name="AV_139!Module2_7_7!component0_0_00x557603a23ec0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_139!Module2_7_7!component0_0_00x557603a23ec0_pos" unit="mm" x="45.194115128785" y="16.1707129628266" z="0"/>
+        <rotation name="AV_139!Module2_7_7!component0_0_00x557603a23ec0_rot" unit="deg" x="90" y="-70.3125" z="0"/>
+      </physvol>
+      <physvol copynumber="9" name="AV_140!Module2_8_8!component0_0_00x557603a240a0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_140!Module2_8_8!component0_0_00x557603a240a0_pos" unit="mm" x="44.3462175605418" y="18.3688047535243" z="0"/>
+        <rotation name="AV_140!Module2_8_8!component0_0_00x557603a240a0_rot" unit="deg" x="90" y="-67.5" z="0"/>
+      </physvol>
+      <physvol copynumber="10" name="AV_141!Module2_9_9!component0_0_00x557603a24280">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_141!Module2_9_9!component0_0_00x557603a24280_pos" unit="mm" x="43.3914860699253" y="20.5226444846535" z="0"/>
+        <rotation name="AV_141!Module2_9_9!component0_0_00x557603a24280_rot" unit="deg" x="90" y="-64.6875" z="0"/>
+      </physvol>
+      <physvol copynumber="11" name="AV_142!Module2_10_10!component0_0_00x557603a24460">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_142!Module2_10_10!component0_0_00x557603a24460_pos" unit="mm" x="42.332220688721" y="22.6270433676479" z="0"/>
+        <rotation name="AV_142!Module2_10_10!component0_0_00x557603a24460_rot" unit="deg" x="90" y="-61.875" z="0"/>
+      </physvol>
+      <physvol copynumber="12" name="AV_143!Module2_11_11!component0_0_00x557603a24640">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_143!Module2_11_11!component0_0_00x557603a24640_pos" unit="mm" x="41.1709732800131" y="24.6769317212746" z="0"/>
+        <rotation name="AV_143!Module2_11_11!component0_0_00x557603a24640_rot" unit="deg" x="90" y="-59.0625" z="0"/>
+      </physvol>
+      <physvol copynumber="13" name="AV_144!Module2_12_12!component0_0_00x557603a24820">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_144!Module2_12_12!component0_0_00x557603a24820_pos" unit="mm" x="39.9105413905222" y="26.6673711849409" z="0"/>
+        <rotation name="AV_144!Module2_12_12!component0_0_00x557603a24820_rot" unit="deg" x="90" y="-56.25" z="0"/>
+      </physvol>
+      <physvol copynumber="14" name="AV_145!Module2_13_13!component0_0_00x557603a24a00">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_145!Module2_13_13!component0_0_00x557603a24a00_pos" unit="mm" x="38.553961511071" y="28.5935666156368" z="0"/>
+        <rotation name="AV_145!Module2_13_13!component0_0_00x557603a24a00_rot" unit="deg" x="90" y="-53.4375" z="0"/>
+      </physvol>
+      <physvol copynumber="15" name="AV_146!Module2_14_14!component0_0_00x557603a24be0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_146!Module2_14_14!component0_0_00x557603a24be0_pos" unit="mm" x="37.1045017614114" y="30.450877639855" z="0"/>
+        <rotation name="AV_146!Module2_14_14!component0_0_00x557603a24be0_rot" unit="deg" x="90" y="-50.625" z="0"/>
+      </physvol>
+      <physvol copynumber="16" name="AV_147!Module2_15_15!component0_0_00x557603a24dc0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_147!Module2_15_15!component0_0_00x557603a24dc0_pos" unit="mm" x="35.565654017038" y="32.2348298326569" z="0"/>
+        <rotation name="AV_147!Module2_15_15!component0_0_00x557603a24dc0_rot" unit="deg" x="90" y="-47.8125" z="0"/>
+      </physvol>
+      <physvol copynumber="17" name="AV_148!Module2_16_16!component0_0_00x557603a24fa0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_148!Module2_16_16!component0_0_00x557603a24fa0_pos" unit="mm" x="33.9411254969543" y="33.9411254969543" z="0"/>
+        <rotation name="AV_148!Module2_16_16!component0_0_00x557603a24fa0_rot" unit="deg" x="90" y="-45" z="0"/>
+      </physvol>
+      <physvol copynumber="18" name="AV_149!Module2_17_17!component0_0_00x557603a25180">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_149!Module2_17_17!component0_0_00x557603a25180_pos" unit="mm" x="32.2348298326569" y="35.565654017038" z="0"/>
+        <rotation name="AV_149!Module2_17_17!component0_0_00x557603a25180_rot" unit="deg" x="90" y="-42.1875" z="0"/>
+      </physvol>
+      <physvol copynumber="19" name="AV_150!Module2_18_18!component0_0_00x557603a25360">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_150!Module2_18_18!component0_0_00x557603a25360_pos" unit="mm" x="30.450877639855" y="37.1045017614114" z="0"/>
+        <rotation name="AV_150!Module2_18_18!component0_0_00x557603a25360_rot" unit="deg" x="90" y="-39.375" z="0"/>
+      </physvol>
+      <physvol copynumber="20" name="AV_151!Module2_19_19!component0_0_00x557603a25540">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_151!Module2_19_19!component0_0_00x557603a25540_pos" unit="mm" x="28.5935666156368" y="38.553961511071" z="0"/>
+        <rotation name="AV_151!Module2_19_19!component0_0_00x557603a25540_rot" unit="deg" x="90" y="-36.5625" z="0"/>
+      </physvol>
+      <physvol copynumber="21" name="AV_152!Module2_20_20!component0_0_00x557603a25720">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_152!Module2_20_20!component0_0_00x557603a25720_pos" unit="mm" x="26.6673711849409" y="39.9105413905222" z="0"/>
+        <rotation name="AV_152!Module2_20_20!component0_0_00x557603a25720_rot" unit="deg" x="90" y="-33.75" z="0"/>
+      </physvol>
+      <physvol copynumber="22" name="AV_153!Module2_21_21!component0_0_00x557603a25900">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_153!Module2_21_21!component0_0_00x557603a25900_pos" unit="mm" x="24.6769317212746" y="41.1709732800131" z="0"/>
+        <rotation name="AV_153!Module2_21_21!component0_0_00x557603a25900_rot" unit="deg" x="90" y="-30.9375" z="0"/>
+      </physvol>
+      <physvol copynumber="23" name="AV_154!Module2_22_22!component0_0_00x557603a25ae0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_154!Module2_22_22!component0_0_00x557603a25ae0_pos" unit="mm" x="22.6270433676479" y="42.3322206887211" z="0"/>
+        <rotation name="AV_154!Module2_22_22!component0_0_00x557603a25ae0_rot" unit="deg" x="90" y="-28.125" z="0"/>
+      </physvol>
+      <physvol copynumber="24" name="AV_155!Module2_23_23!component0_0_00x557603a25cc0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_155!Module2_23_23!component0_0_00x557603a25cc0_pos" unit="mm" x="20.5226444846535" y="43.3914860699253" z="0"/>
+        <rotation name="AV_155!Module2_23_23!component0_0_00x557603a25cc0_rot" unit="deg" x="90" y="-25.3125" z="0"/>
+      </physvol>
+      <physvol copynumber="25" name="AV_156!Module2_24_24!component0_0_00x557603a25ea0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_156!Module2_24_24!component0_0_00x557603a25ea0_pos" unit="mm" x="18.3688047535243" y="44.3462175605418" z="0"/>
+        <rotation name="AV_156!Module2_24_24!component0_0_00x557603a25ea0_rot" unit="deg" x="90" y="-22.5" z="0"/>
+      </physvol>
+      <physvol copynumber="26" name="AV_157!Module2_25_25!component0_0_00x557603a26080">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_157!Module2_25_25!component0_0_00x557603a26080_pos" unit="mm" x="16.1707129628265" y="45.194115128785" z="0"/>
+        <rotation name="AV_157!Module2_25_25!component0_0_00x557603a26080_rot" unit="deg" x="90" y="-19.6875" z="0"/>
+      </physvol>
+      <physvol copynumber="27" name="AV_158!Module2_26_26!component0_0_00x557603a26260">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_158!Module2_26_26!component0_0_00x557603a26260_pos" unit="mm" x="13.9336645082142" y="45.933136115146" z="0"/>
+        <rotation name="AV_158!Module2_26_26!component0_0_00x557603a26260_rot" unit="deg" x="90" y="-16.875" z="0"/>
+      </physvol>
+      <physvol copynumber="28" name="AV_159!Module2_27_27!component0_0_00x557603a26440">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_159!Module2_27_27!component0_0_00x557603a26440_pos" unit="mm" x="11.6630486353566" y="46.5615001533381" z="0"/>
+        <rotation name="AV_159!Module2_27_27!component0_0_00x557603a26440_rot" unit="deg" x="90" y="-14.0625" z="0"/>
+      </physvol>
+      <physvol copynumber="29" name="AV_160!Module2_28_28!component0_0_00x557603a26620">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_160!Module2_28_28!component0_0_00x557603a26620_pos" unit="mm" x="9.36433545677412" y="47.0776934593551" z="0"/>
+        <rotation name="AV_160!Module2_28_28!component0_0_00x557603a26620_rot" unit="deg" x="90" y="-11.2499999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="30" name="AV_161!Module2_29_29!component0_0_00x557603a26800">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_161!Module2_29_29!component0_0_00x557603a26800_pos" unit="mm" x="7.04306277385732" y="47.4804724783095" z="0"/>
+        <rotation name="AV_161!Module2_29_29!component0_0_00x557603a26800_rot" unit="deg" x="90" y="-8.43749999999994" z="0"/>
+      </physvol>
+      <physvol copynumber="31" name="AV_162!Module2_30_30!component0_0_00x557603a271f0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_162!Module2_30_30!component0_0_00x557603a271f0_pos" unit="mm" x="4.70482273581886" y="47.7688668802654" z="0"/>
+        <rotation name="AV_162!Module2_30_30!component0_0_00x557603a271f0_rot" unit="deg" x="90" y="-5.62499999999994" z="0"/>
+      </physvol>
+      <physvol copynumber="32" name="AV_163!Module2_31_31!component0_0_00x557603a273d0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_163!Module2_31_31!component0_0_00x557603a273d0_pos" unit="mm" x="2.35524836771602" y="47.9421818978483" z="0"/>
+        <rotation name="AV_163!Module2_31_31!component0_0_00x557603a273d0_rot" unit="deg" x="90" y="-2.81249999999994" z="0"/>
+      </physvol>
+      <physvol copynumber="33" name="AV_164!Module2_32_32!component0_0_00x557603a275b0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_164!Module2_32_32!component0_0_00x557603a275b0_pos" unit="mm" x="-5.03515528640539e-14" y="48" z="0"/>
+        <rotation name="AV_164!Module2_32_32!component0_0_00x557603a275b0_rot" unit="deg" x="90" y="6.36110936292703e-14" z="0"/>
+      </physvol>
+      <physvol copynumber="34" name="AV_165!Module2_33_33!component0_0_00x557603a27790">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_165!Module2_33_33!component0_0_00x557603a27790_pos" unit="mm" x="-2.35524836771612" y="47.9421818978483" z="0"/>
+        <rotation name="AV_165!Module2_33_33!component0_0_00x557603a27790_rot" unit="deg" x="90" y="2.81250000000007" z="0"/>
+      </physvol>
+      <physvol copynumber="35" name="AV_166!Module2_34_34!component0_0_00x557603a27970">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_166!Module2_34_34!component0_0_00x557603a27970_pos" unit="mm" x="-4.70482273581896" y="47.7688668802654" z="0"/>
+        <rotation name="AV_166!Module2_34_34!component0_0_00x557603a27970_rot" unit="deg" x="90" y="5.62500000000007" z="0"/>
+      </physvol>
+      <physvol copynumber="36" name="AV_167!Module2_35_35!component0_0_00x557603a27b50">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_167!Module2_35_35!component0_0_00x557603a27b50_pos" unit="mm" x="-7.04306277385742" y="47.4804724783095" z="0"/>
+        <rotation name="AV_167!Module2_35_35!component0_0_00x557603a27b50_rot" unit="deg" x="90" y="8.43750000000007" z="0"/>
+      </physvol>
+      <physvol copynumber="37" name="AV_168!Module2_36_36!component0_0_00x557603a27d30">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_168!Module2_36_36!component0_0_00x557603a27d30_pos" unit="mm" x="-9.36433545677422" y="47.077693459355" z="0"/>
+        <rotation name="AV_168!Module2_36_36!component0_0_00x557603a27d30_rot" unit="deg" x="90" y="11.2500000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="38" name="AV_169!Module2_37_37!component0_0_00x557603a27f10">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_169!Module2_37_37!component0_0_00x557603a27f10_pos" unit="mm" x="-11.6630486353567" y="46.5615001533381" z="0"/>
+        <rotation name="AV_169!Module2_37_37!component0_0_00x557603a27f10_rot" unit="deg" x="90" y="14.0625000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="39" name="AV_170!Module2_38_38!component0_0_00x557603a280f0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_170!Module2_38_38!component0_0_00x557603a280f0_pos" unit="mm" x="-13.9336645082143" y="45.933136115146" z="0"/>
+        <rotation name="AV_170!Module2_38_38!component0_0_00x557603a280f0_rot" unit="deg" x="90" y="16.8750000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="40" name="AV_171!Module2_39_39!component0_0_00x557603a282d0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_171!Module2_39_39!component0_0_00x557603a282d0_pos" unit="mm" x="-16.1707129628266" y="45.194115128785" z="0"/>
+        <rotation name="AV_171!Module2_39_39!component0_0_00x557603a282d0_rot" unit="deg" x="90" y="19.6875000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="41" name="AV_172!Module2_40_40!component0_0_00x557603a284b0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_172!Module2_40_40!component0_0_00x557603a284b0_pos" unit="mm" x="-18.3688047535244" y="44.3462175605417" z="0"/>
+        <rotation name="AV_172!Module2_40_40!component0_0_00x557603a284b0_rot" unit="deg" x="90" y="22.5000000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="42" name="AV_173!Module2_41_41!component0_0_00x557603a28690">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_173!Module2_41_41!component0_0_00x557603a28690_pos" unit="mm" x="-20.5226444846536" y="43.3914860699252" z="0"/>
+        <rotation name="AV_173!Module2_41_41!component0_0_00x557603a28690_rot" unit="deg" x="90" y="25.3125000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="43" name="AV_174!Module2_42_42!component0_0_00x557603a28870">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_174!Module2_42_42!component0_0_00x557603a28870_pos" unit="mm" x="-22.6270433676479" y="42.332220688721" z="0"/>
+        <rotation name="AV_174!Module2_42_42!component0_0_00x557603a28870_rot" unit="deg" x="90" y="28.1250000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="44" name="AV_175!Module2_43_43!component0_0_00x557603a28a50">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_175!Module2_43_43!component0_0_00x557603a28a50_pos" unit="mm" x="-24.6769317212747" y="41.170973280013" z="0"/>
+        <rotation name="AV_175!Module2_43_43!component0_0_00x557603a28a50_rot" unit="deg" x="90" y="30.9375000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="45" name="AV_176!Module2_44_44!component0_0_00x557603a28c30">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_176!Module2_44_44!component0_0_00x557603a28c30_pos" unit="mm" x="-26.6673711849409" y="39.9105413905221" z="0"/>
+        <rotation name="AV_176!Module2_44_44!component0_0_00x557603a28c30_rot" unit="deg" x="90" y="33.7500000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="46" name="AV_177!Module2_45_45!component0_0_00x557603a28e10">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_177!Module2_45_45!component0_0_00x557603a28e10_pos" unit="mm" x="-28.5935666156368" y="38.5539615110709" z="0"/>
+        <rotation name="AV_177!Module2_45_45!component0_0_00x557603a28e10_rot" unit="deg" x="90" y="36.5625" z="0"/>
+      </physvol>
+      <physvol copynumber="47" name="AV_178!Module2_46_46!component0_0_00x557603a28ff0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_178!Module2_46_46!component0_0_00x557603a28ff0_pos" unit="mm" x="-30.450877639855" y="37.1045017614114" z="0"/>
+        <rotation name="AV_178!Module2_46_46!component0_0_00x557603a28ff0_rot" unit="deg" x="90" y="39.375" z="0"/>
+      </physvol>
+      <physvol copynumber="48" name="AV_179!Module2_47_47!component0_0_00x557603a291d0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_179!Module2_47_47!component0_0_00x557603a291d0_pos" unit="mm" x="-32.2348298326569" y="35.565654017038" z="0"/>
+        <rotation name="AV_179!Module2_47_47!component0_0_00x557603a291d0_rot" unit="deg" x="90" y="42.1875" z="0"/>
+      </physvol>
+      <physvol copynumber="49" name="AV_180!Module2_48_48!component0_0_00x557603a293b0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_180!Module2_48_48!component0_0_00x557603a293b0_pos" unit="mm" x="-33.9411254969543" y="33.9411254969543" z="0"/>
+        <rotation name="AV_180!Module2_48_48!component0_0_00x557603a293b0_rot" unit="deg" x="90" y="45" z="0"/>
+      </physvol>
+      <physvol copynumber="50" name="AV_181!Module2_49_49!component0_0_00x557603a29590">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_181!Module2_49_49!component0_0_00x557603a29590_pos" unit="mm" x="-35.565654017038" y="32.2348298326569" z="0"/>
+        <rotation name="AV_181!Module2_49_49!component0_0_00x557603a29590_rot" unit="deg" x="90" y="47.8125" z="0"/>
+      </physvol>
+      <physvol copynumber="51" name="AV_182!Module2_50_50!component0_0_00x557603a29770">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_182!Module2_50_50!component0_0_00x557603a29770_pos" unit="mm" x="-37.1045017614114" y="30.450877639855" z="0"/>
+        <rotation name="AV_182!Module2_50_50!component0_0_00x557603a29770_rot" unit="deg" x="90" y="50.625" z="0"/>
+      </physvol>
+      <physvol copynumber="52" name="AV_183!Module2_51_51!component0_0_00x557603a29950">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_183!Module2_51_51!component0_0_00x557603a29950_pos" unit="mm" x="-38.553961511071" y="28.5935666156368" z="0"/>
+        <rotation name="AV_183!Module2_51_51!component0_0_00x557603a29950_rot" unit="deg" x="90" y="53.4375" z="0"/>
+      </physvol>
+      <physvol copynumber="53" name="AV_184!Module2_52_52!component0_0_00x557603a29b30">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_184!Module2_52_52!component0_0_00x557603a29b30_pos" unit="mm" x="-39.9105413905222" y="26.6673711849409" z="0"/>
+        <rotation name="AV_184!Module2_52_52!component0_0_00x557603a29b30_rot" unit="deg" x="90" y="56.25" z="0"/>
+      </physvol>
+      <physvol copynumber="54" name="AV_185!Module2_53_53!component0_0_00x557603a29d10">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_185!Module2_53_53!component0_0_00x557603a29d10_pos" unit="mm" x="-41.170973280013" y="24.6769317212747" z="0"/>
+        <rotation name="AV_185!Module2_53_53!component0_0_00x557603a29d10_rot" unit="deg" x="90" y="59.0625" z="0"/>
+      </physvol>
+      <physvol copynumber="55" name="AV_186!Module2_54_54!component0_0_00x557603a29ef0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_186!Module2_54_54!component0_0_00x557603a29ef0_pos" unit="mm" x="-42.332220688721" y="22.6270433676479" z="0"/>
+        <rotation name="AV_186!Module2_54_54!component0_0_00x557603a29ef0_rot" unit="deg" x="90" y="61.875" z="0"/>
+      </physvol>
+      <physvol copynumber="56" name="AV_187!Module2_55_55!component0_0_00x557603a2a0d0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_187!Module2_55_55!component0_0_00x557603a2a0d0_pos" unit="mm" x="-43.3914860699253" y="20.5226444846536" z="0"/>
+        <rotation name="AV_187!Module2_55_55!component0_0_00x557603a2a0d0_rot" unit="deg" x="90" y="64.6875" z="0"/>
+      </physvol>
+      <physvol copynumber="57" name="AV_188!Module2_56_56!component0_0_00x557603a2a2b0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_188!Module2_56_56!component0_0_00x557603a2a2b0_pos" unit="mm" x="-44.3462175605417" y="18.3688047535244" z="0"/>
+        <rotation name="AV_188!Module2_56_56!component0_0_00x557603a2a2b0_rot" unit="deg" x="90" y="67.4999999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="58" name="AV_189!Module2_57_57!component0_0_00x557603a2a490">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_189!Module2_57_57!component0_0_00x557603a2a490_pos" unit="mm" x="-45.194115128785" y="16.1707129628266" z="0"/>
+        <rotation name="AV_189!Module2_57_57!component0_0_00x557603a2a490_rot" unit="deg" x="90" y="70.3124999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="59" name="AV_190!Module2_58_58!component0_0_00x557603a2a670">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_190!Module2_58_58!component0_0_00x557603a2a670_pos" unit="mm" x="-45.933136115146" y="13.9336645082143" z="0"/>
+        <rotation name="AV_190!Module2_58_58!component0_0_00x557603a2a670_rot" unit="deg" x="90" y="73.1249999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="60" name="AV_191!Module2_59_59!component0_0_00x557603a2a850">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_191!Module2_59_59!component0_0_00x557603a2a850_pos" unit="mm" x="-46.5615001533381" y="11.6630486353567" z="0"/>
+        <rotation name="AV_191!Module2_59_59!component0_0_00x557603a2a850_rot" unit="deg" x="90" y="75.9374999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="61" name="AV_192!Module2_60_60!component0_0_00x557603a2aa30">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_192!Module2_60_60!component0_0_00x557603a2aa30_pos" unit="mm" x="-47.077693459355" y="9.36433545677423" z="0"/>
+        <rotation name="AV_192!Module2_60_60!component0_0_00x557603a2aa30_rot" unit="deg" x="90" y="78.7499999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="62" name="AV_193!Module2_61_61!component0_0_00x557603a2ac10">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_193!Module2_61_61!component0_0_00x557603a2ac10_pos" unit="mm" x="-47.4804724783095" y="7.04306277385745" z="0"/>
+        <rotation name="AV_193!Module2_61_61!component0_0_00x557603a2ac10_rot" unit="deg" x="90" y="81.5624999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="63" name="AV_194!Module2_62_62!component0_0_00x557603a269e0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_194!Module2_62_62!component0_0_00x557603a269e0_pos" unit="mm" x="-47.7688668802654" y="4.704822735819" z="0"/>
+        <rotation name="AV_194!Module2_62_62!component0_0_00x557603a269e0_rot" unit="deg" x="90" y="84.3749999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="64" name="AV_195!Module2_63_63!component0_0_00x557603a26bc0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_195!Module2_63_63!component0_0_00x557603a26bc0_pos" unit="mm" x="-47.9421818978483" y="2.35524836771617" z="0"/>
+        <rotation name="AV_195!Module2_63_63!component0_0_00x557603a26bc0_rot" unit="deg" x="90" y="87.1874999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="65" name="AV_196!Module2_64_64!component0_0_00x557603a26da0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_196!Module2_64_64!component0_0_00x557603a26da0_pos" unit="mm" x="-48" y="1.12459714999922e-13" z="0"/>
+        <rotation name="AV_196!Module2_64_64!component0_0_00x557603a26da0_rot" unit="deg" x="90" y="89.9999999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="66" name="AV_197!Module2_65_65!component0_0_00x557603a26f80">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_197!Module2_65_65!component0_0_00x557603a26f80_pos" unit="mm" x="-47.9421818978483" y="-2.35524836771594" z="0"/>
+        <rotation name="AV_197!Module2_65_65!component0_0_00x557603a26f80_rot" unit="deg" x="-90" y="87.1875000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="67" name="AV_198!Module2_66_66!component0_0_00x557603a27160">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_198!Module2_66_66!component0_0_00x557603a27160_pos" unit="mm" x="-47.7688668802655" y="-4.70482273581878" z="0"/>
+        <rotation name="AV_198!Module2_66_66!component0_0_00x557603a27160_rot" unit="deg" x="-90" y="84.3750000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="68" name="AV_199!Module2_67_67!component0_0_00x557603a2bf60">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_199!Module2_67_67!component0_0_00x557603a2bf60_pos" unit="mm" x="-47.4804724783095" y="-7.04306277385723" z="0"/>
+        <rotation name="AV_199!Module2_67_67!component0_0_00x557603a2bf60_rot" unit="deg" x="-90" y="81.5625000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="69" name="AV_200!Module2_68_68!component0_0_00x557603a2c140">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_200!Module2_68_68!component0_0_00x557603a2c140_pos" unit="mm" x="-47.0776934593551" y="-9.36433545677401" z="0"/>
+        <rotation name="AV_200!Module2_68_68!component0_0_00x557603a2c140_rot" unit="deg" x="-90" y="78.7500000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="70" name="AV_201!Module2_69_69!component0_0_00x557603a2c320">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_201!Module2_69_69!component0_0_00x557603a2c320_pos" unit="mm" x="-46.5615001533381" y="-11.6630486353565" z="0"/>
+        <rotation name="AV_201!Module2_69_69!component0_0_00x557603a2c320_rot" unit="deg" x="-90" y="75.9375000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="71" name="AV_202!Module2_70_70!component0_0_00x557603a1f310">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_202!Module2_70_70!component0_0_00x557603a1f310_pos" unit="mm" x="-45.9331361151461" y="-13.933664508214" z="0"/>
+        <rotation name="AV_202!Module2_70_70!component0_0_00x557603a1f310_rot" unit="deg" x="-90" y="73.1250000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="72" name="AV_203!Module2_71_71!component0_0_00x557603a1f4f0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_203!Module2_71_71!component0_0_00x557603a1f4f0_pos" unit="mm" x="-45.1941151287851" y="-16.1707129628264" z="0"/>
+        <rotation name="AV_203!Module2_71_71!component0_0_00x557603a1f4f0_rot" unit="deg" x="-90" y="70.3125000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="73" name="AV_204!Module2_72_72!component0_0_00x557603a1f6d0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_204!Module2_72_72!component0_0_00x557603a1f6d0_pos" unit="mm" x="-44.3462175605418" y="-18.3688047535241" z="0"/>
+        <rotation name="AV_204!Module2_72_72!component0_0_00x557603a1f6d0_rot" unit="deg" x="-90" y="67.5000000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="74" name="AV_205!Module2_73_73!component0_0_00x557603a2d0e0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_205!Module2_73_73!component0_0_00x557603a2d0e0_pos" unit="mm" x="-43.3914860699254" y="-20.5226444846534" z="0"/>
+        <rotation name="AV_205!Module2_73_73!component0_0_00x557603a2d0e0_rot" unit="deg" x="-90" y="64.6875000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="75" name="AV_206!Module2_74_74!component0_0_00x557603a2d2c0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_206!Module2_74_74!component0_0_00x557603a2d2c0_pos" unit="mm" x="-42.3322206887211" y="-22.6270433676477" z="0"/>
+        <rotation name="AV_206!Module2_74_74!component0_0_00x557603a2d2c0_rot" unit="deg" x="-90" y="61.8750000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="76" name="AV_207!Module2_75_75!component0_0_00x557603a2d4a0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_207!Module2_75_75!component0_0_00x557603a2d4a0_pos" unit="mm" x="-41.1709732800132" y="-24.6769317212745" z="0"/>
+        <rotation name="AV_207!Module2_75_75!component0_0_00x557603a2d4a0_rot" unit="deg" x="-90" y="59.0625000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="77" name="AV_208!Module2_76_76!component0_0_00x557603a2d680">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_208!Module2_76_76!component0_0_00x557603a2d680_pos" unit="mm" x="-39.9105413905223" y="-26.6673711849407" z="0"/>
+        <rotation name="AV_208!Module2_76_76!component0_0_00x557603a2d680_rot" unit="deg" x="-90" y="56.2500000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="78" name="AV_209!Module2_77_77!component0_0_00x557603a2d860">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_209!Module2_77_77!component0_0_00x557603a2d860_pos" unit="mm" x="-38.5539615110711" y="-28.5935666156366" z="0"/>
+        <rotation name="AV_209!Module2_77_77!component0_0_00x557603a2d860_rot" unit="deg" x="-90" y="53.4375000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="79" name="AV_210!Module2_78_78!component0_0_00x557603a2da40">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_210!Module2_78_78!component0_0_00x557603a2da40_pos" unit="mm" x="-37.1045017614115" y="-30.4508776398548" z="0"/>
+        <rotation name="AV_210!Module2_78_78!component0_0_00x557603a2da40_rot" unit="deg" x="-90" y="50.6250000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="80" name="AV_211!Module2_79_79!component0_0_00x557603a2dc20">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_211!Module2_79_79!component0_0_00x557603a2dc20_pos" unit="mm" x="-35.5656540170382" y="-32.2348298326567" z="0"/>
+        <rotation name="AV_211!Module2_79_79!component0_0_00x557603a2dc20_rot" unit="deg" x="-90" y="47.8125000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="81" name="AV_212!Module2_80_80!component0_0_00x557603a2de00">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_212!Module2_80_80!component0_0_00x557603a2de00_pos" unit="mm" x="-33.9411254969545" y="-33.9411254969541" z="0"/>
+        <rotation name="AV_212!Module2_80_80!component0_0_00x557603a2de00_rot" unit="deg" x="-90" y="45.0000000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="82" name="AV_213!Module2_81_81!component0_0_00x557603a2dfe0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_213!Module2_81_81!component0_0_00x557603a2dfe0_pos" unit="mm" x="-32.2348298326571" y="-35.5656540170379" z="0"/>
+        <rotation name="AV_213!Module2_81_81!component0_0_00x557603a2dfe0_rot" unit="deg" x="-90" y="42.1875000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="83" name="AV_214!Module2_82_82!component0_0_00x557603a2e1c0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_214!Module2_82_82!component0_0_00x557603a2e1c0_pos" unit="mm" x="-30.4508776398552" y="-37.1045017614112" z="0"/>
+        <rotation name="AV_214!Module2_82_82!component0_0_00x557603a2e1c0_rot" unit="deg" x="-90" y="39.3750000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="84" name="AV_215!Module2_83_83!component0_0_00x557603a2e3a0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_215!Module2_83_83!component0_0_00x557603a2e3a0_pos" unit="mm" x="-28.593566615637" y="-38.5539615110708" z="0"/>
+        <rotation name="AV_215!Module2_83_83!component0_0_00x557603a2e3a0_rot" unit="deg" x="-90" y="36.5625000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="85" name="AV_216!Module2_84_84!component0_0_00x557603a2e580">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_216!Module2_84_84!component0_0_00x557603a2e580_pos" unit="mm" x="-26.6673711849411" y="-39.910541390522" z="0"/>
+        <rotation name="AV_216!Module2_84_84!component0_0_00x557603a2e580_rot" unit="deg" x="-90" y="33.7500000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="86" name="AV_217!Module2_85_85!component0_0_00x557603a2e760">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_217!Module2_85_85!component0_0_00x557603a2e760_pos" unit="mm" x="-24.6769317212749" y="-41.1709732800129" z="0"/>
+        <rotation name="AV_217!Module2_85_85!component0_0_00x557603a2e760_rot" unit="deg" x="-90" y="30.9375000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="87" name="AV_218!Module2_86_86!component0_0_00x557603a2e940">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_218!Module2_86_86!component0_0_00x557603a2e940_pos" unit="mm" x="-22.6270433676481" y="-42.3322206887209" z="0"/>
+        <rotation name="AV_218!Module2_86_86!component0_0_00x557603a2e940_rot" unit="deg" x="-90" y="28.1250000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="88" name="AV_219!Module2_87_87!component0_0_00x557603a2eb20">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_219!Module2_87_87!component0_0_00x557603a2eb20_pos" unit="mm" x="-20.5226444846538" y="-43.3914860699252" z="0"/>
+        <rotation name="AV_219!Module2_87_87!component0_0_00x557603a2eb20_rot" unit="deg" x="-90" y="25.3125000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="89" name="AV_220!Module2_88_88!component0_0_00x557603a2ed00">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_220!Module2_88_88!component0_0_00x557603a2ed00_pos" unit="mm" x="-18.3688047535246" y="-44.3462175605417" z="0"/>
+        <rotation name="AV_220!Module2_88_88!component0_0_00x557603a2ed00_rot" unit="deg" x="-90" y="22.5000000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="90" name="AV_221!Module2_89_89!component0_0_00x557603a2eee0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_221!Module2_89_89!component0_0_00x557603a2eee0_pos" unit="mm" x="-16.1707129628268" y="-45.1941151287849" z="0"/>
+        <rotation name="AV_221!Module2_89_89!component0_0_00x557603a2eee0_rot" unit="deg" x="-90" y="19.6875000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="91" name="AV_222!Module2_90_90!component0_0_00x557603a2f0c0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_222!Module2_90_90!component0_0_00x557603a2f0c0_pos" unit="mm" x="-13.9336645082145" y="-45.9331361151459" z="0"/>
+        <rotation name="AV_222!Module2_90_90!component0_0_00x557603a2f0c0_rot" unit="deg" x="-90" y="16.8750000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="92" name="AV_223!Module2_91_91!component0_0_00x557603a2f2a0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_223!Module2_91_91!component0_0_00x557603a2f2a0_pos" unit="mm" x="-11.663048635357" y="-46.561500153338" z="0"/>
+        <rotation name="AV_223!Module2_91_91!component0_0_00x557603a2f2a0_rot" unit="deg" x="-90" y="14.0625000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="93" name="AV_224!Module2_92_92!component0_0_00x557603a2f480">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_224!Module2_92_92!component0_0_00x557603a2f480_pos" unit="mm" x="-9.36433545677447" y="-47.077693459355" z="0"/>
+        <rotation name="AV_224!Module2_92_92!component0_0_00x557603a2f480_rot" unit="deg" x="-90" y="11.2500000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="94" name="AV_225!Module2_93_93!component0_0_00x557603a2f660">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_225!Module2_93_93!component0_0_00x557603a2f660_pos" unit="mm" x="-7.04306277385769" y="-47.4804724783094" z="0"/>
+        <rotation name="AV_225!Module2_93_93!component0_0_00x557603a2f660_rot" unit="deg" x="-90" y="8.43750000000038" z="-180"/>
+      </physvol>
+      <physvol copynumber="95" name="AV_226!Module2_94_94!component0_0_00x557603a2f840">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_226!Module2_94_94!component0_0_00x557603a2f840_pos" unit="mm" x="-4.70482273581924" y="-47.7688668802654" z="0"/>
+        <rotation name="AV_226!Module2_94_94!component0_0_00x557603a2f840_rot" unit="deg" x="-90" y="5.62500000000039" z="-180"/>
+      </physvol>
+      <physvol copynumber="96" name="AV_227!Module2_95_95!component0_0_00x557603a2fa20">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_227!Module2_95_95!component0_0_00x557603a2fa20_pos" unit="mm" x="-2.35524836771641" y="-47.9421818978483" z="0"/>
+        <rotation name="AV_227!Module2_95_95!component0_0_00x557603a2fa20_rot" unit="deg" x="-90" y="2.8125000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="97" name="AV_228!Module2_96_96!component0_0_00x557603a2fc00">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_228!Module2_96_96!component0_0_00x557603a2fc00_pos" unit="mm" x="-3.49877970118709e-13" y="-48" z="0"/>
+        <rotation name="AV_228!Module2_96_96!component0_0_00x557603a2fc00_rot" unit="deg" x="-90" y="4.0711099922733e-13" z="-180"/>
+      </physvol>
+      <physvol copynumber="98" name="AV_229!Module2_97_97!component0_0_00x557603a2fde0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_229!Module2_97_97!component0_0_00x557603a2fde0_pos" unit="mm" x="2.35524836771571" y="-47.9421818978483" z="0"/>
+        <rotation name="AV_229!Module2_97_97!component0_0_00x557603a2fde0_rot" unit="deg" x="-90" y="-2.81249999999958" z="-180"/>
+      </physvol>
+      <physvol copynumber="99" name="AV_230!Module2_98_98!component0_0_00x557603a2ffc0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_230!Module2_98_98!component0_0_00x557603a2ffc0_pos" unit="mm" x="4.70482273581854" y="-47.7688668802655" z="0"/>
+        <rotation name="AV_230!Module2_98_98!component0_0_00x557603a2ffc0_rot" unit="deg" x="-90" y="-5.62499999999957" z="-180"/>
+      </physvol>
+      <physvol copynumber="100" name="AV_231!Module2_99_99!component0_0_00x557603a301a0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_231!Module2_99_99!component0_0_00x557603a301a0_pos" unit="mm" x="7.04306277385699" y="-47.4804724783095" z="0"/>
+        <rotation name="AV_231!Module2_99_99!component0_0_00x557603a301a0_rot" unit="deg" x="-90" y="-8.43749999999956" z="-180"/>
+      </physvol>
+      <physvol copynumber="101" name="AV_232!Module2_100_100!component0_0_00x557603a30380">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_232!Module2_100_100!component0_0_00x557603a30380_pos" unit="mm" x="9.36433545677378" y="-47.0776934593551" z="0"/>
+        <rotation name="AV_232!Module2_100_100!component0_0_00x557603a30380_rot" unit="deg" x="-90" y="-11.2499999999996" z="-180"/>
+      </physvol>
+      <physvol copynumber="102" name="AV_233!Module2_101_101!component0_0_00x557603a30560">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_233!Module2_101_101!component0_0_00x557603a30560_pos" unit="mm" x="11.6630486353563" y="-46.5615001533382" z="0"/>
+        <rotation name="AV_233!Module2_101_101!component0_0_00x557603a30560_rot" unit="deg" x="-90" y="-14.0624999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="103" name="AV_234!Module2_102_102!component0_0_00x557603a30740">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_234!Module2_102_102!component0_0_00x557603a30740_pos" unit="mm" x="13.9336645082138" y="-45.9331361151461" z="0"/>
+        <rotation name="AV_234!Module2_102_102!component0_0_00x557603a30740_rot" unit="deg" x="-90" y="-16.8749999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="104" name="AV_235!Module2_103_103!component0_0_00x557603a30920">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_235!Module2_103_103!component0_0_00x557603a30920_pos" unit="mm" x="16.1707129628262" y="-45.1941151287851" z="0"/>
+        <rotation name="AV_235!Module2_103_103!component0_0_00x557603a30920_rot" unit="deg" x="-90" y="-19.6874999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="105" name="AV_236!Module2_104_104!component0_0_00x557603a30b00">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_236!Module2_104_104!component0_0_00x557603a30b00_pos" unit="mm" x="18.3688047535239" y="-44.3462175605419" z="0"/>
+        <rotation name="AV_236!Module2_104_104!component0_0_00x557603a30b00_rot" unit="deg" x="-90" y="-22.4999999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="106" name="AV_237!Module2_105_105!component0_0_00x557603a30ce0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_237!Module2_105_105!component0_0_00x557603a30ce0_pos" unit="mm" x="20.5226444846532" y="-43.3914860699255" z="0"/>
+        <rotation name="AV_237!Module2_105_105!component0_0_00x557603a30ce0_rot" unit="deg" x="-90" y="-25.3124999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="107" name="AV_238!Module2_106_106!component0_0_00x557603a30ec0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_238!Module2_106_106!component0_0_00x557603a30ec0_pos" unit="mm" x="22.6270433676475" y="-42.3322206887212" z="0"/>
+        <rotation name="AV_238!Module2_106_106!component0_0_00x557603a30ec0_rot" unit="deg" x="-90" y="-28.1249999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="108" name="AV_239!Module2_107_107!component0_0_00x557603a310a0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_239!Module2_107_107!component0_0_00x557603a310a0_pos" unit="mm" x="24.6769317212743" y="-41.1709732800133" z="0"/>
+        <rotation name="AV_239!Module2_107_107!component0_0_00x557603a310a0_rot" unit="deg" x="-90" y="-30.9374999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="109" name="AV_240!Module2_108_108!component0_0_00x557603a31280">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_240!Module2_108_108!component0_0_00x557603a31280_pos" unit="mm" x="26.6673711849405" y="-39.9105413905224" z="0"/>
+        <rotation name="AV_240!Module2_108_108!component0_0_00x557603a31280_rot" unit="deg" x="-90" y="-33.7499999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="110" name="AV_241!Module2_109_109!component0_0_00x557603a31460">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_241!Module2_109_109!component0_0_00x557603a31460_pos" unit="mm" x="28.5935666156364" y="-38.5539615110712" z="0"/>
+        <rotation name="AV_241!Module2_109_109!component0_0_00x557603a31460_rot" unit="deg" x="-90" y="-36.5624999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="111" name="AV_242!Module2_110_110!component0_0_00x557603a31640">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_242!Module2_110_110!component0_0_00x557603a31640_pos" unit="mm" x="30.4508776398546" y="-37.1045017614117" z="0"/>
+        <rotation name="AV_242!Module2_110_110!component0_0_00x557603a31640_rot" unit="deg" x="-90" y="-39.3749999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="112" name="AV_243!Module2_111_111!component0_0_00x557603a31820">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_243!Module2_111_111!component0_0_00x557603a31820_pos" unit="mm" x="32.2348298326565" y="-35.5656540170383" z="0"/>
+        <rotation name="AV_243!Module2_111_111!component0_0_00x557603a31820_rot" unit="deg" x="-90" y="-42.1874999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="113" name="AV_244!Module2_112_112!component0_0_00x557603a31a00">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_244!Module2_112_112!component0_0_00x557603a31a00_pos" unit="mm" x="33.9411254969539" y="-33.9411254969546" z="0"/>
+        <rotation name="AV_244!Module2_112_112!component0_0_00x557603a31a00_rot" unit="deg" x="-90" y="-44.9999999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="114" name="AV_245!Module2_113_113!component0_0_00x557603a31be0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_245!Module2_113_113!component0_0_00x557603a31be0_pos" unit="mm" x="35.5656540170377" y="-32.2348298326572" z="0"/>
+        <rotation name="AV_245!Module2_113_113!component0_0_00x557603a31be0_rot" unit="deg" x="-90" y="-47.8124999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="115" name="AV_246!Module2_114_114!component0_0_00x557603a31dc0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_246!Module2_114_114!component0_0_00x557603a31dc0_pos" unit="mm" x="37.1045017614111" y="-30.4508776398554" z="0"/>
+        <rotation name="AV_246!Module2_114_114!component0_0_00x557603a31dc0_rot" unit="deg" x="-90" y="-50.6249999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="116" name="AV_247!Module2_115_115!component0_0_00x557603a31fa0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_247!Module2_115_115!component0_0_00x557603a31fa0_pos" unit="mm" x="38.5539615110707" y="-28.5935666156372" z="0"/>
+        <rotation name="AV_247!Module2_115_115!component0_0_00x557603a31fa0_rot" unit="deg" x="-90" y="-53.4374999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="117" name="AV_248!Module2_116_116!component0_0_00x557603a32180">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_248!Module2_116_116!component0_0_00x557603a32180_pos" unit="mm" x="39.9105413905219" y="-26.6673711849413" z="0"/>
+        <rotation name="AV_248!Module2_116_116!component0_0_00x557603a32180_rot" unit="deg" x="-90" y="-56.2499999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="118" name="AV_249!Module2_117_117!component0_0_00x557603a32360">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_249!Module2_117_117!component0_0_00x557603a32360_pos" unit="mm" x="41.1709732800128" y="-24.6769317212751" z="0"/>
+        <rotation name="AV_249!Module2_117_117!component0_0_00x557603a32360_rot" unit="deg" x="-90" y="-59.0624999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="119" name="AV_250!Module2_118_118!component0_0_00x557603a32540">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_250!Module2_118_118!component0_0_00x557603a32540_pos" unit="mm" x="42.3322206887208" y="-22.6270433676484" z="0"/>
+        <rotation name="AV_250!Module2_118_118!component0_0_00x557603a32540_rot" unit="deg" x="-90" y="-61.8749999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="120" name="AV_251!Module2_119_119!component0_0_00x557603a32720">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_251!Module2_119_119!component0_0_00x557603a32720_pos" unit="mm" x="43.3914860699251" y="-20.522644484654" z="0"/>
+        <rotation name="AV_251!Module2_119_119!component0_0_00x557603a32720_rot" unit="deg" x="-90" y="-64.6874999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="121" name="AV_252!Module2_120_120!component0_0_00x557603a32900">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_252!Module2_120_120!component0_0_00x557603a32900_pos" unit="mm" x="44.3462175605416" y="-18.3688047535248" z="0"/>
+        <rotation name="AV_252!Module2_120_120!component0_0_00x557603a32900_rot" unit="deg" x="-90" y="-67.4999999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="122" name="AV_253!Module2_121_121!component0_0_00x557603a32ae0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_253!Module2_121_121!component0_0_00x557603a32ae0_pos" unit="mm" x="45.1941151287848" y="-16.1707129628271" z="0"/>
+        <rotation name="AV_253!Module2_121_121!component0_0_00x557603a32ae0_rot" unit="deg" x="-90" y="-70.3124999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="123" name="AV_254!Module2_122_122!component0_0_00x557603a32cc0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_254!Module2_122_122!component0_0_00x557603a32cc0_pos" unit="mm" x="45.9331361151459" y="-13.9336645082147" z="0"/>
+        <rotation name="AV_254!Module2_122_122!component0_0_00x557603a32cc0_rot" unit="deg" x="-90" y="-73.1249999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="124" name="AV_255!Module2_123_123!component0_0_00x557603a32ea0">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_255!Module2_123_123!component0_0_00x557603a32ea0_pos" unit="mm" x="46.561500153338" y="-11.6630486353572" z="0"/>
+        <rotation name="AV_255!Module2_123_123!component0_0_00x557603a32ea0_rot" unit="deg" x="-90" y="-75.9374999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="128" name="AV_256!Module2_127_127!component0_0_00x557603a33080">
+        <volumeref ref="component00x5576039e3450"/>
+        <position name="AV_256!Module2_127_127!component0_0_00x557603a33080_pos" unit="mm" x="47.9421818978482" y="-2.35524836771666" z="0"/>
+        <rotation name="AV_256!Module2_127_127!component0_0_00x557603a33080_rot" unit="deg" x="-90" y="-87.1874999999993" z="-180"/>
+      </physvol>
+      <auxiliary auxtype="gammaECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="electronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="positronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="protonECut" auxunit="MeV" auxvalue="-1"/>
+    </volume>
+    <volume name="component00x5576039e3920">
+      <materialref ref="Silicon0x5576039d8e70"/>
+      <solidref ref="component0_shape_0x557602d552600x5576039b9170"/>
+      <auxiliary auxtype="gammaECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="electronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="positronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="protonECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="SensDet" auxvalue="VertexBarrel"/>
+    </volume>
+    <volume name="VertexBarrel_layer40x5576039d2b30">
+      <materialref ref="Air0x5576034f9730"/>
+      <solidref ref="VertexBarrel_layer4_shape_0x5576031b60000x5576039d76a0"/>
+      <physvol copynumber="1" name="AV_257!Module3_0_0!component0_0_00x557603a33260">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_257!Module3_0_0!component0_0_00x557603a33260_pos" unit="mm" x="120" y="0" z="0"/>
+        <rotation name="AV_257!Module3_0_0!component0_0_00x557603a33260_rot" unit="deg" x="90" y="-90" z="0"/>
+      </physvol>
+      <physvol copynumber="2" name="AV_258!Module3_1_1!component0_0_00x557603a334e0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_258!Module3_1_1!component0_0_00x557603a334e0_pos" unit="mm" x="119.855454744621" y="5.88812091929016" z="0"/>
+        <rotation name="AV_258!Module3_1_1!component0_0_00x557603a334e0_rot" unit="deg" x="90" y="-87.1875" z="0"/>
+      </physvol>
+      <physvol copynumber="3" name="AV_259!Module3_2_2!component0_0_00x557603a33710">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_259!Module3_2_2!component0_0_00x557603a33710_pos" unit="mm" x="119.422167200664" y="11.7620568395473" z="0"/>
+        <rotation name="AV_259!Module3_2_2!component0_0_00x557603a33710_rot" unit="deg" x="90" y="-84.375" z="0"/>
+      </physvol>
+      <physvol copynumber="4" name="AV_260!Module3_3_3!component0_0_00x557603a338d0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_260!Module3_3_3!component0_0_00x557603a338d0_pos" unit="mm" x="118.701181195774" y="17.6076569346434" z="0"/>
+        <rotation name="AV_260!Module3_3_3!component0_0_00x557603a338d0_rot" unit="deg" x="90" y="-81.5625" z="0"/>
+      </physvol>
+      <physvol copynumber="5" name="AV_261!Module3_4_4!component0_0_00x557603a33a60">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_261!Module3_4_4!component0_0_00x557603a33a60_pos" unit="mm" x="117.694233648388" y="23.4108386419354" z="0"/>
+        <rotation name="AV_261!Module3_4_4!component0_0_00x557603a33a60_rot" unit="deg" x="90" y="-78.75" z="0"/>
+      </physvol>
+      <physvol copynumber="6" name="AV_262!Module3_5_5!component0_0_00x557603a33c90">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_262!Module3_5_5!component0_0_00x557603a33c90_pos" unit="mm" x="116.403750383345" y="29.1576215883917" z="0"/>
+        <rotation name="AV_262!Module3_5_5!component0_0_00x557603a33c90_rot" unit="deg" x="90" y="-75.9375" z="0"/>
+      </physvol>
+      <physvol copynumber="7" name="AV_263!Module3_6_6!component0_0_00x557603a33e40">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_263!Module3_6_6!component0_0_00x557603a33e40_pos" unit="mm" x="114.832840287865" y="34.8341612705355" z="0"/>
+        <rotation name="AV_263!Module3_6_6!component0_0_00x557603a33e40_rot" unit="deg" x="90" y="-73.125" z="0"/>
+      </physvol>
+      <physvol copynumber="8" name="AV_264!Module3_7_7!component0_0_00x557603a34020">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_264!Module3_7_7!component0_0_00x557603a34020_pos" unit="mm" x="112.985287821963" y="40.4267824070664" z="0"/>
+        <rotation name="AV_264!Module3_7_7!component0_0_00x557603a34020_rot" unit="deg" x="90" y="-70.3125" z="0"/>
+      </physvol>
+      <physvol copynumber="9" name="AV_265!Module3_8_8!component0_0_00x557603a34200">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_265!Module3_8_8!component0_0_00x557603a34200_pos" unit="mm" x="110.865543901354" y="45.9220118838108" z="0"/>
+        <rotation name="AV_265!Module3_8_8!component0_0_00x557603a34200_rot" unit="deg" x="90" y="-67.5" z="0"/>
+      </physvol>
+      <physvol copynumber="10" name="AV_266!Module3_9_9!component0_0_00x557603a343e0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_266!Module3_9_9!component0_0_00x557603a343e0_pos" unit="mm" x="108.478715174813" y="51.3066112116339" z="0"/>
+        <rotation name="AV_266!Module3_9_9!component0_0_00x557603a343e0_rot" unit="deg" x="90" y="-64.6875" z="0"/>
+      </physvol>
+      <physvol copynumber="11" name="AV_267!Module3_10_10!component0_0_00x557603a34570">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_267!Module3_10_10!component0_0_00x557603a34570_pos" unit="mm" x="105.830551721803" y="56.5676084191197" z="0"/>
+        <rotation name="AV_267!Module3_10_10!component0_0_00x557603a34570_rot" unit="deg" x="90" y="-61.875" z="0"/>
+      </physvol>
+      <physvol copynumber="12" name="AV_268!Module3_11_11!component0_0_00x557603a34750">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_268!Module3_11_11!component0_0_00x557603a34750_pos" unit="mm" x="102.927433200033" y="61.6923293031866" z="0"/>
+        <rotation name="AV_268!Module3_11_11!component0_0_00x557603a34750_rot" unit="deg" x="90" y="-59.0625" z="0"/>
+      </physvol>
+      <physvol copynumber="13" name="AV_269!Module3_12_12!component0_0_00x557603a34930">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_269!Module3_12_12!component0_0_00x557603a34930_pos" unit="mm" x="99.7763534763054" y="66.6684279623523" z="0"/>
+        <rotation name="AV_269!Module3_12_12!component0_0_00x557603a34930_rot" unit="deg" x="90" y="-56.25" z="0"/>
+      </physvol>
+      <physvol copynumber="14" name="AV_270!Module3_13_13!component0_0_00x557603a34b10">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_270!Module3_13_13!component0_0_00x557603a34b10_pos" unit="mm" x="96.3849037776774" y="71.483916539092" z="0"/>
+        <rotation name="AV_270!Module3_13_13!component0_0_00x557603a34b10_rot" unit="deg" x="90" y="-53.4375" z="0"/>
+      </physvol>
+      <physvol copynumber="15" name="AV_271!Module3_14_14!component0_0_00x557603a34cf0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_271!Module3_14_14!component0_0_00x557603a34cf0_pos" unit="mm" x="92.7612544035284" y="76.1271940996375" z="0"/>
+        <rotation name="AV_271!Module3_14_14!component0_0_00x557603a34cf0_rot" unit="deg" x="90" y="-50.625" z="0"/>
+      </physvol>
+      <physvol copynumber="16" name="AV_272!Module3_15_15!component0_0_00x557603a34ed0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_272!Module3_15_15!component0_0_00x557603a34ed0_pos" unit="mm" x="88.9141350425951" y="80.5870745816422" z="0"/>
+        <rotation name="AV_272!Module3_15_15!component0_0_00x557603a34ed0_rot" unit="deg" x="90" y="-47.8125" z="0"/>
+      </physvol>
+      <physvol copynumber="17" name="AV_273!Module3_16_16!component0_0_00x557603a350b0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_273!Module3_16_16!component0_0_00x557603a350b0_pos" unit="mm" x="84.8528137423857" y="84.8528137423857" z="0"/>
+        <rotation name="AV_273!Module3_16_16!component0_0_00x557603a350b0_rot" unit="deg" x="90" y="-45" z="0"/>
+      </physvol>
+      <physvol copynumber="18" name="AV_274!Module3_17_17!component0_0_00x557603a356a0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_274!Module3_17_17!component0_0_00x557603a356a0_pos" unit="mm" x="80.5870745816422" y="88.9141350425951" z="0"/>
+        <rotation name="AV_274!Module3_17_17!component0_0_00x557603a356a0_rot" unit="deg" x="90" y="-42.1875" z="0"/>
+      </physvol>
+      <physvol copynumber="19" name="AV_275!Module3_18_18!component0_0_00x557603a35880">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_275!Module3_18_18!component0_0_00x557603a35880_pos" unit="mm" x="76.1271940996374" y="92.7612544035285" z="0"/>
+        <rotation name="AV_275!Module3_18_18!component0_0_00x557603a35880_rot" unit="deg" x="90" y="-39.375" z="0"/>
+      </physvol>
+      <physvol copynumber="20" name="AV_276!Module3_19_19!component0_0_00x557603a35a60">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_276!Module3_19_19!component0_0_00x557603a35a60_pos" unit="mm" x="71.483916539092" y="96.3849037776774" z="0"/>
+        <rotation name="AV_276!Module3_19_19!component0_0_00x557603a35a60_rot" unit="deg" x="90" y="-36.5625" z="0"/>
+      </physvol>
+      <physvol copynumber="21" name="AV_277!Module3_20_20!component0_0_00x557603a35c40">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_277!Module3_20_20!component0_0_00x557603a35c40_pos" unit="mm" x="66.6684279623522" y="99.7763534763055" z="0"/>
+        <rotation name="AV_277!Module3_20_20!component0_0_00x557603a35c40_rot" unit="deg" x="90" y="-33.75" z="0"/>
+      </physvol>
+      <physvol copynumber="22" name="AV_278!Module3_21_21!component0_0_00x557603a35e20">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_278!Module3_21_21!component0_0_00x557603a35e20_pos" unit="mm" x="61.6923293031866" y="102.927433200033" z="0"/>
+        <rotation name="AV_278!Module3_21_21!component0_0_00x557603a35e20_rot" unit="deg" x="90" y="-30.9375" z="0"/>
+      </physvol>
+      <physvol copynumber="23" name="AV_279!Module3_22_22!component0_0_00x557603a36000">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_279!Module3_22_22!component0_0_00x557603a36000_pos" unit="mm" x="56.5676084191197" y="105.830551721803" z="0"/>
+        <rotation name="AV_279!Module3_22_22!component0_0_00x557603a36000_rot" unit="deg" x="90" y="-28.125" z="0"/>
+      </physvol>
+      <physvol copynumber="24" name="AV_280!Module3_23_23!component0_0_00x557603a361e0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_280!Module3_23_23!component0_0_00x557603a361e0_pos" unit="mm" x="51.3066112116338" y="108.478715174813" z="0"/>
+        <rotation name="AV_280!Module3_23_23!component0_0_00x557603a361e0_rot" unit="deg" x="90" y="-25.3125" z="0"/>
+      </physvol>
+      <physvol copynumber="25" name="AV_281!Module3_24_24!component0_0_00x557603a363c0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_281!Module3_24_24!component0_0_00x557603a363c0_pos" unit="mm" x="45.9220118838107" y="110.865543901354" z="0"/>
+        <rotation name="AV_281!Module3_24_24!component0_0_00x557603a363c0_rot" unit="deg" x="90" y="-22.5" z="0"/>
+      </physvol>
+      <physvol copynumber="26" name="AV_282!Module3_25_25!component0_0_00x557603a365a0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_282!Module3_25_25!component0_0_00x557603a365a0_pos" unit="mm" x="40.4267824070663" y="112.985287821963" z="0"/>
+        <rotation name="AV_282!Module3_25_25!component0_0_00x557603a365a0_rot" unit="deg" x="90" y="-19.6875" z="0"/>
+      </physvol>
+      <physvol copynumber="27" name="AV_283!Module3_26_26!component0_0_00x557603a36780">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_283!Module3_26_26!component0_0_00x557603a36780_pos" unit="mm" x="34.8341612705354" y="114.832840287865" z="0"/>
+        <rotation name="AV_283!Module3_26_26!component0_0_00x557603a36780_rot" unit="deg" x="90" y="-16.875" z="0"/>
+      </physvol>
+      <physvol copynumber="28" name="AV_284!Module3_27_27!component0_0_00x557603a36960">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_284!Module3_27_27!component0_0_00x557603a36960_pos" unit="mm" x="29.1576215883916" y="116.403750383345" z="0"/>
+        <rotation name="AV_284!Module3_27_27!component0_0_00x557603a36960_rot" unit="deg" x="90" y="-14.0625" z="0"/>
+      </physvol>
+      <physvol copynumber="29" name="AV_285!Module3_28_28!component0_0_00x557603a36b40">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_285!Module3_28_28!component0_0_00x557603a36b40_pos" unit="mm" x="23.4108386419353" y="117.694233648388" z="0"/>
+        <rotation name="AV_285!Module3_28_28!component0_0_00x557603a36b40_rot" unit="deg" x="90" y="-11.2499999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="30" name="AV_286!Module3_29_29!component0_0_00x557603a36d20">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_286!Module3_29_29!component0_0_00x557603a36d20_pos" unit="mm" x="17.6076569346433" y="118.701181195774" z="0"/>
+        <rotation name="AV_286!Module3_29_29!component0_0_00x557603a36d20_rot" unit="deg" x="90" y="-8.43749999999994" z="0"/>
+      </physvol>
+      <physvol copynumber="31" name="AV_287!Module3_30_30!component0_0_00x557603a36f00">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_287!Module3_30_30!component0_0_00x557603a36f00_pos" unit="mm" x="11.7620568395472" y="119.422167200664" z="0"/>
+        <rotation name="AV_287!Module3_30_30!component0_0_00x557603a36f00_rot" unit="deg" x="90" y="-5.62499999999994" z="0"/>
+      </physvol>
+      <physvol copynumber="32" name="AV_288!Module3_31_31!component0_0_00x557603a370e0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_288!Module3_31_31!component0_0_00x557603a370e0_pos" unit="mm" x="5.88812091929004" y="119.855454744621" z="0"/>
+        <rotation name="AV_288!Module3_31_31!component0_0_00x557603a370e0_rot" unit="deg" x="90" y="-2.81249999999994" z="0"/>
+      </physvol>
+      <physvol copynumber="33" name="AV_289!Module3_32_32!component0_0_00x557603a372c0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_289!Module3_32_32!component0_0_00x557603a372c0_pos" unit="mm" x="-1.25878882160135e-13" y="120" z="0"/>
+        <rotation name="AV_289!Module3_32_32!component0_0_00x557603a372c0_rot" unit="deg" x="90" y="6.36110936292703e-14" z="0"/>
+      </physvol>
+      <physvol copynumber="34" name="AV_290!Module3_33_33!component0_0_00x557603a37cb0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_290!Module3_33_33!component0_0_00x557603a37cb0_pos" unit="mm" x="-5.88812091929029" y="119.855454744621" z="0"/>
+        <rotation name="AV_290!Module3_33_33!component0_0_00x557603a37cb0_rot" unit="deg" x="90" y="2.81250000000007" z="0"/>
+      </physvol>
+      <physvol copynumber="35" name="AV_291!Module3_34_34!component0_0_00x557603a37e90">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_291!Module3_34_34!component0_0_00x557603a37e90_pos" unit="mm" x="-11.7620568395474" y="119.422167200664" z="0"/>
+        <rotation name="AV_291!Module3_34_34!component0_0_00x557603a37e90_rot" unit="deg" x="90" y="5.62500000000007" z="0"/>
+      </physvol>
+      <physvol copynumber="36" name="AV_292!Module3_35_35!component0_0_00x557603a38070">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_292!Module3_35_35!component0_0_00x557603a38070_pos" unit="mm" x="-17.6076569346436" y="118.701181195774" z="0"/>
+        <rotation name="AV_292!Module3_35_35!component0_0_00x557603a38070_rot" unit="deg" x="90" y="8.43750000000007" z="0"/>
+      </physvol>
+      <physvol copynumber="37" name="AV_293!Module3_36_36!component0_0_00x557603a38250">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_293!Module3_36_36!component0_0_00x557603a38250_pos" unit="mm" x="-23.4108386419355" y="117.694233648388" z="0"/>
+        <rotation name="AV_293!Module3_36_36!component0_0_00x557603a38250_rot" unit="deg" x="90" y="11.2500000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="38" name="AV_294!Module3_37_37!component0_0_00x557603a38430">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_294!Module3_37_37!component0_0_00x557603a38430_pos" unit="mm" x="-29.1576215883918" y="116.403750383345" z="0"/>
+        <rotation name="AV_294!Module3_37_37!component0_0_00x557603a38430_rot" unit="deg" x="90" y="14.0625000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="39" name="AV_295!Module3_38_38!component0_0_00x557603a38610">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_295!Module3_38_38!component0_0_00x557603a38610_pos" unit="mm" x="-34.8341612705356" y="114.832840287865" z="0"/>
+        <rotation name="AV_295!Module3_38_38!component0_0_00x557603a38610_rot" unit="deg" x="90" y="16.8750000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="40" name="AV_296!Module3_39_39!component0_0_00x557603a387f0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_296!Module3_39_39!component0_0_00x557603a387f0_pos" unit="mm" x="-40.4267824070666" y="112.985287821962" z="0"/>
+        <rotation name="AV_296!Module3_39_39!component0_0_00x557603a387f0_rot" unit="deg" x="90" y="19.6875000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="41" name="AV_297!Module3_40_40!component0_0_00x557603a389d0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_297!Module3_40_40!component0_0_00x557603a389d0_pos" unit="mm" x="-45.9220118838109" y="110.865543901354" z="0"/>
+        <rotation name="AV_297!Module3_40_40!component0_0_00x557603a389d0_rot" unit="deg" x="90" y="22.5000000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="42" name="AV_298!Module3_41_41!component0_0_00x557603a38bb0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_298!Module3_41_41!component0_0_00x557603a38bb0_pos" unit="mm" x="-51.306611211634" y="108.478715174813" z="0"/>
+        <rotation name="AV_298!Module3_41_41!component0_0_00x557603a38bb0_rot" unit="deg" x="90" y="25.3125000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="43" name="AV_299!Module3_42_42!component0_0_00x557603a38d90">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_299!Module3_42_42!component0_0_00x557603a38d90_pos" unit="mm" x="-56.5676084191199" y="105.830551721803" z="0"/>
+        <rotation name="AV_299!Module3_42_42!component0_0_00x557603a38d90_rot" unit="deg" x="90" y="28.1250000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="44" name="AV_300!Module3_43_43!component0_0_00x557603a38f70">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_300!Module3_43_43!component0_0_00x557603a38f70_pos" unit="mm" x="-61.6923293031867" y="102.927433200033" z="0"/>
+        <rotation name="AV_300!Module3_43_43!component0_0_00x557603a38f70_rot" unit="deg" x="90" y="30.9375000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="45" name="AV_301!Module3_44_44!component0_0_00x557603a39150">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_301!Module3_44_44!component0_0_00x557603a39150_pos" unit="mm" x="-66.6684279623524" y="99.7763534763054" z="0"/>
+        <rotation name="AV_301!Module3_44_44!component0_0_00x557603a39150_rot" unit="deg" x="90" y="33.7500000000001" z="0"/>
+      </physvol>
+      <physvol copynumber="46" name="AV_302!Module3_45_45!component0_0_00x557603a39330">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_302!Module3_45_45!component0_0_00x557603a39330_pos" unit="mm" x="-71.4839165390921" y="96.3849037776773" z="0"/>
+        <rotation name="AV_302!Module3_45_45!component0_0_00x557603a39330_rot" unit="deg" x="90" y="36.5625" z="0"/>
+      </physvol>
+      <physvol copynumber="47" name="AV_303!Module3_46_46!component0_0_00x557603a39510">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_303!Module3_46_46!component0_0_00x557603a39510_pos" unit="mm" x="-76.1271940996375" y="92.7612544035284" z="0"/>
+        <rotation name="AV_303!Module3_46_46!component0_0_00x557603a39510_rot" unit="deg" x="90" y="39.375" z="0"/>
+      </physvol>
+      <physvol copynumber="48" name="AV_304!Module3_47_47!component0_0_00x557603a396f0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_304!Module3_47_47!component0_0_00x557603a396f0_pos" unit="mm" x="-80.5870745816422" y="88.914135042595" z="0"/>
+        <rotation name="AV_304!Module3_47_47!component0_0_00x557603a396f0_rot" unit="deg" x="90" y="42.1875" z="0"/>
+      </physvol>
+      <physvol copynumber="49" name="AV_305!Module3_48_48!component0_0_00x557603a398d0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_305!Module3_48_48!component0_0_00x557603a398d0_pos" unit="mm" x="-84.8528137423857" y="84.8528137423857" z="0"/>
+        <rotation name="AV_305!Module3_48_48!component0_0_00x557603a398d0_rot" unit="deg" x="90" y="45" z="0"/>
+      </physvol>
+      <physvol copynumber="50" name="AV_306!Module3_49_49!component0_0_00x557603a39ab0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_306!Module3_49_49!component0_0_00x557603a39ab0_pos" unit="mm" x="-88.9141350425951" y="80.5870745816422" z="0"/>
+        <rotation name="AV_306!Module3_49_49!component0_0_00x557603a39ab0_rot" unit="deg" x="90" y="47.8125" z="0"/>
+      </physvol>
+      <physvol copynumber="51" name="AV_307!Module3_50_50!component0_0_00x557603a39c90">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_307!Module3_50_50!component0_0_00x557603a39c90_pos" unit="mm" x="-92.7612544035284" y="76.1271940996375" z="0"/>
+        <rotation name="AV_307!Module3_50_50!component0_0_00x557603a39c90_rot" unit="deg" x="90" y="50.625" z="0"/>
+      </physvol>
+      <physvol copynumber="52" name="AV_308!Module3_51_51!component0_0_00x557603a39e70">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_308!Module3_51_51!component0_0_00x557603a39e70_pos" unit="mm" x="-96.3849037776774" y="71.483916539092" z="0"/>
+        <rotation name="AV_308!Module3_51_51!component0_0_00x557603a39e70_rot" unit="deg" x="90" y="53.4375" z="0"/>
+      </physvol>
+      <physvol copynumber="53" name="AV_309!Module3_52_52!component0_0_00x557603a3a050">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_309!Module3_52_52!component0_0_00x557603a3a050_pos" unit="mm" x="-99.7763534763054" y="66.6684279623523" z="0"/>
+        <rotation name="AV_309!Module3_52_52!component0_0_00x557603a3a050_rot" unit="deg" x="90" y="56.25" z="0"/>
+      </physvol>
+      <physvol copynumber="54" name="AV_310!Module3_53_53!component0_0_00x557603a3a230">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_310!Module3_53_53!component0_0_00x557603a3a230_pos" unit="mm" x="-102.927433200033" y="61.6923293031867" z="0"/>
+        <rotation name="AV_310!Module3_53_53!component0_0_00x557603a3a230_rot" unit="deg" x="90" y="59.0625" z="0"/>
+      </physvol>
+      <physvol copynumber="55" name="AV_311!Module3_54_54!component0_0_00x557603a3a410">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_311!Module3_54_54!component0_0_00x557603a3a410_pos" unit="mm" x="-105.830551721803" y="56.5676084191198" z="0"/>
+        <rotation name="AV_311!Module3_54_54!component0_0_00x557603a3a410_rot" unit="deg" x="90" y="61.875" z="0"/>
+      </physvol>
+      <physvol copynumber="56" name="AV_312!Module3_55_55!component0_0_00x557603a3a5f0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_312!Module3_55_55!component0_0_00x557603a3a5f0_pos" unit="mm" x="-108.478715174813" y="51.3066112116339" z="0"/>
+        <rotation name="AV_312!Module3_55_55!component0_0_00x557603a3a5f0_rot" unit="deg" x="90" y="64.6875" z="0"/>
+      </physvol>
+      <physvol copynumber="57" name="AV_313!Module3_56_56!component0_0_00x557603a3a7d0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_313!Module3_56_56!component0_0_00x557603a3a7d0_pos" unit="mm" x="-110.865543901354" y="45.9220118838109" z="0"/>
+        <rotation name="AV_313!Module3_56_56!component0_0_00x557603a3a7d0_rot" unit="deg" x="90" y="67.4999999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="58" name="AV_314!Module3_57_57!component0_0_00x557603a3a9b0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_314!Module3_57_57!component0_0_00x557603a3a9b0_pos" unit="mm" x="-112.985287821962" y="40.4267824070665" z="0"/>
+        <rotation name="AV_314!Module3_57_57!component0_0_00x557603a3a9b0_rot" unit="deg" x="90" y="70.3124999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="59" name="AV_315!Module3_58_58!component0_0_00x557603a3ab90">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_315!Module3_58_58!component0_0_00x557603a3ab90_pos" unit="mm" x="-114.832840287865" y="34.8341612705356" z="0"/>
+        <rotation name="AV_315!Module3_58_58!component0_0_00x557603a3ab90_rot" unit="deg" x="90" y="73.1249999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="60" name="AV_316!Module3_59_59!component0_0_00x557603a3ad70">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_316!Module3_59_59!component0_0_00x557603a3ad70_pos" unit="mm" x="-116.403750383345" y="29.1576215883918" z="0"/>
+        <rotation name="AV_316!Module3_59_59!component0_0_00x557603a3ad70_rot" unit="deg" x="90" y="75.9374999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="61" name="AV_317!Module3_60_60!component0_0_00x557603a3af50">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_317!Module3_60_60!component0_0_00x557603a3af50_pos" unit="mm" x="-117.694233648388" y="23.4108386419356" z="0"/>
+        <rotation name="AV_317!Module3_60_60!component0_0_00x557603a3af50_rot" unit="deg" x="90" y="78.7499999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="62" name="AV_318!Module3_61_61!component0_0_00x557603a3b130">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_318!Module3_61_61!component0_0_00x557603a3b130_pos" unit="mm" x="-118.701181195774" y="17.6076569346436" z="0"/>
+        <rotation name="AV_318!Module3_61_61!component0_0_00x557603a3b130_rot" unit="deg" x="90" y="81.5624999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="63" name="AV_319!Module3_62_62!component0_0_00x557603a3b310">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_319!Module3_62_62!component0_0_00x557603a3b310_pos" unit="mm" x="-119.422167200664" y="11.7620568395475" z="0"/>
+        <rotation name="AV_319!Module3_62_62!component0_0_00x557603a3b310_rot" unit="deg" x="90" y="84.3749999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="64" name="AV_320!Module3_63_63!component0_0_00x557603a3b4f0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_320!Module3_63_63!component0_0_00x557603a3b4f0_pos" unit="mm" x="-119.855454744621" y="5.88812091929042" z="0"/>
+        <rotation name="AV_320!Module3_63_63!component0_0_00x557603a3b4f0_rot" unit="deg" x="90" y="87.1874999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="65" name="AV_321!Module3_64_64!component0_0_00x557603a3b6d0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_321!Module3_64_64!component0_0_00x557603a3b6d0_pos" unit="mm" x="-120" y="2.81149287499806e-13" z="0"/>
+        <rotation name="AV_321!Module3_64_64!component0_0_00x557603a3b6d0_rot" unit="deg" x="90" y="89.9999999999999" z="0"/>
+      </physvol>
+      <physvol copynumber="66" name="AV_322!Module3_65_65!component0_0_00x557603a374a0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_322!Module3_65_65!component0_0_00x557603a374a0_pos" unit="mm" x="-119.855454744621" y="-5.88812091928986" z="0"/>
+        <rotation name="AV_322!Module3_65_65!component0_0_00x557603a374a0_rot" unit="deg" x="-90" y="87.1875000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="67" name="AV_323!Module3_66_66!component0_0_00x557603a37680">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_323!Module3_66_66!component0_0_00x557603a37680_pos" unit="mm" x="-119.422167200664" y="-11.762056839547" z="0"/>
+        <rotation name="AV_323!Module3_66_66!component0_0_00x557603a37680_rot" unit="deg" x="-90" y="84.3750000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="68" name="AV_324!Module3_67_67!component0_0_00x557603a37860">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_324!Module3_67_67!component0_0_00x557603a37860_pos" unit="mm" x="-118.701181195774" y="-17.6076569346431" z="0"/>
+        <rotation name="AV_324!Module3_67_67!component0_0_00x557603a37860_rot" unit="deg" x="-90" y="81.5625000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="69" name="AV_325!Module3_68_68!component0_0_00x557603a37a40">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_325!Module3_68_68!component0_0_00x557603a37a40_pos" unit="mm" x="-117.694233648388" y="-23.410838641935" z="0"/>
+        <rotation name="AV_325!Module3_68_68!component0_0_00x557603a37a40_rot" unit="deg" x="-90" y="78.7500000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="70" name="AV_326!Module3_69_69!component0_0_00x557603a37c20">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_326!Module3_69_69!component0_0_00x557603a37c20_pos" unit="mm" x="-116.403750383345" y="-29.1576215883913" z="0"/>
+        <rotation name="AV_326!Module3_69_69!component0_0_00x557603a37c20_rot" unit="deg" x="-90" y="75.9375000000001" z="-180"/>
+      </physvol>
+      <physvol copynumber="71" name="AV_327!Module3_70_70!component0_0_00x557603a3ca20">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_327!Module3_70_70!component0_0_00x557603a3ca20_pos" unit="mm" x="-114.832840287865" y="-34.8341612705351" z="0"/>
+        <rotation name="AV_327!Module3_70_70!component0_0_00x557603a3ca20_rot" unit="deg" x="-90" y="73.1250000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="72" name="AV_328!Module3_71_71!component0_0_00x557603a3cc00">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_328!Module3_71_71!component0_0_00x557603a3cc00_pos" unit="mm" x="-112.985287821963" y="-40.426782407066" z="0"/>
+        <rotation name="AV_328!Module3_71_71!component0_0_00x557603a3cc00_rot" unit="deg" x="-90" y="70.3125000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="73" name="AV_329!Module3_72_72!component0_0_00x557603a3cde0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_329!Module3_72_72!component0_0_00x557603a3cde0_pos" unit="mm" x="-110.865543901355" y="-45.9220118838104" z="0"/>
+        <rotation name="AV_329!Module3_72_72!component0_0_00x557603a3cde0_rot" unit="deg" x="-90" y="67.5000000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="74" name="AV_330!Module3_73_73!component0_0_00x557603a3cfc0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_330!Module3_73_73!component0_0_00x557603a3cfc0_pos" unit="mm" x="-108.478715174813" y="-51.3066112116334" z="0"/>
+        <rotation name="AV_330!Module3_73_73!component0_0_00x557603a3cfc0_rot" unit="deg" x="-90" y="64.6875000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="75" name="AV_331!Module3_74_74!component0_0_00x557603a3d1a0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_331!Module3_74_74!component0_0_00x557603a3d1a0_pos" unit="mm" x="-105.830551721803" y="-56.5676084191193" z="0"/>
+        <rotation name="AV_331!Module3_74_74!component0_0_00x557603a3d1a0_rot" unit="deg" x="-90" y="61.8750000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="76" name="AV_332!Module3_75_75!component0_0_00x557603a3d380">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_332!Module3_75_75!component0_0_00x557603a3d380_pos" unit="mm" x="-102.927433200033" y="-61.6923293031862" z="0"/>
+        <rotation name="AV_332!Module3_75_75!component0_0_00x557603a3d380_rot" unit="deg" x="-90" y="59.0625000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="77" name="AV_333!Module3_76_76!component0_0_00x557603a3d560">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_333!Module3_76_76!component0_0_00x557603a3d560_pos" unit="mm" x="-99.7763534763057" y="-66.6684279623518" z="0"/>
+        <rotation name="AV_333!Module3_76_76!component0_0_00x557603a3d560_rot" unit="deg" x="-90" y="56.2500000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="78" name="AV_334!Module3_77_77!component0_0_00x557603a3d740">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_334!Module3_77_77!component0_0_00x557603a3d740_pos" unit="mm" x="-96.3849037776777" y="-71.4839165390916" z="0"/>
+        <rotation name="AV_334!Module3_77_77!component0_0_00x557603a3d740_rot" unit="deg" x="-90" y="53.4375000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="79" name="AV_335!Module3_78_78!component0_0_00x557603a3d920">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_335!Module3_78_78!component0_0_00x557603a3d920_pos" unit="mm" x="-92.7612544035288" y="-76.127194099637" z="0"/>
+        <rotation name="AV_335!Module3_78_78!component0_0_00x557603a3d920_rot" unit="deg" x="-90" y="50.6250000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="80" name="AV_336!Module3_79_79!component0_0_00x557603a3db00">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_336!Module3_79_79!component0_0_00x557603a3db00_pos" unit="mm" x="-88.9141350425955" y="-80.5870745816418" z="0"/>
+        <rotation name="AV_336!Module3_79_79!component0_0_00x557603a3db00_rot" unit="deg" x="-90" y="47.8125000000002" z="-180"/>
+      </physvol>
+      <physvol copynumber="81" name="AV_337!Module3_80_80!component0_0_00x557603a3dce0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_337!Module3_80_80!component0_0_00x557603a3dce0_pos" unit="mm" x="-84.8528137423861" y="-84.8528137423853" z="0"/>
+        <rotation name="AV_337!Module3_80_80!component0_0_00x557603a3dce0_rot" unit="deg" x="-90" y="45.0000000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="82" name="AV_338!Module3_81_81!component0_0_00x557603a3dec0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_338!Module3_81_81!component0_0_00x557603a3dec0_pos" unit="mm" x="-80.5870745816427" y="-88.9141350425947" z="0"/>
+        <rotation name="AV_338!Module3_81_81!component0_0_00x557603a3dec0_rot" unit="deg" x="-90" y="42.1875000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="83" name="AV_339!Module3_82_82!component0_0_00x557603a3e0a0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_339!Module3_82_82!component0_0_00x557603a3e0a0_pos" unit="mm" x="-76.1271940996379" y="-92.7612544035281" z="0"/>
+        <rotation name="AV_339!Module3_82_82!component0_0_00x557603a3e0a0_rot" unit="deg" x="-90" y="39.3750000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="84" name="AV_340!Module3_83_83!component0_0_00x557603a3e280">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_340!Module3_83_83!component0_0_00x557603a3e280_pos" unit="mm" x="-71.4839165390925" y="-96.384903777677" z="0"/>
+        <rotation name="AV_340!Module3_83_83!component0_0_00x557603a3e280_rot" unit="deg" x="-90" y="36.5625000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="85" name="AV_341!Module3_84_84!component0_0_00x557603a3e460">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_341!Module3_84_84!component0_0_00x557603a3e460_pos" unit="mm" x="-66.6684279623528" y="-99.7763534763051" z="0"/>
+        <rotation name="AV_341!Module3_84_84!component0_0_00x557603a3e460_rot" unit="deg" x="-90" y="33.7500000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="86" name="AV_342!Module3_85_85!component0_0_00x557603a3e640">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_342!Module3_85_85!component0_0_00x557603a3e640_pos" unit="mm" x="-61.6923293031872" y="-102.927433200032" z="0"/>
+        <rotation name="AV_342!Module3_85_85!component0_0_00x557603a3e640_rot" unit="deg" x="-90" y="30.9375000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="87" name="AV_343!Module3_86_86!component0_0_00x557603a3e820">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_343!Module3_86_86!component0_0_00x557603a3e820_pos" unit="mm" x="-56.5676084191203" y="-105.830551721802" z="0"/>
+        <rotation name="AV_343!Module3_86_86!component0_0_00x557603a3e820_rot" unit="deg" x="-90" y="28.1250000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="88" name="AV_344!Module3_87_87!component0_0_00x557603a3ea00">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_344!Module3_87_87!component0_0_00x557603a3ea00_pos" unit="mm" x="-51.3066112116345" y="-108.478715174813" z="0"/>
+        <rotation name="AV_344!Module3_87_87!component0_0_00x557603a3ea00_rot" unit="deg" x="-90" y="25.3125000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="89" name="AV_345!Module3_88_88!component0_0_00x557603a3ebe0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_345!Module3_88_88!component0_0_00x557603a3ebe0_pos" unit="mm" x="-45.9220118838114" y="-110.865543901354" z="0"/>
+        <rotation name="AV_345!Module3_88_88!component0_0_00x557603a3ebe0_rot" unit="deg" x="-90" y="22.5000000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="90" name="AV_346!Module3_89_89!component0_0_00x557603a3edc0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_346!Module3_89_89!component0_0_00x557603a3edc0_pos" unit="mm" x="-40.4267824070671" y="-112.985287821962" z="0"/>
+        <rotation name="AV_346!Module3_89_89!component0_0_00x557603a3edc0_rot" unit="deg" x="-90" y="19.6875000000003" z="-180"/>
+      </physvol>
+      <physvol copynumber="91" name="AV_347!Module3_90_90!component0_0_00x557603a3efa0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_347!Module3_90_90!component0_0_00x557603a3efa0_pos" unit="mm" x="-34.8341612705362" y="-114.832840287865" z="0"/>
+        <rotation name="AV_347!Module3_90_90!component0_0_00x557603a3efa0_rot" unit="deg" x="-90" y="16.8750000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="92" name="AV_348!Module3_91_91!component0_0_00x557603a3f180">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_348!Module3_91_91!component0_0_00x557603a3f180_pos" unit="mm" x="-29.1576215883924" y="-116.403750383345" z="0"/>
+        <rotation name="AV_348!Module3_91_91!component0_0_00x557603a3f180_rot" unit="deg" x="-90" y="14.0625000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="93" name="AV_349!Module3_92_92!component0_0_00x557603a3f360">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_349!Module3_92_92!component0_0_00x557603a3f360_pos" unit="mm" x="-23.4108386419362" y="-117.694233648388" z="0"/>
+        <rotation name="AV_349!Module3_92_92!component0_0_00x557603a3f360_rot" unit="deg" x="-90" y="11.2500000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="94" name="AV_350!Module3_93_93!component0_0_00x557603a3f540">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_350!Module3_93_93!component0_0_00x557603a3f540_pos" unit="mm" x="-17.6076569346442" y="-118.701181195774" z="0"/>
+        <rotation name="AV_350!Module3_93_93!component0_0_00x557603a3f540_rot" unit="deg" x="-90" y="8.43750000000038" z="-180"/>
+      </physvol>
+      <physvol copynumber="95" name="AV_351!Module3_94_94!component0_0_00x557603a3f720">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_351!Module3_94_94!component0_0_00x557603a3f720_pos" unit="mm" x="-11.7620568395481" y="-119.422167200664" z="0"/>
+        <rotation name="AV_351!Module3_94_94!component0_0_00x557603a3f720_rot" unit="deg" x="-90" y="5.62500000000039" z="-180"/>
+      </physvol>
+      <physvol copynumber="96" name="AV_352!Module3_95_95!component0_0_00x557603a3f900">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_352!Module3_95_95!component0_0_00x557603a3f900_pos" unit="mm" x="-5.88812091929102" y="-119.855454744621" z="0"/>
+        <rotation name="AV_352!Module3_95_95!component0_0_00x557603a3f900_rot" unit="deg" x="-90" y="2.8125000000004" z="-180"/>
+      </physvol>
+      <physvol copynumber="97" name="AV_353!Module3_96_96!component0_0_00x557603a3fae0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_353!Module3_96_96!component0_0_00x557603a3fae0_pos" unit="mm" x="-8.74694925296773e-13" y="-120" z="0"/>
+        <rotation name="AV_353!Module3_96_96!component0_0_00x557603a3fae0_rot" unit="deg" x="-90" y="4.0711099922733e-13" z="-180"/>
+      </physvol>
+      <physvol copynumber="98" name="AV_354!Module3_97_97!component0_0_00x557603a3fcc0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_354!Module3_97_97!component0_0_00x557603a3fcc0_pos" unit="mm" x="5.88812091928927" y="-119.855454744621" z="0"/>
+        <rotation name="AV_354!Module3_97_97!component0_0_00x557603a3fcc0_rot" unit="deg" x="-90" y="-2.81249999999958" z="-180"/>
+      </physvol>
+      <physvol copynumber="99" name="AV_355!Module3_98_98!component0_0_00x557603a3fea0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_355!Module3_98_98!component0_0_00x557603a3fea0_pos" unit="mm" x="11.7620568395464" y="-119.422167200664" z="0"/>
+        <rotation name="AV_355!Module3_98_98!component0_0_00x557603a3fea0_rot" unit="deg" x="-90" y="-5.62499999999957" z="-180"/>
+      </physvol>
+      <physvol copynumber="100" name="AV_356!Module3_99_99!component0_0_00x557603a40080">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_356!Module3_99_99!component0_0_00x557603a40080_pos" unit="mm" x="17.6076569346425" y="-118.701181195774" z="0"/>
+        <rotation name="AV_356!Module3_99_99!component0_0_00x557603a40080_rot" unit="deg" x="-90" y="-8.43749999999956" z="-180"/>
+      </physvol>
+      <physvol copynumber="101" name="AV_357!Module3_100_100!component0_0_00x557603a40260">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_357!Module3_100_100!component0_0_00x557603a40260_pos" unit="mm" x="23.4108386419345" y="-117.694233648388" z="0"/>
+        <rotation name="AV_357!Module3_100_100!component0_0_00x557603a40260_rot" unit="deg" x="-90" y="-11.2499999999996" z="-180"/>
+      </physvol>
+      <physvol copynumber="102" name="AV_358!Module3_101_101!component0_0_00x557603a40440">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_358!Module3_101_101!component0_0_00x557603a40440_pos" unit="mm" x="29.1576215883907" y="-116.403750383346" z="0"/>
+        <rotation name="AV_358!Module3_101_101!component0_0_00x557603a40440_rot" unit="deg" x="-90" y="-14.0624999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="103" name="AV_359!Module3_102_102!component0_0_00x557603a40620">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_359!Module3_102_102!component0_0_00x557603a40620_pos" unit="mm" x="34.8341612705345" y="-114.832840287865" z="0"/>
+        <rotation name="AV_359!Module3_102_102!component0_0_00x557603a40620_rot" unit="deg" x="-90" y="-16.8749999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="104" name="AV_360!Module3_103_103!component0_0_00x557603a40800">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_360!Module3_103_103!component0_0_00x557603a40800_pos" unit="mm" x="40.4267824070654" y="-112.985287821963" z="0"/>
+        <rotation name="AV_360!Module3_103_103!component0_0_00x557603a40800_rot" unit="deg" x="-90" y="-19.6874999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="105" name="AV_361!Module3_104_104!component0_0_00x557603a409e0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_361!Module3_104_104!component0_0_00x557603a409e0_pos" unit="mm" x="45.9220118838098" y="-110.865543901355" z="0"/>
+        <rotation name="AV_361!Module3_104_104!component0_0_00x557603a409e0_rot" unit="deg" x="-90" y="-22.4999999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="106" name="AV_362!Module3_105_105!component0_0_00x557603a40bc0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_362!Module3_105_105!component0_0_00x557603a40bc0_pos" unit="mm" x="51.3066112116329" y="-108.478715174814" z="0"/>
+        <rotation name="AV_362!Module3_105_105!component0_0_00x557603a40bc0_rot" unit="deg" x="-90" y="-25.3124999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="107" name="AV_363!Module3_106_106!component0_0_00x557603a40da0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_363!Module3_106_106!component0_0_00x557603a40da0_pos" unit="mm" x="56.5676084191188" y="-105.830551721803" z="0"/>
+        <rotation name="AV_363!Module3_106_106!component0_0_00x557603a40da0_rot" unit="deg" x="-90" y="-28.1249999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="108" name="AV_364!Module3_107_107!component0_0_00x557603a40f80">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_364!Module3_107_107!component0_0_00x557603a40f80_pos" unit="mm" x="61.6923293031857" y="-102.927433200033" z="0"/>
+        <rotation name="AV_364!Module3_107_107!component0_0_00x557603a40f80_rot" unit="deg" x="-90" y="-30.9374999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="109" name="AV_365!Module3_108_108!component0_0_00x557603a41160">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_365!Module3_108_108!component0_0_00x557603a41160_pos" unit="mm" x="66.6684279623513" y="-99.7763534763061" z="0"/>
+        <rotation name="AV_365!Module3_108_108!component0_0_00x557603a41160_rot" unit="deg" x="-90" y="-33.7499999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="110" name="AV_366!Module3_109_109!component0_0_00x557603a41340">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_366!Module3_109_109!component0_0_00x557603a41340_pos" unit="mm" x="71.4839165390911" y="-96.3849037776781" z="0"/>
+        <rotation name="AV_366!Module3_109_109!component0_0_00x557603a41340_rot" unit="deg" x="-90" y="-36.5624999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="111" name="AV_367!Module3_110_110!component0_0_00x557603a41520">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_367!Module3_110_110!component0_0_00x557603a41520_pos" unit="mm" x="76.1271940996366" y="-92.7612544035292" z="0"/>
+        <rotation name="AV_367!Module3_110_110!component0_0_00x557603a41520_rot" unit="deg" x="-90" y="-39.3749999999995" z="-180"/>
+      </physvol>
+      <physvol copynumber="112" name="AV_368!Module3_111_111!component0_0_00x557603a41700">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_368!Module3_111_111!component0_0_00x557603a41700_pos" unit="mm" x="80.5870745816413" y="-88.9141350425959" z="0"/>
+        <rotation name="AV_368!Module3_111_111!component0_0_00x557603a41700_rot" unit="deg" x="-90" y="-42.1874999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="113" name="AV_369!Module3_112_112!component0_0_00x557603a418e0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_369!Module3_112_112!component0_0_00x557603a418e0_pos" unit="mm" x="84.8528137423849" y="-84.8528137423865" z="0"/>
+        <rotation name="AV_369!Module3_112_112!component0_0_00x557603a418e0_rot" unit="deg" x="-90" y="-44.9999999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="114" name="AV_370!Module3_113_113!component0_0_00x557603a41ac0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_370!Module3_113_113!component0_0_00x557603a41ac0_pos" unit="mm" x="88.9141350425943" y="-80.5870745816431" z="0"/>
+        <rotation name="AV_370!Module3_113_113!component0_0_00x557603a41ac0_rot" unit="deg" x="-90" y="-47.8124999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="115" name="AV_371!Module3_114_114!component0_0_00x557603a41ca0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_371!Module3_114_114!component0_0_00x557603a41ca0_pos" unit="mm" x="92.7612544035276" y="-76.1271940996384" z="0"/>
+        <rotation name="AV_371!Module3_114_114!component0_0_00x557603a41ca0_rot" unit="deg" x="-90" y="-50.6249999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="116" name="AV_372!Module3_115_115!component0_0_00x557603a41e80">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_372!Module3_115_115!component0_0_00x557603a41e80_pos" unit="mm" x="96.3849037776766" y="-71.483916539093" z="0"/>
+        <rotation name="AV_372!Module3_115_115!component0_0_00x557603a41e80_rot" unit="deg" x="-90" y="-53.4374999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="117" name="AV_373!Module3_116_116!component0_0_00x557603a42060">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_373!Module3_116_116!component0_0_00x557603a42060_pos" unit="mm" x="99.7763534763047" y="-66.6684279623533" z="0"/>
+        <rotation name="AV_373!Module3_116_116!component0_0_00x557603a42060_rot" unit="deg" x="-90" y="-56.2499999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="118" name="AV_374!Module3_117_117!component0_0_00x557603a42240">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_374!Module3_117_117!component0_0_00x557603a42240_pos" unit="mm" x="102.927433200032" y="-61.6923293031877" z="0"/>
+        <rotation name="AV_374!Module3_117_117!component0_0_00x557603a42240_rot" unit="deg" x="-90" y="-59.0624999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="119" name="AV_375!Module3_118_118!component0_0_00x557603a42420">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_375!Module3_118_118!component0_0_00x557603a42420_pos" unit="mm" x="105.830551721802" y="-56.5676084191209" z="0"/>
+        <rotation name="AV_375!Module3_118_118!component0_0_00x557603a42420_rot" unit="deg" x="-90" y="-61.8749999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="120" name="AV_376!Module3_119_119!component0_0_00x557603a42600">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_376!Module3_119_119!component0_0_00x557603a42600_pos" unit="mm" x="108.478715174813" y="-51.3066112116351" z="0"/>
+        <rotation name="AV_376!Module3_119_119!component0_0_00x557603a42600_rot" unit="deg" x="-90" y="-64.6874999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="121" name="AV_377!Module3_120_120!component0_0_00x557603a427e0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_377!Module3_120_120!component0_0_00x557603a427e0_pos" unit="mm" x="110.865543901354" y="-45.922011883812" z="0"/>
+        <rotation name="AV_377!Module3_120_120!component0_0_00x557603a427e0_rot" unit="deg" x="-90" y="-67.4999999999994" z="-180"/>
+      </physvol>
+      <physvol copynumber="122" name="AV_378!Module3_121_121!component0_0_00x557603a429c0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_378!Module3_121_121!component0_0_00x557603a429c0_pos" unit="mm" x="112.985287821962" y="-40.4267824070677" z="0"/>
+        <rotation name="AV_378!Module3_121_121!component0_0_00x557603a429c0_rot" unit="deg" x="-90" y="-70.3124999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="123" name="AV_379!Module3_122_122!component0_0_00x557603a42ba0">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_379!Module3_122_122!component0_0_00x557603a42ba0_pos" unit="mm" x="114.832840287865" y="-34.8341612705368" z="0"/>
+        <rotation name="AV_379!Module3_122_122!component0_0_00x557603a42ba0_rot" unit="deg" x="-90" y="-73.1249999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="124" name="AV_380!Module3_123_123!component0_0_00x557603a42d80">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_380!Module3_123_123!component0_0_00x557603a42d80_pos" unit="mm" x="116.403750383345" y="-29.157621588393" z="0"/>
+        <rotation name="AV_380!Module3_123_123!component0_0_00x557603a42d80_rot" unit="deg" x="-90" y="-75.9374999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="125" name="AV_381!Module3_124_124!component0_0_00x557603a42f60">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_381!Module3_124_124!component0_0_00x557603a42f60_pos" unit="mm" x="117.694233648387" y="-23.4108386419368" z="0"/>
+        <rotation name="AV_381!Module3_124_124!component0_0_00x557603a42f60_rot" unit="deg" x="-90" y="-78.7499999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="126" name="AV_382!Module3_125_125!component0_0_00x557603a43140">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_382!Module3_125_125!component0_0_00x557603a43140_pos" unit="mm" x="118.701181195774" y="-17.6076569346449" z="0"/>
+        <rotation name="AV_382!Module3_125_125!component0_0_00x557603a43140_rot" unit="deg" x="-90" y="-81.5624999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="127" name="AV_383!Module3_126_126!component0_0_00x557603a43320">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_383!Module3_126_126!component0_0_00x557603a43320_pos" unit="mm" x="119.422167200663" y="-11.7620568395487" z="0"/>
+        <rotation name="AV_383!Module3_126_126!component0_0_00x557603a43320_rot" unit="deg" x="-90" y="-84.3749999999993" z="-180"/>
+      </physvol>
+      <physvol copynumber="128" name="AV_384!Module3_127_127!component0_0_00x557603a43500">
+        <volumeref ref="component00x5576039e3920"/>
+        <position name="AV_384!Module3_127_127!component0_0_00x557603a43500_pos" unit="mm" x="119.855454744621" y="-5.88812091929166" z="0"/>
+        <rotation name="AV_384!Module3_127_127!component0_0_00x557603a43500_rot" unit="deg" x="-90" y="-87.1874999999993" z="-180"/>
+      </physvol>
+      <auxiliary auxtype="gammaECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="electronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="positronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="protonECut" auxunit="MeV" auxvalue="-1"/>
+    </volume>
+    <volume name="world_volume0x5576039d2d40">
+      <materialref ref="Air0x5576034f9730"/>
+      <solidref ref="world_volume_shape_0x557602d0c1900x5576039a96f0"/>
+      <physvol copynumber="1" name="AV_388!VertexBarrelSubAssembly_0_0!VertexBarrel_layer1_0_00x557603a43860">
+        <volumeref ref="VertexBarrel_layer10x5576039db0c0"/>
+      </physvol>
+      <physvol copynumber="2" name="AV_388!VertexBarrelSubAssembly_0_0!VertexBarrel_layer2_1_10x557603a43b60">
+        <volumeref ref="VertexBarrel_layer20x5576039db4a0"/>
+      </physvol>
+      <physvol copynumber="3" name="AV_388!VertexBarrelSubAssembly_0_0!VertexBarrel_layer4_2_20x557603a43d50">
+        <volumeref ref="VertexBarrel_layer40x5576039d2b30"/>
+      </physvol>
+      <auxiliary auxtype="gammaECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="electronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="positronECut" auxunit="MeV" auxvalue="-1"/>
+      <auxiliary auxtype="protonECut" auxunit="MeV" auxvalue="-1"/>
+    </volume>
+  </structure>
+
+  <userinfo>
+    <auxiliary auxtype="Region" auxvalue="DefaultRegionForTheWorld0x5576037b6db0">
+      <auxiliary auxtype="volume" auxvalue="world_volume0x5576039d2d40"/>
+      <auxiliary auxtype="gamcut" auxunit="mm" auxvalue="0.7"/>
+      <auxiliary auxtype="ecut" auxunit="mm" auxvalue="0.7"/>
+      <auxiliary auxtype="poscut" auxunit="mm" auxvalue="0.7"/>
+      <auxiliary auxtype="pcut" auxunit="mm" auxvalue="0.7"/>
+    </auxiliary>
+  </userinfo>
+
+  <setup name="Default" version="1.0">
+    <world ref="world_volume0x5576039d2d40"/>
+  </setup>
+
+</gdml>

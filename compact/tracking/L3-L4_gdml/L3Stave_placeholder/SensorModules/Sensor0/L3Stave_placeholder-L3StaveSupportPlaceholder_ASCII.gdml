@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+
+    <define>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v0" unit="mm" x="67.0" y="1.32289195061" z="-19.7096729279"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v1" unit="mm" x="1.80000007006e-14" y="1.32289195061" z="-19.7096729279"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v2" unit="mm" x="67.0" y="2.14683532715" z="-15.4268226624"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v3" unit="mm" x="8.68464405479e-15" y="2.14683532715" z="-15.4268226624"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v4" unit="mm" x="5.44192579996e-15" y="2.77345275879" z="-11.1106853485"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v5" unit="mm" x="67.0" y="2.77345275879" z="-11.1106853485"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v6" unit="mm" x="67.0" y="3.20142579079" z="-6.77034759521"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v7" unit="mm" x="2.29423490093e-15" y="3.20142579079" z="-6.77034759521"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v8" unit="mm" x="-7.51802462363e-16" y="3.42985272408" z="-2.41494727135"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v9" unit="mm" x="67.0" y="3.42985272408" z="-2.41494727135"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v10" unit="mm" x="67.0" y="3.45825314522" z="1.94634652138"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v11" unit="mm" x="-3.68977335055e-15" y="3.45825314522" z="1.94634652138"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v12" unit="mm" x="-6.51349320549e-15" y="3.28656697273" z="6.30435228348"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v13" unit="mm" x="67.0" y="3.28656697273" z="6.30435228348"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v14" unit="mm" x="-9.21701696763e-15" y="2.9151558876" z="10.649895668"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v15" unit="mm" x="67.0" y="2.9151558876" z="10.649895668"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v16" unit="mm" x="67.0" y="2.34480142593" z="14.9738273621"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v17" unit="mm" x="-1.17946525756e-14" y="2.34480142593" z="14.9738273621"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v18" unit="mm" x="67.0" y="1.57670485973" z="19.2670440674"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v19" unit="mm" x="-1.70000003793e-14" y="1.57670485973" z="19.2670440674"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v20" unit="mm" x="67.0" y="-1.3010532856" z="-19.7096729279"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v21" unit="mm" x="1.70000003793e-14" y="-1.3010532856" z="-19.7096729279"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v22" unit="mm" x="67.0" y="-1.2904548645" z="19.2670440674"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v23" unit="mm" x="-1.80000007006e-14" y="-1.2904548645" z="19.2670440674"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v24" unit="mm" x="-56.0" y="1.32289195061" z="-19.7096729279"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v25" unit="mm" x="-56.0" y="2.14683532715" z="-15.4268226624"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v26" unit="mm" x="-56.0" y="2.77345275879" z="-11.1106853485"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v27" unit="mm" x="-56.0" y="3.20142579079" z="-6.77034759521"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v28" unit="mm" x="-56.0" y="3.42985272408" z="-2.41494727135"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v29" unit="mm" x="-56.0" y="3.45825314522" z="1.94634652138"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v30" unit="mm" x="-56.0" y="3.28656697273" z="6.30435228348"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v31" unit="mm" x="-56.0" y="2.9151558876" z="10.649895668"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v32" unit="mm" x="-56.0" y="2.34480142593" z="14.9738273621"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v33" unit="mm" x="-56.0" y="1.57670485973" z="19.2670440674"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v34" unit="mm" x="67.0" y="-0.897351980209" z="-18.2644405365"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v35" unit="mm" x="67.0" y="-2.09232640266" z="-15.8595685959"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v36" unit="mm" x="67.0" y="1.18862700462" z="-18.2644405365"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v37" unit="mm" x="67.0" y="-0.897351980209" z="-6.93928909302"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v38" unit="mm" x="67.0" y="-3.15041136742" z="-8.07196807861"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v39" unit="mm" x="67.0" y="-2.70919728279" z="-11.9777011871"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v40" unit="mm" x="67.0" y="-2.11454391479" z="-6.93928909302"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v41" unit="mm" x="67.0" y="-3.41507101059" z="-4.15031337738"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v42" unit="mm" x="67.0" y="2.60427093506" z="-6.39999485016"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v43" unit="mm" x="67.0" y="1.18862700462" z="-6.39999485016"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v44" unit="mm" x="67.0" y="-3.14614152908" z="7.63034772873"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v45" unit="mm" x="67.0" y="-3.41293382645" z="3.70883750916"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v46" unit="mm" x="67.0" y="-2.11454391479" z="5.66668605804"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v47" unit="mm" x="67.0" y="-0.897351980209" z="5.66668605804"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v48" unit="mm" x="67.0" y="1.18862700462" z="5.53186321259"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v49" unit="mm" x="67.0" y="2.60427093506" z="5.53186321259"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v50" unit="mm" x="67.0" y="-2.08382153511" z="15.4173707962"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v51" unit="mm" x="67.0" y="-0.897351980209" z="18.3338088989"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v52" unit="mm" x="67.0" y="1.18862700462" z="18.3338088989"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v53" unit="mm" x="67.0" y="-2.70280361176" z="11.5358400345"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v54" unit="mm" x="67.0" y="-3.50263786316" z="-0.220713913441"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v55" unit="mm" x="-8.75309109319e-15" y="-2.08382153511" z="15.4173707962"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v56" unit="mm" x="-5.80583571806e-15" y="-2.70280361176" z="11.5358400345"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v57" unit="mm" x="-2.94088632265e-15" y="-3.14614152908" z="7.63034772873"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v58" unit="mm" x="-1.64070837749e-16" y="-3.41293382645" z="3.70883750916"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v59" unit="mm" x="2.51896269448e-15" y="-3.50263786316" z="-0.220713913441"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v60" unit="mm" x="5.10275686722e-15" y="-3.41507101059" z="-4.15031337738"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v61" unit="mm" x="7.58205618515e-15" y="-3.15041136742" z="-8.07196807861"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v62" unit="mm" x="9.95181720235e-15" y="-2.70919728279" z="-11.9777011871"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v63" unit="mm" x="1.22072203013e-14" y="-2.09232640266" z="-15.8595685959"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v64" unit="mm" x="-56.0" y="-1.3010532856" z="-19.7096729279"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v65" unit="mm" x="-56.0" y="-1.2904548645" z="19.2670440674"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v66" unit="mm" x="-56.0" y="-0.897351980209" z="-18.2644405365"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v67" unit="mm" x="-56.0" y="-2.09232640266" z="-15.8595685959"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v68" unit="mm" x="-56.0" y="1.18862700462" z="-18.2644405365"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v69" unit="mm" x="-56.0" y="-3.15041136742" z="-8.07196807861"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v70" unit="mm" x="-56.0" y="-0.897351980209" z="-6.93928909302"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v71" unit="mm" x="-56.0" y="-2.70919728279" z="-11.9777011871"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v72" unit="mm" x="-56.0" y="-2.11454391479" z="-6.93928909302"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v73" unit="mm" x="-56.0" y="-3.41507101059" z="-4.15031337738"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v74" unit="mm" x="-56.0" y="2.60427093506" z="-6.39999485016"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v75" unit="mm" x="-56.0" y="1.18862700462" z="-6.39999485016"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v76" unit="mm" x="-56.0" y="-3.41293382645" z="3.70883750916"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v77" unit="mm" x="-56.0" y="-3.14614152908" z="7.63034772873"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v78" unit="mm" x="-56.0" y="-2.11454391479" z="5.66668605804"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v79" unit="mm" x="-56.0" y="-0.897351980209" z="5.66668605804"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v80" unit="mm" x="-56.0" y="1.18862700462" z="5.53186321259"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v81" unit="mm" x="-56.0" y="2.60427093506" z="5.53186321259"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v82" unit="mm" x="-56.0" y="-2.08382153511" z="15.4173707962"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v83" unit="mm" x="-56.0" y="-0.897351980209" z="18.3338088989"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v84" unit="mm" x="-56.0" y="1.18862700462" z="18.3338088989"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v85" unit="mm" x="-56.0" y="-2.70280361176" z="11.5358400345"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v86" unit="mm" x="-56.0" y="-3.50263786316" z="-0.220713913441"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v87" unit="mm" x="-4.99999991226e-15" y="-0.897351980209" z="5.66668605804"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v88" unit="mm" x="-1.70000003793e-14" y="-0.897351980209" z="18.3338088989"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v89" unit="mm" x="-1.6000000058e-14" y="1.18862700462" z="18.3338088989"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v90" unit="mm" x="-4.99999991226e-15" y="1.18862700462" z="5.53186321259"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v91" unit="mm" x="-4.00000001451e-15" y="2.60427093506" z="5.53186321259"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v92" unit="mm" x="7.00000013127e-15" y="2.60427093506" z="-6.39999485016"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v93" unit="mm" x="5.99999981001e-15" y="1.18862700462" z="-6.39999485016"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v94" unit="mm" x="1.70000003793e-14" y="1.18862700462" z="-18.2644405365"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v95" unit="mm" x="1.6000000058e-14" y="-0.897351980209" z="-18.2644405365"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v96" unit="mm" x="5.99999981001e-15" y="-0.897351980209" z="-6.93928909302"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v97" unit="mm" x="4.99999991226e-15" y="-2.11454391479" z="-6.93928909302"/>
+        <position name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v98" unit="mm" x="-5.99999981001e-15" y="-2.11454391479" z="5.66668605804"/>
+    </define>
+
+    <solids>
+        <tessellated aunit="deg" lunit="mm" name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII-SOL">
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v0" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v1" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v2"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v1" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v3" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v2"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v2" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v4" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v5"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v5" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v4" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v6"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v3" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v4" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v2"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v4" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v7" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v6"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v6" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v8" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v9"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v9" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v8" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v10"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v7" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v8" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v6"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v8" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v11" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v10"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v10" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v12" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v13"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v11" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v12" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v10"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v13" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v14" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v15"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v15" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v14" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v16"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v12" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v14" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v13"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v16" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v17" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v18"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v14" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v17" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v16"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v17" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v19" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v18"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v20" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v21" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v0"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v21" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v1" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v0"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v18" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v19" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v22"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v19" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v23" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v22"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v1" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v24" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v25"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v3" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v25" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v26"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v3" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v1" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v25"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v4" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v3" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v26"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v7" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v26" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v27"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v7" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v27" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v28"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v7" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v4" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v26"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v8" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v7" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v28"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v11" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v28" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v29"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v11" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v8" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v28"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v12" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v29" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v30"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v12" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v11" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v29"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v14" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v30" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v31"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v14" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v31" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v32"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v14" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v12" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v30"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v17" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v32" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v33"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v17" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v14" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v32"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v19" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v17" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v33"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v0" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v34" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v20"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v35" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v20" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v34"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v36" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v34" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v0"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v2" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v36" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v0"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v37" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v38" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v39"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v37" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v40" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v38"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v41" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v38" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v40"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v6" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v42" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v43"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v6" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v43" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v5"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v9" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v42" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v6"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v44" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v45" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v46"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v47" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v44" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v46"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v13" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v48" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v49"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v13" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v49" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v10"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v15" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v48" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v13"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v22" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v50" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v51"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v18" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v22" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v51"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v18" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v52" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v16"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v18" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v51" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v52"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v47" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v51" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v50"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v47" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v50" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v53"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v47" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v53" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v44"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v52" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v48" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v16"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v16" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v48" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v15"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v49" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v42" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v9"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v49" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v9" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v10"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v43" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v36" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v2"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v43" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v2" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v5"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v34" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v37" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v35"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v35" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v37" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v39"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v40" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v46" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v45"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v40" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v45" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v54"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v40" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v54" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v41"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v23" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v55" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v22"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v22" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v55" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v50"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v50" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v56" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v53"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v55" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v56" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v50"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v53" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v57" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v44"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v56" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v57" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v53"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v44" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v58" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v45"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v45" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v58" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v54"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v57" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v58" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v44"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v58" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v59" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v54"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v54" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v60" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v41"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v41" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v60" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v38"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v59" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v60" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v54"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v60" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v61" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v38"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v38" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v62" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v39"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v61" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v62" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v38"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v39" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v63" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v35"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v35" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v63" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v20"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v62" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v63" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v39"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v63" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v21" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v20"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v21" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v64" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v24"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v1" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v21" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v24"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v19" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v33" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v65"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v23" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v19" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v65"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v66" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v24" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v64"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v64" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v67" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v66"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v66" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v68" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v24"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v68" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v25" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v24"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v69" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v70" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v71"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v72" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v70" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v69"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v69" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v73" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v72"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v74" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v27" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v75"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v75" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v27" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v26"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v74" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v28" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v27"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v76" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v77" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v78"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v77" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v79" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v78"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v80" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v30" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v81"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v81" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v30" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v29"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v80" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v31" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v30"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v82" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v65" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v83"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v65" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v33" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v83"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v84" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v33" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v32"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v83" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v33" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v84"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v83" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v79" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v82"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v82" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v79" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v85"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v85" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v79" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v77"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v80" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v84" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v32"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v80" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v32" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v31"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v74" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v81" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v28"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v28" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v81" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v29"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v68" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v75" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v25"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v25" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v75" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v26"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v70" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v66" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v67"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v70" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v67" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v71"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v78" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v72" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v76"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v76" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v72" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v86"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v86" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v72" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v73"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v47" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v87" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v51"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v87" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v88" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v51"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v51" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v88" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v52"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v88" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v89" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v52"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v52" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v89" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v48"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v89" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v90" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v48"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v48" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v90" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v49"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v90" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v91" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v49"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v49" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v91" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v42"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v91" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v92" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v42"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v42" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v92" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v43"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v92" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v93" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v43"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v43" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v93" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v36"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v93" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v94" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v36"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v36" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v94" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v34"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v94" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v95" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v34"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v34" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v95" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v37"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v95" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v96" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v37"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v97" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v40" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v37"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v96" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v97" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v37"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v98" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v46" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v40"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v97" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v98" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v40"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v87" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v47" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v46"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v98" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v87" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v46"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v23" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v65" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v82"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v55" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v82" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v85"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v55" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v23" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v82"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v56" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v55" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v85"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v57" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v85" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v77"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v57" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v77" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v76"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v57" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v56" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v85"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v58" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v57" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v76"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v59" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v76" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v86"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v59" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v58" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v76"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v60" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v86" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v73"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v60" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v73" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v69"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v60" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v59" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v86"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v61" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v60" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v69"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v62" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v69" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v71"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v62" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v61" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v69"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v63" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v71" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v67"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v63" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v67" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v64"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v63" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v62" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v71"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v21" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v63" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v64"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v88" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v87" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v79"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v88" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v79" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v83"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v88" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v83" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v84"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v89" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v88" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v84"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v89" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v84" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v80"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v90" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v89" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v80"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v90" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v80" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v81"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v91" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v90" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v81"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v91" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v81" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v74"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v92" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v91" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v74"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v92" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v74" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v75"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v93" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v92" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v75"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v93" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v75" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v68"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v94" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v93" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v68"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v94" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v68" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v66"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v95" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v94" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v66"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v96" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v95" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v66"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v96" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v66" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v70"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v72" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v97" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v70"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v97" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v96" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v70"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v78" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v98" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v72"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v98" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v97" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v72"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v79" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v87" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v78"/>
+             <triangular vertex1="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v87" vertex2="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v98" vertex3="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII_v78"/>
+        </tessellated>
+    </solids>
+
+    <structure>
+        <volume name="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII">
+            <materialref ref="Vacuum"/>
+            <solidref ref="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII-SOL"/>
+        </volume>
+    </structure>
+
+    <setup name="Default" version="1.0">
+        <world ref="L3Stave_placeholder-L3StaveSupportPlaceholder_ASCII"/>
+    </setup>
+</gdml>
