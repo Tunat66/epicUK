@@ -119,8 +119,8 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
 
   typedef vector<PlacedVolume> Placements;
   xml_det_t x_det = e;
-  //Material air    = description.air();
-  Material vacuum = description.vacuum();
+  Material air    = description.air();
+  //Material vacuum = description.vacuum();
   //Material silicon = description.material();
   int det_id      = x_det.id();
   string det_name = x_det.nameStr();
@@ -449,7 +449,7 @@ static Ref_t create_BarrelTrackerOuter(Detector& description, xml_h e, Sensitive
     string m_nam        = x_layer.moduleStr();
     string lay_nam      = det_name + _toString(x_layer.id(), "_layer%d");
     Tube lay_tub(x_barrel.inner_r(), x_barrel.outer_r(), x_barrel.z_length() / 2.0);
-    Volume lay_vol(lay_nam, lay_tub, vacuum); // Create the layer envelope volume.
+    Volume lay_vol(lay_nam, lay_tub, air); // Create the layer envelope volume.
     Position lay_pos(0, 0, getAttrOrDefault(x_barrel, _U(z0), 0.));
     lay_vol.setVisAttributes(description.visAttributes(x_layer.visStr()));
 
