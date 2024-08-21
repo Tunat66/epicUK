@@ -4,6 +4,32 @@ import Part
 import os
 import sys
 
+def get_global_placement(obj): #this method I created with chatgpt
+    """
+    Calculate the global placement of a given object by considering its parent hierarchy.
+
+    Parameters:
+    obj (FreeCAD object): The object for which the global placement is calculated.
+
+    Returns:
+    FreeCAD.Placement: The global placement of the object.
+    """
+    # Initialize global placement with the object's own placement
+    global_placement = obj.Placement
+
+    # Traverse up the hierarchy
+    while obj.InList:
+        # Assume single parent scenario
+        parent = obj.InList[0]
+
+        # Multiply the current global placement by the parent's placement
+        global_placement = parent.Placement.multiply(global_placement)
+
+        # Move to the next parent
+        obj = parent
+
+    return global_placement
+
 def export_component_as_mesh(component, filename, tessellation_level = 0.1): #filename must contain .stl extension
     # Ensure the filename ends with .stl
     if not filename.lower().endswith(".stl"):
@@ -13,7 +39,8 @@ def export_component_as_mesh(component, filename, tessellation_level = 0.1): #fi
     shape = component.Shape
 
     # Apply the component's placement to transform it to the global coordinate system (THIS PART IS VERY IMPORTANT)
-    placement = component.Placement
+    #placement = component.Placement
+    placement = get_global_placement(component)
     transformed_shape = shape.copy()
     transformed_shape.Placement = placement
     
@@ -21,6 +48,9 @@ def export_component_as_mesh(component, filename, tessellation_level = 0.1): #fi
     if shape.isNull():
         raise ValueError("Shape is null or invalid")
     
+    # Recursion Case
+    
+    # Base Case
     # Tessellate the shape
     try:
         mesh_data = transformed_shape.tessellate(tessellation_level)
