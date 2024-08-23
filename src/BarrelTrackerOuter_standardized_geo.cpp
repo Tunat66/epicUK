@@ -16,20 +16,67 @@
 //#include "CADPlugins.h"
 #include "FileLoaderHelper.h"
 #include "ImportCADHelper.h" //include utilities
+#include <fstream>
 
 using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::rec;
 using namespace dd4hep::detail;
 
-struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated> 
+template <typename T> int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+}
+
+//some global variables
+TessellatedSolid::Vertex xhat(1., 0., 0.);
+TessellatedSolid::Vertex yhat(0., 1., 0.);
+TessellatedSolid::Vertex zhat(0., 0., 1.);
+
+class TriangularFacet
 {
-  
+  public:
+  //some attributes of the facet we are working with
+  bool initialized = false;
+  bool extruded = false;
+  vector<TessellatedSolid::Vertex> vertices;
+  TessellatedSolid::Vertex centroid;
+  //indices of the vertices
+  int iv0 = -1;
+  int iv1 = -1;
+  int iv2 = -1;
+  //TessellatedSolid solid = NULL; //pointer to the solid object, somehow does not like nullptr?
+  double facet_area = 0;
   TessellatedSolid::Vertex normal;
   TessellatedSolid::Vertex extrusionVector;
-  
-  TessellatedSolid::Vertex getNormal() {return normal;}
-  TessellatedSolid::Vertex compute_normal(vector<TessellatedSolid::Vertex> vertices)
+  //now this might be the weirdest varible
+  //+1 if the position of the facet and its normal are both pointing up from the yz plane
+  //-1 if one is pointing up and the other is pointing down or vice-versa
+  int concavity_score = 0;
+  void compute_facet_properties(TessellatedSolid::Facet facet, TessellatedSolid c_sol){
+    //get the vertex indices
+    iv0 = facet.GetVertexIndex(0);
+    iv1 = facet.GetVertexIndex(1);
+    iv2 = facet.GetVertexIndex(2);
+    //add the vertices to a vector
+    vertices.push_back(c_sol->GetVertex(iv0));
+    vertices.push_back(c_sol->GetVertex(iv1));
+    vertices.push_back(c_sol->GetVertex(iv2));
+    centroid = 0.33333*(vertices[0] + vertices[1] + vertices[2]);
+    facet_area = compute_area();
+    normal = compute_normal(); 
+
+    //assign the concavity score:
+    double normalscore = TessellatedSolid::Vertex::Dot(xhat, normal);
+    //shift the centroid to a new coordinate system, whose origin is to the same side of all components of the stave
+    //this is a geometric requirement when determining concavity this way
+    TessellatedSolid::Vertex shift(0., -1000., 1.);
+    centroid -= shift;
+    double centroidscore = TessellatedSolid::Vertex::Dot(xhat, centroid);
+    concavity_score = sgn(normalscore*centroidscore);
+    //set initialization flag    
+    initialized = true;
+  }
+  TessellatedSolid::Vertex compute_normal()
   {
     //figure out the castings here
     TessellatedSolid::Vertex vec1 = vertices.at(1) - vertices.at(2);
@@ -43,7 +90,7 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
     }
     return normal_return;
   }
-  double compute_area(vector<TessellatedSolid::Vertex> vertices)
+  double compute_area()
   {
     //figure out the castings here
     TessellatedSolid::Vertex vec1 = vertices.at(1) - vertices.at(2);
@@ -54,17 +101,20 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
     TessellatedSolid::Vertex normal_return = TessellatedSolid::Vertex::Cross(vec1, vec2);
     return(normal_return.Mag()/2);
   }
-
-  TessellatedSolid return_TriangularPrism(vector<TessellatedSolid::Vertex> vertices, double extrusion_length) {
+  TessellatedSolid create_TriangularPrism(double extrusion_length) {
     
-    double facet_area = compute_area(vertices);
+    if(!initialized) {
+      printout(ERROR, "BarrelTrackerOuter_standardized", "Try running struct TriangularPrism construct_from_facet_and_solid()");
+      throw runtime_error("Vertices not initialized! Triangular prisim construction failed.");
+      return NULL;
+    }
+    TessellatedSolid extruded_prism("prism", 6);
     if(vertices.size() > 3) {
       printout(ERROR, "BarrelTrackerOuter_standardized", "Trying to construct triangular prism with more or less than 3 vertices");
       throw runtime_error("Triangular prisim construction failed.");
     }
     else if(facet_area < 0.1) return NULL;
     else {
-      normal = compute_normal(vertices);
       extrusionVector = extrusion_length * normal;
       vector<TessellatedSolid::Vertex> extruded_vertices;
       for(auto& element : vertices) 
@@ -74,33 +124,34 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
       //vector<TessellatedSolid::Vertex> all_vertices(vertices.size() + extruded_vertices.size());
       //merge(vertices.begin(), vertices.end(), extruded_vertices.begin(), extruded_vertices.end(), 
           //all_vertices.begin()); 
-      TessellatedSolid prism("prism", 6);
       //Now add the facets:
       //depending on the extrusion, change the orientation
       if(extrusion_length > 0)
       {
         //Top and bottom
-        prism.addFacet(vertices.at(2), vertices.at(1), vertices.at(0));
+        extruded_prism.addFacet(vertices.at(2), vertices.at(1), vertices.at(0));
         //note the reversal of order to keep the normals well
-        prism.addFacet(extruded_vertices.at(0), extruded_vertices.at(1), extruded_vertices.at(2));
+        extruded_prism.addFacet(extruded_vertices.at(0), extruded_vertices.at(1), extruded_vertices.at(2));
         //sides
         for(unsigned long i = 0; i < vertices.size(); i++) 
         {
           int next_i = (i + 1) % vertices.size();
-          prism.addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
+          extruded_prism.addFacet(vertices.at(i), vertices.at(next_i), extruded_vertices.at(next_i), extruded_vertices.at(i));
+          //extruded_prism.addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
         }
       }
       else if(extrusion_length < 0)
       {
         //Top and bottom
-        prism.addFacet(vertices.at(0), vertices.at(1), vertices.at(2));
+        extruded_prism.addFacet(vertices.at(0), vertices.at(1), vertices.at(2));
         //note the reversal of order to keep the normals well
-        prism.addFacet(extruded_vertices.at(2), extruded_vertices.at(1), extruded_vertices.at(0));
+        extruded_prism.addFacet(extruded_vertices.at(2), extruded_vertices.at(1), extruded_vertices.at(0));
         //sides
         for(unsigned long i = 0; i < vertices.size(); i++) 
         {
           int next_i = (i + 1) % vertices.size();
-          prism.addFacet(vertices.at(i), vertices.at(next_i), extruded_vertices.at(next_i), extruded_vertices.at(i)); 
+          //extruded_prism.addFacet(vertices.at(i), vertices.at(next_i), extruded_vertices.at(next_i), extruded_vertices.at(i));
+          extruded_prism.addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
         }
       }
       else
@@ -108,13 +159,9 @@ struct TriangularPrism // : public TessellatedSolid //Solid_type<TGeoTessellated
         printout(ERROR, "BarrelTrackerOuter_standardized", "Trying to construct triangular prism with zero extrusion_length!!!");
         throw runtime_error("Triangular prisim construction failed.");
       }
-      
-
-
-
-      return prism;
+      extruded = true;
+      return extruded_prism;
     }
-    
   }
 };
 
@@ -221,6 +268,11 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
 
   // loop over the modules
   // to parse GDML files
+
+  //needed for some reports
+  double sensitive_area = 0;
+  double total_surface_area = 0;
+
   TGDMLParseBiggerFiles* parser = new TGDMLParseBiggerFiles();
   for (xml_coll_t mi(x_det, _U(module)); mi; ++mi) {
     xml_comp_t x_mod = mi;
@@ -283,23 +335,6 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
       c_vol.setSolid(c_sol);
       c_vol.setRegion(description, x_comp.regionStr());
       c_vol.setLimitSet(description, x_comp.limitsStr());
-      //for former testing purposes
-      //c_vol.setSolid(Box(12 * mm, 12 * mm, 120 * mm));
-      
-      /*
-      //newer code, now can import .stl files directly
-      //Still not ready :(
-      //some code from: https://github.com/AIDASoft/DD4hep/blob/master/DDCAD/src/plugins/CADPlugins.cpp
-      //create the component volume
-      Volume c_vol(c_nam);
-      //std::string stl_file =
-          //getAttrOrDefault<std::string>(x_comp, _Unicode(file), " ");
-      //double unit = mm; 
-      TessellatedSolid c_sol = create_CAD_Shape(description, x_comp);
-      //finally, refine the mesh
-      c_sol->CloseShape(true, true, true); //otherwise you get an infinite bounding box
-      c_sol->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
-      c_vol.setSolid(c_sol);*/
 
       //an important offset variable that allows radial offsetting to prevent overlaps:
       const double radial_offset =
@@ -307,153 +342,120 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
       
       // Utility variable for the relative z-offset based off the previous components
       const double zoff = thickness_sum + radial_offset / 2.0;
-      //const double zoff = 0; //this value might cause issues, keep an eye out
 
-      //now, the code branches in the following way:
+      // now, the code branches in the following way:
       // if the volume is sensitive, build the tesselated solid into thickened pixels of extruded polyogons
       // and place those under m_vol
       // else, just place c_vol under m_vol
-      if (x_comp.isSensitive()) { // sensitive volume, create the pixels
-        //printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FOUND");
-        //Volume sc_vol(c_nam);
-
+      if (x_comp.isSensitive()) {
         //loop over the facets of c_vol to define volumes and set them as sensitive
         //note these facets won't be actual pixels, but rather just bits of the mesh
-
         //some variables to monitor if any sensitive area is lost
-        double sensitive_area = 0;
-        double total_surface_area = 0;
-        
-        for(int facet_index = 0; facet_index < c_sol->GetNfacets(); facet_index++) {
-          //printout(WARNING, "BarrelTrackingOuter", "SENSITIVE DETECTOR FACET FOUND");
+        double extrusion_length = x_comp.thickness(); //thickness will control the extrusion length
+        //note that the negative sign has the same effect of flipping the normal of the inner side
+        vector<TriangularFacet> accepted_facets;
+        //calculate the concavity
+        //double component_direction = 0;
+        double costheta_threshold = 0.88;
+        double facet_area_threshold = 0.1;
+        for(int facet_index = 0; facet_index < c_sol->GetNfacets(); facet_index++)  {
+          if (!(c_sol->GetFacet(facet_index).GetNvert() == 3)) throw runtime_error("BarrelTrackerOuterStandardized: Non triangular facets not supported. Please revise your mesh.");
+          //construct a TriangularFacet from the facet
+          TriangularFacet tri_facet;
+          tri_facet.compute_facet_properties(c_sol->GetFacet(facet_index), c_sol);
+          double facet_area = tri_facet.facet_area;
+          total_surface_area += facet_area;
+          //determine if the facet is a good facet
+          //note the standard in importing the cad models I defined when importing them:
+            //stave long axis: z
+            //stave thickness: y
+            //stave width: x
+            //extract some parameters
+          double costheta = TessellatedSolid::Vertex::Dot(yhat, tri_facet.normal);
+          //component_direction += sgn(costheta) * tri_facet.facet_area;
+          bool is_good_facet = abs(costheta) >= costheta_threshold && 
+                            facet_area > facet_area_threshold &&
+                            tri_facet.concavity_score == -1; //always extrude the concave side
+          if(!is_good_facet) continue;
+          else accepted_facets.push_back(tri_facet);
+        }
+        //handle the extrusion length accordingly:
+        //handle extrusion direction based on the concavity
+        /*switch(sgn(component_direction)) 
+        {
+          case  1:
+           extrusion_length *= -1;
+           break;
+          case -1:
+            break;
+          default: throw runtime_error("BarrelTrackerOuterStandardized: concavity of sensor is not 1 or -1.");
+        }
+        for(int facet_index = 0; facet_index < c_sol->GetNfacets(); facet_index++)  {
           Volume sc_vol_tmp(c_nam + "_" + to_string(facet_index));
-          TessellatedSolid::Facet current_facet = c_sol->GetFacet(facet_index); 
-          //compute the normal to the facet
-          TessellatedSolid::Vertex xhat(1., 0., 0.);
-          TessellatedSolid::Vertex yhat(0., 1., 0.);
-          TessellatedSolid::Vertex zhat(0., 0., 1.);
-
-          //depending on which direction the stave is facing:
-          double extrusion_length = x_comp.thickness(); //thickness will control this
-          if(given_name == "L4Module0_active_silicon_inside"){
-            //flip the y vector with which we will take a dot product
-            //printout(INFO, "BarrelTrackingOuterStandardized", "Sensitive name valid.");
-            TessellatedSolid::Vertex tmp(0., -1., 0.);
-            yhat = tmp;
-          }
-          else if(given_name == "L4Module0_active_silicon_outside") {
-            //printout(INFO, "BarrelTrackingOuterStandardized", "Sensitive name valid.");
-            //extrusion_length *= -1;
-          }
-          else
-            printout(WARNING, "BarrelTrackingOuterStandardized", "Sensitive name invalid. Must be L4Module0_active_silicon_outside or L4Module0_active_silicon_inside");
-
-
-          //construct a Triangular prisim from the facet
-          vector<TessellatedSolid::Vertex> vertices;
-          //indices of the vertices
-          int iv0 = -1;
-          int iv1 = -1;
-          int iv2 = -1;
-          //int iv3 = -1;
-          
-          if(current_facet.GetNvert() == 3) //triangular facet
-          {
-            //printout(WARNING, "BarrelTrackingOuter", "3333333SENSITIVE DETECTOR FACET FOUND");
-            //get the vertex indices
-            iv0 = current_facet.GetVertexIndex(0);
-            iv1 = current_facet.GetVertexIndex(1);
-            iv2 = current_facet.GetVertexIndex(2);
-            //add the vertices to a vector
-            vertices.push_back(c_sol->GetVertex(iv0));
-            vertices.push_back(c_sol->GetVertex(iv1));
-            vertices.push_back(c_sol->GetVertex(iv2));
-            //construct a triangular prisim from the vertices
-            struct TriangularPrism extruded_facet_access;
-            TessellatedSolid extruded_facet = extruded_facet_access.return_TriangularPrism(vertices, extrusion_length);
-
+          TessellatedSolid::Facet current_facet = c_sol->GetFacet(facet_index);
+          if (current_facet.GetNvert() == 3) {
+            //construct a TriangularFacet from the facet
+            struct TriangularFacet extruded_facet_access;
+            extruded_facet_access.compute_facet_properties(current_facet, c_sol);
             
-            if(extruded_facet) {
-              extruded_facet->CloseShape(true, true, true); //otherwise you get an infinite bounding box
-              extruded_facet->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
-            }
+            double facet_area = extruded_facet_access.facet_area;
+            concavity_score = extruded_facet_access.concavity_score;
             
-            //if the facet normal is not more than 90 deg off the x axis vector then keep it
-            //note the standard in importing the cad models I defined when importing them
-            double costheta = TessellatedSolid::Vertex::Dot(yhat, extruded_facet_access.getNormal());
-            double facet_area = extruded_facet_access.compute_area(vertices);
-            total_surface_area += facet_area;
-            if (abs(costheta) >= 0.88 && facet_area > 0.1) //note the null check
-            {
-              //now define a facet volume and place it under sc_vol
-              sensitive_area += facet_area;
-              Volume sc_vol_facet("facet" + to_string(sensor_number));
-              sc_vol_facet.setSolid(extruded_facet); //note: the dereferenced pointer is also a pointer
-              sc_vol_facet.setMaterial(description.material(x_comp.materialStr()));
-              sc_vol_facet.setRegion(description, x_comp.regionStr());
-              sc_vol_facet.setLimitSet(description, x_comp.limitsStr());
-              //now place the volume
-              RotationZYX c_rot(0, 0, -M_PI/2);
-              pv = m_vol.placeVolume(sc_vol_facet, Transform3D(c_rot, Position(0, 0, zoff)));
-              sc_vol_facet.setVisAttributes(description, x_comp.visStr());
-              pv.addPhysVolID("sensor", sensor_number);
-
-              sensor_number = sensor_number + 1;
-              sc_vol_facet.setSensitiveDetector(sens);
-              sensitives[m_nam].push_back(pv);
+            
+            //extrude if the facet is a good facet
+            double costheta = TessellatedSolid::Vertex::Dot(yhat, extruded_facet_access.normal);
+            bool good_facet = abs(costheta) >= costheta_threshold && facet_area > facet_area_threshold;
+            if (good_facet) {
               
-
-              //SURFACE WORK
-              //module_thicknesses[m_nam] = {extrusion_length,
-                                          //0};
-              module_thicknesses[m_nam] = {thickness_so_far + x_comp.thickness() / 2.0,
-                                           total_thickness - thickness_so_far - x_comp.thickness() / 2.0};                   
-              // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
-              //Vector3D u(-1., 0., 0.);
-              //Vector3D v(0., -1., 0.);
-              //Vector3D n(0., 0., 1.);
-              //    Vector3D o( 0. , 0. , 0. ) ;
-              
-              //first compute a centroid
-              //for(auto& element : vertices) 
-              //{
-                //extruded_vertices.push_back(element + extrusionVector);
-              //}
-
-              Vector3D u = vertex_to_vector3D(vertices.at(1) - vertices.at(2));
-              Vector3D v = vertex_to_vector3D(vertices.at(0) - vertices.at(2));
-              Vector3D n = vertex_to_vector3D(extruded_facet_access.normal);
-              Vector3D o = vertex_to_vector3D(0.333333333 * (vertices.at(0) + vertices.at(1) + vertices.at(2)));
-
-    
-              // compute the inner and outer thicknesses that need to be assigned to the tracking surface
-              // depending on whether the support is above or below the sensor
-              double inner_thickness = module_thicknesses[m_nam][0];
-              double outer_thickness = module_thicknesses[m_nam][1];
-              SurfaceType type(SurfaceType::Sensitive);
-              VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n, o);
-              volplane_surfaces[m_nam].push_back(surf);
-              //printout(WARNING, "BarrelTrackingOuter", "Facet is facing the right direction, registered as sensitive.");
             }
-            //else //for debugging
-              //printout(WARNING, "BarrelTrackingOuter", "Facet is not facing right direction, skipping facet.");
-            
-            //release the facet extrusion*/
-            //delete extruded_facet;
           }
-          else if (current_facet.GetNvert() == 4) //quadrilateral facet
-          {
-            //yet to be implemented with quad prisim class
-            printout(WARNING, "BarrelTrackingOuter", "Quadrilateral facets are not yet supported. Please revise your mesh.");
-          }
-          else throw runtime_error("Facet not triangular or quadrilateral.");
-          
+        }*/
+        //now work with the accepted prisms
+        for(auto& tri_facet: accepted_facets) {
+          sensitive_area += tri_facet.facet_area; //log the area
+          //printout(WARNING, "BarrelTrackingOuter", "%f", TessellatedSolid::Vertex::Dot(yhat, tri_facet.normal));
+          //now define a facet solid and place it under sc_vol
+          TessellatedSolid extruded_facet = tri_facet.create_TriangularPrism(extrusion_length); //extrude the facet
+          if(!extruded_facet) throw runtime_error("BarrelTrackerOuterStandardized: Error when extruding facet!");
+          extruded_facet->CloseShape(true, true, true); //otherwise you get an infinite bounding box
+          extruded_facet->CheckClosure(true, true); //fix any flipped orientation in facets, the second 'true' is for verbose
+          Volume sc_vol_facet("facet" + to_string(sensor_number));
+          sc_vol_facet.setSolid(extruded_facet); //note: the dereferenced pointer is also a pointer
+          sc_vol_facet.setMaterial(description.material(x_comp.materialStr()));
+          sc_vol_facet.setRegion(description, x_comp.regionStr());
+          sc_vol_facet.setLimitSet(description, x_comp.limitsStr());
+          //now place the volume
+          RotationZYX c_rot(0, 0, -M_PI/2);
+          pv = m_vol.placeVolume(sc_vol_facet, Transform3D(c_rot, Position(0, 0, zoff)));
+          sc_vol_facet.setVisAttributes(description, x_comp.visStr());
+          pv.addPhysVolID("sensor", sensor_number);
+          sensor_number = sensor_number + 1;
+          sc_vol_facet.setSensitiveDetector(sens);
+          sensitives[m_nam].push_back(pv);
+
+          //SURFACE WORK
+          //module_thicknesses[m_nam] = {extrusion_length,
+                                      //0};
+          module_thicknesses[m_nam] = {thickness_so_far + x_comp.thickness() / 2.0,
+                                        total_thickness - thickness_so_far - x_comp.thickness() / 2.0};                   
+          // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
+          vector<TessellatedSolid::Vertex> vertices = tri_facet.vertices;
+          Vector3D u = vertex_to_vector3D(vertices.at(1) - vertices.at(2));
+          Vector3D v = vertex_to_vector3D(vertices.at(0) - vertices.at(2));
+          Vector3D n = vertex_to_vector3D(tri_facet.normal);
+          Vector3D o = vertex_to_vector3D(0.333333333 * (vertices.at(0) + vertices.at(1) + vertices.at(2)));// + extrusion_length*n;
+          // compute the inner and outer thicknesses that need to be assigned to the tracking surface
+          // depending on whether the support is above or below the sensor
+          double inner_thickness = module_thicknesses[m_nam][0];
+          double outer_thickness = module_thicknesses[m_nam][1];
+          SurfaceType type(SurfaceType::Sensitive);
+          VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n, o);
+          volplane_surfaces[m_nam].push_back(surf);
 
         }
-        printout(WARNING, "BarrelTrackingOuter", "Please check the following values, they should be very close: ");
-        printout(WARNING, "BarrelTrackingOuter", "Total Area of Facets / 2 : %f", total_surface_area/2);
-        printout(WARNING, "BarrelTrackingOuter", "Total Sensitive Area: %f", sensitive_area/2);
-
+        //printout(WARNING, "BarrelTrackingOuter", "Please check the following values, they should be very close: ");
+        //printout(WARNING, "BarrelTrackingOuter", "Total Area of Facets / 2 : %f", total_surface_area/2);
+        //printout(WARNING, "BarrelTrackingOuter", "Total Sensitive Area: %f", sensitive_area/2);
       }
       else { // not a sensitive volume
         //place the volume
@@ -488,6 +490,15 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
     
   }
   delete parser;
+  
+
+  //dump reports on the components:
+  ofstream area_report("Sens_Area_Report.txt");
+  if(!area_report.is_open()) throw std::runtime_error("Unable to open or create the file: Sens_Area_Report.txt");
+  area_report << "Sensitive area loss report from extrusion..." << std::endl;
+  area_report << "Check if these values are close to each other (former will be slightly bigger):" << std::endl;
+  area_report << "Total Surface Area / 2: " << total_surface_area/2 << std::endl;
+  area_report << "Sensitive area: " << sensitive_area << std::endl;
 
   // now build the layers
   for (xml_coll_t li(x_det, _U(layer)); li; ++li) {
