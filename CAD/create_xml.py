@@ -162,23 +162,53 @@ FOOTER = '''
 </lccdd>
 
 '''
+#note that units are in milimeters
+default_thickness_sensitive = 0.09996 #in milimeters
+def module_component(component_path, component_name, my_dict):
+    COMPONENT_HEADER = f'''
+        <module_component name="{component_name}" '''
 
-def module_component(component_path):
-    COMPONENT = f'''
-        <module_component name="L4Module_support0"
-                          material="CarbonFiber"
-                          sensitive="false"
-                          width="3 * mm"
-                          length="840 * mm"
-                          offset="0 * mm"
-                          thickness="0 * mm"
+    #print the attributes of the dictionary
+    COMPONENT_BODY = ""      
+    for key, value in my_dict.items():
+        COMPONENT_BODY += f"\n                          {key}=\"{value}\""
+                          #material="{component_material}"
+                          #sensitive="{component_offset}"
+                          #offset="{component_is_sensitive} * mm"
+                          #thickness="{component_thickness} * mm"
+    COMPONENT_FOOTER = f'''
                           vis="TrackerLayerVis"
-                          file="{component_path}" />
+                          file="CAD/{component_path}" />
     '''
+    COMPONENT = COMPONENT_HEADER + COMPONENT_BODY + COMPONENT_FOOTER
     return COMPONENT
 
+def scan_and_place(folder_path, search_string, xml_file, my_dict):
+    # scan folder for gdml name with string and place certain attributes accordingly
+    # i.e the material etc. of a component is determined by the name of the .gdml file (very lazy way to do it I know)
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            if file.endswith(".gdml") and search_string in file:
+                # Get the relative path and add to the list
+                full_path = os.path.join(root, file)
+                xml_file.write(module_component(full_path, file, my_dict))
 
-
+#dictionaries to contain the filename patterns
+dict_list = [
+    {"matching_name": "Active", "material": "Silicon", "sensitive": "true", "thickness": f"{default_thickness_sensitive} * mm"},
+    {"matching_name": "Biasing", "material": "Silicon"},
+    {"matching_name": "DataBackbone", "material": "Silicon"},
+    {"matching_name": "Pads", "material": "Silicon"},
+    {"matching_name": "PowerSwitches", "material": "Silicon"},
+    {"matching_name": "Readout", "material": "Silicon"},
+    {"matching_name": "FPC", "material": "Kapton"},
+    {"matching_name": "kapton", "material": "Kapton"},
+    {"matching_name": "K9", "material": "K9"},
+    {"matching_name": "Carbon", "material": "CarbonFiber"},
+    {"matching_name": "Ultem", "material": "Ultem"},
+] #extend as required
+dict_attr_list = ["material", "sensitive", "thickness", "offset"]
+  
 
 # Check if the folder path is provided as an argument
 if len(sys.argv) < 3:
@@ -195,20 +225,11 @@ if os.path.exists(file_path):
 
 with open(file_path, "w") as xml_file:
     xml_file.write(HEADER)
-    # Walk through the folder and all subfolders
-    for root, dirs, files in os.walk(L3_folder_path):
-        for file in files:
-            if file.endswith(".gdml"):
-                # Get the full path and add to the list
-                full_path = os.path.join(root, file)
-                xml_file.write(module_component(full_path))
+    for key_dict in dict_list:
+        scan_and_place(L3_folder_path, key_dict["matching_name"], xml_file, key_dict)
     xml_file.write(MIDDLE)
-    for root, dirs, files in os.walk(L4_folder_path):
-        for file in files:
-            if file.endswith(".gdml"):
-                # Get the full path and add to the list
-                full_path = os.path.join(root, file)
-                xml_file.write(module_component(full_path))
+    for key_dict in dict_list:
+        scan_and_place(L4_folder_path, key_dict["matching_name"], xml_file, key_dict)
     xml_file.write(FOOTER)
 
 
