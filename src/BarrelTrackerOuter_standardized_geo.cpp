@@ -113,7 +113,7 @@ class TriangularFacet
       printout(ERROR, "BarrelTrackerOuter_standardized", "Trying to construct triangular prism with more or less than 3 vertices");
       throw runtime_error("Triangular prisim construction failed.");
     }
-    else if(facet_area < 0.1) return NULL;
+    if(facet_area < 0.05) return NULL;
     else {
       extrusionVector = extrusion_length * normal;
       vector<TessellatedSolid::Vertex> extruded_vertices;
@@ -359,7 +359,7 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
         //calculate the concavity
         //double component_direction = 0;
         double costheta_threshold = 0.88;
-        double facet_area_threshold = 0.01;
+        double facet_area_threshold = 0.05;
         for(int facet_index = 0; facet_index < c_sol->GetNfacets(); facet_index++)  {
           if (!(c_sol->GetFacet(facet_index).GetNvert() == 3)) throw runtime_error("BarrelTrackerOuterStandardized: Non triangular facets not supported. Please revise your mesh.");
           //construct a TriangularFacet from the facet
@@ -415,7 +415,6 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
         }*/
         //now work with the accepted prisms
         for(auto& tri_facet: accepted_facets) {
-          printout(WARNING, "BarrelTrackerOuterSENSSSSSSSSSSSSS", "%f", extrusion_length);
           sensitive_area += tri_facet.facet_area; //log the area
           //printout(WARNING, "BarrelTrackingOuter", "%f", TessellatedSolid::Vertex::Dot(yhat, tri_facet.normal));
           //now define a facet solid and place it under sc_vol
@@ -482,9 +481,9 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
         c_vol.setVisAttributes(description, x_comp.visStr());
         
       }
-      double thic = getAttrOrDefault<double>(x_comp, _U(thickness), 0 * mm);
-      thickness_sum += radial_offset +  thic;
-      thickness_so_far += radial_offset + thic;
+      //double thic = getAttrOrDefault<double>(x_comp, _U(thickness), 0 * mm);
+      thickness_sum += radial_offset;
+      thickness_so_far += radial_offset;
       // apply relative offsets in z-position used to stack components side-by-side
       if (x_pos) {
         thickness_sum += x_pos.z(0);

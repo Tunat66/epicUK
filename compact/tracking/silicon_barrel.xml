@@ -22335,7 +22335,7 @@
         <barrel_envelope
           inner_r="SiBarrelLayer1_rmin-10.0*mm"
           outer_r="SiBarrelLayer1_rmax"
-          z_length="SiBarrelLayer1_length" />
+          z_length="SiBarrelLayer1_length + 100*mm" />
         <layer_material surface="inner" binning="binPhi,binZ" bins0="46" bins1="100" />
         <layer_material surface="outer" binning="binPhi,binZ" bins0="46" bins1="100" />
         <comment>
@@ -59447,7 +59447,7 @@
     <readout name="SiBarrelHits">
       <segmentation type="CartesianGridXY" grid_size_x="0.020*mm" grid_size_y="0.020*mm" />
       <comment>bitfieldsizes for indexing sensors and modules, max values are 2 exp bitfieldsize</comment>
-      <id>system:8,layer:4,module:8,sensor:9,x:32:-16,y:-16</id>
+      <id>system:8,layer:4,module:5,sensor:14,x:32:-16,y:-16</id>
     </readout>
   </readouts>
 
