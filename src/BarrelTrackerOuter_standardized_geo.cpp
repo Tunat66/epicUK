@@ -291,7 +291,8 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
     // Compute module total thickness from components
     xml_coll_t ci(x_mod, _U(module_component));
     for (ci.reset(), total_thickness = 0.0; ci; ++ci) {
-      total_thickness += xml_comp_t(ci).thickness();
+      double thic = getAttrOrDefault(ci, _U(thickness), 0 * mm);
+      total_thickness += thic;
     }
     Assembly m_vol(m_nam);
     volumes[m_nam] = m_vol;
@@ -310,11 +311,11 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
       //import the GDML file from the "file" attribute of the module_component
       std::string gdml_file =
           getAttrOrDefault<std::string>(x_comp, _Unicode(file), " ");
-      printout(WARNING, "BarrelTrackerOuter", gdml_file);
+      //printout(WARNING, "BarrelTrackerOuter", gdml_file);
       std::string given_name = getAttrOrDefault<std::string>(x_comp, _Unicode(name), " ");
 
       Volume c_vol(c_nam);
-      printout(WARNING, "BarrelTrackerOuter", "Parsing a large GDML file may lead to segfault or heap overflow.");
+      //printout(WARNING, "BarrelTrackerOuter", "Parsing a large GDML file may lead to segfault or heap overflow.");
       //STANDARD WHEN IMPORTING CAD MODELS: 
       //-> STAVE LONG AXIS MUST BE Z
       //-> STAVE FACES ALONG THE X AXIS
@@ -348,6 +349,7 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
       // and place those under m_vol
       // else, just place c_vol under m_vol
       if (x_comp.isSensitive()) {
+        
         //loop over the facets of c_vol to define volumes and set them as sensitive
         //note these facets won't be actual pixels, but rather just bits of the mesh
         //some variables to monitor if any sensitive area is lost
@@ -357,11 +359,12 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
         //calculate the concavity
         //double component_direction = 0;
         double costheta_threshold = 0.88;
-        double facet_area_threshold = 0.1;
+        double facet_area_threshold = 0.01;
         for(int facet_index = 0; facet_index < c_sol->GetNfacets(); facet_index++)  {
           if (!(c_sol->GetFacet(facet_index).GetNvert() == 3)) throw runtime_error("BarrelTrackerOuterStandardized: Non triangular facets not supported. Please revise your mesh.");
           //construct a TriangularFacet from the facet
           TriangularFacet tri_facet;
+          //printout(WARNING, "BarrelTrackerOuterSENSSSSSSSSSSSSS", gdml_file);
           tri_facet.compute_facet_properties(c_sol->GetFacet(facet_index), c_sol);
           double facet_area = tri_facet.facet_area;
           total_surface_area += facet_area;
@@ -412,6 +415,7 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
         }*/
         //now work with the accepted prisms
         for(auto& tri_facet: accepted_facets) {
+          printout(WARNING, "BarrelTrackerOuterSENSSSSSSSSSSSSS", "%f", extrusion_length);
           sensitive_area += tri_facet.facet_area; //log the area
           //printout(WARNING, "BarrelTrackingOuter", "%f", TessellatedSolid::Vertex::Dot(yhat, tri_facet.normal));
           //now define a facet solid and place it under sc_vol
@@ -478,9 +482,9 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
         c_vol.setVisAttributes(description, x_comp.visStr());
         
       }
-      //NOTE: HAVE THICKNESS ATTRIBUTE FOR ALL COMPONENTS
-      thickness_sum += radial_offset +  x_comp.thickness();
-      thickness_so_far += radial_offset + x_comp.thickness();
+      double thic = getAttrOrDefault<double>(x_comp, _U(thickness), 0 * mm);
+      thickness_sum += radial_offset +  thic;
+      thickness_so_far += radial_offset + thic;
       // apply relative offsets in z-position used to stack components side-by-side
       if (x_pos) {
         thickness_sum += x_pos.z(0);

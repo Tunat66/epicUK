@@ -58,7 +58,7 @@ HEADER = '''
     <detector
       id="TrackerBarrel_0_ID"
       name="SagittaSiBarrel"
-      type="epic_SiliconBarrel"
+      type="epic_SiliconBarrelStandardized"
       readout="SiBarrelHits"
       insideTrackingVolume="true">
       <type_flags type="DetType_TRACKER + DetType_BARREL"/>
@@ -196,16 +196,16 @@ def scan_and_place(folder_path, search_string, xml_file, my_dict):
 #dictionaries to contain the filename patterns
 dict_list = [
     {"matching_name": "Active", "material": "Silicon", "sensitive": "true", "thickness": f"{default_thickness_sensitive} * mm"},
-    {"matching_name": "Biasing", "material": "Silicon"},
-    {"matching_name": "DataBackbone", "material": "Silicon"},
-    {"matching_name": "Pads", "material": "Silicon"},
-    {"matching_name": "PowerSwitches", "material": "Silicon"},
-    {"matching_name": "Readout", "material": "Silicon"},
-    {"matching_name": "FPC", "material": "Kapton"},
-    {"matching_name": "kapton", "material": "Kapton"},
-    {"matching_name": "K9", "material": "K9"},
-    {"matching_name": "Carbon", "material": "CarbonFiber"},
-    {"matching_name": "Ultem", "material": "Ultem"},
+    {"matching_name": "Biasing", "material": "Silicon"      , "sensitive": "false"},
+    {"matching_name": "DataBackbone", "material": "Silicon" , "sensitive": "false"},
+    {"matching_name": "Pads", "material": "Silicon"         , "sensitive": "false"},
+    {"matching_name": "PowerSwitches", "material": "Silicon", "sensitive": "false"},
+    {"matching_name": "Readout", "material": "Silicon"      , "sensitive": "false"},
+    {"matching_name": "FPC", "material": "Kapton"           , "sensitive": "false"},
+    {"matching_name": "kapton", "material": "Kapton"        , "sensitive": "false"},
+    {"matching_name": "K9", "material": "K9"                , "sensitive": "false"},
+    {"matching_name": "Carbon", "material": "CarbonFiber"   , "sensitive": "false"},
+    {"matching_name": "Ultem", "material": "Ultem"          , "sensitive": "false"},
 ] #extend as required
 dict_attr_list = ["material", "sensitive", "thickness", "offset"]
   

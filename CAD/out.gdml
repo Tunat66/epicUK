@@ -481,7 +481,7 @@
             <solidref ref="world_solid"/>
 
             <physvol>
-                <file name="./Meshes/ALICE_SENSOR_ASSEMBLY005_ASCII.gdml"/>
+                <file name="./Meshes/ActivePixelArray_002(Mirror)_(1)_ASCII.gdml"/>
              </physvol>
 
 
