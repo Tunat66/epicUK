@@ -126,7 +126,7 @@ class TriangularFacet
           //all_vertices.begin()); 
       //Now add the facets:
       //depending on the extrusion, change the orientation
-      if(extrusion_length > 0)
+      if(extrusion_length < 0)
       {
         //Top and bottom
         extruded_prism.addFacet(vertices.at(2), vertices.at(1), vertices.at(0));
@@ -140,7 +140,7 @@ class TriangularFacet
           //extruded_prism.addFacet(extruded_vertices.at(i), extruded_vertices.at(next_i), vertices.at(next_i), vertices.at(i)); 
         }
       }
-      else if(extrusion_length < 0)
+      else if(extrusion_length > 0)
       {
         //Top and bottom
         extruded_prism.addFacet(vertices.at(0), vertices.at(1), vertices.at(2));

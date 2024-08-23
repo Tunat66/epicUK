@@ -232,8 +232,6 @@ with open(file_path, "w") as xml_file:
         scan_and_place(L4_folder_path, key_dict["matching_name"], xml_file, key_dict)
     xml_file.write(FOOTER)
 
-
-            
 # Print the resulting list (optional)
 #print("Found .gdml files:")
 #for file in gdml_files:
