@@ -22299,6 +22299,8 @@
                           sensitive="false"
                           vis="TrackerLayerVis"
                           file="CAD/L3_stave_gdml/Carbon_Compsite_Central_Spar_ASCII.gdml" />
+      </module>
+      <module name="L3Module_2" vis="TrackerLayerVis">
     
         <module_component name="Carbon_Compsite_Central_Spar(Mirror)_ASCII.gdml" 
                           matching_name="Carbon"
@@ -22330,7 +22332,7 @@
     
         <!--end bundle-->    
       </module>
-      <comment> Layers composed of many arrayed modules  </comment>
+      <comment> Layers contain many modules labelled as letters  </comment>
       <layer module="L3Module" id="1" vis="TrackerLayerVis">
         <barrel_envelope
           inner_r="SiBarrelLayer1_rmin-10.0*mm"

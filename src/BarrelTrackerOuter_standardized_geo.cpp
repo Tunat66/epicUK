@@ -197,6 +197,7 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
   DetElement sdet(det_name, det_id);
 
   map<string, Volume> volumes;
+  vector<string> module_names;
   map<string, Placements> sensitives;
   map<string, std::vector<VolPlane>> volplane_surfaces;
   map<string, std::array<double, 2>> module_thicknesses;
@@ -277,7 +278,7 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
   for (xml_coll_t mi(x_det, _U(module)); mi; ++mi) {
     xml_comp_t x_mod = mi;
     string m_nam     = x_mod.nameStr();
-
+    module_names.push_back(m_nam);
     if (volumes.find(m_nam) != volumes.end()) {
       printout(ERROR, "BarrelTrackerOuter",
                string((string("Module with named ") + m_nam + string(" already exists."))).c_str());
@@ -349,7 +350,6 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
       // and place those under m_vol
       // else, just place c_vol under m_vol
       if (x_comp.isSensitive()) {
-        
         //loop over the facets of c_vol to define volumes and set them as sensitive
         //note these facets won't be actual pixels, but rather just bits of the mesh
         //some variables to monitor if any sensitive area is lost
@@ -503,23 +503,27 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
   area_report << "Total Surface Area / 2: " << total_surface_area/2 << std::endl;
   area_report << "Sensitive area: " << sensitive_area << std::endl;
 
-  // now build the layers
+  // now build the layers: changes added to allow multimodule layers
   for (xml_coll_t li(x_det, _U(layer)); li; ++li) {
     xml_comp_t x_layer  = li;
     xml_comp_t x_barrel = x_layer.child(_U(barrel_envelope));
     xml_comp_t x_layout = x_layer.child(_U(rphi_layout));
     xml_comp_t z_layout = x_layer.child(_U(z_layout)); // Get the <z_layout> element.
     int lay_id          = x_layer.id();
-    string m_nam        = x_layer.moduleStr();
     string lay_nam      = det_name + _toString(x_layer.id(), "_layer%d");
     Tube lay_tub(x_barrel.inner_r(), x_barrel.outer_r(), x_barrel.z_length() / 2.0);
     Volume lay_vol(lay_nam, lay_tub, air); // Create the layer envelope volume.
     Position lay_pos(0, 0, getAttrOrDefault(x_barrel, _U(z0), 0.));
     lay_vol.setVisAttributes(description.visAttributes(x_layer.visStr()));
 
+    //code that I used previously in lieu of an envelope, for visualization purposes
     //Assembly lay_vol(lay_nam);
     //Position lay_pos(0, 0, getAttrOrDefault(x_barrel, _U(z0), 0.));
-
+    DetElement lay_elt(sdet, lay_nam, lay_id);
+    // the local coordinate systems of modules in dd4hep and acts differ
+    // see http://acts.web.cern.ch/ACTS/latest/doc/group__DD4hepPlugins.html
+    auto& layerParams =
+        DD4hepDetectorHelper::ensureExtension<dd4hep::rec::VariantParameters>(lay_elt);
     double phi0     = x_layout.phi0();     // Starting phi of first module.
     double phi_tilt = x_layout.phi_tilt(); // Phi tilt of a module.
     double rc       = x_layout.rc();       // Radius of the module center.
@@ -530,22 +534,11 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
     double z0       = z_layout.z0();       // Z position of first module in phi.
     double nz       = z_layout.nz();       // Number of modules to place in z.
     double z_dr     = z_layout.dr();       // Radial displacement parameter, of every other module.
-
-    Volume module_env = volumes[m_nam];
-    DetElement lay_elt(sdet, lay_nam, lay_id);
-    Placements& sensVols = sensitives[m_nam];
-
-    // the local coordinate systems of modules in dd4hep and acts differ
-    // see http://acts.web.cern.ch/ACTS/latest/doc/group__DD4hepPlugins.html
-    auto& layerParams =
-        DD4hepDetectorHelper::ensureExtension<dd4hep::rec::VariantParameters>(lay_elt);
-
     for (xml_coll_t lmat(x_layer, _Unicode(layer_material)); lmat; ++lmat) {
-      xml_comp_t x_layer_material = lmat;
-      DD4hepDetectorHelper::xmlToProtoSurfaceMaterial(x_layer_material, layerParams,
-                                                      "layer_material");
+        xml_comp_t x_layer_material = lmat;
+        DD4hepDetectorHelper::xmlToProtoSurfaceMaterial(x_layer_material, layerParams,
+                                                        "layer_material");
     }
-
     // Z increment for module placement along Z axis.
     // Adjust for z0 at center of module rather than
     // the end of cylindrical envelope.
@@ -553,55 +546,61 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
     // Starting z for module placement along Z axis.
     double module_z = -z0;
     int module      = 1;
+    for(auto& m_nam : module_names) {
 
-    // Loop over the number of modules in phi.
-    for (int ii = 0; ii < nphi; ii++) {
-      double dx = z_dr * std::cos(phic + phi_tilt); // Delta x of module position.
-      double dy = z_dr * std::sin(phic + phi_tilt); // Delta y of module position.
-      double x  = rc * std::cos(phic);              // Basic x module position.
-      double y  = rc * std::sin(phic);              // Basic y module position.
+      Volume module_env = volumes[m_nam];
+      // Loop over the number of modules in phi.
+      for (int ii = 0; ii < nphi; ii++) {
+        double dx = z_dr * std::cos(phic + phi_tilt); // Delta x of module position.
+        double dy = z_dr * std::sin(phic + phi_tilt); // Delta y of module position.
+        double x  = rc * std::cos(phic);              // Basic x module position.
+        double y  = rc * std::sin(phic);              // Basic y module position.
 
-      // Loop over the number of modules in z.
-      for (int j = 0; j < nz; j++) {
-        string module_name = _toString(module, "module%d");
-        DetElement mod_elt(lay_elt, module_name, module);
+        // Loop over the number of modules in z. note that for a system working with stave designs nz = 1 always
+        for (int j = 0; j < nz; j++) {
+          string module_name = _toString(module, "module%d");
+          DetElement mod_elt(lay_elt, module_name, module);
 
-        Transform3D tr(RotationZYX(0, ((M_PI / 2) - phic - phi_tilt), -M_PI/2), /*RotationZ(phic)*/
-                        Position(x, y, module_z));
+          Transform3D tr(RotationZYX(0, ((M_PI / 2) - phic - phi_tilt), -M_PI/2), /*RotationZ(phic)*/
+                          Position(x, y, module_z));
 
-        pv = lay_vol.placeVolume(module_env, tr);
-        pv.addPhysVolID("module", module);
-        mod_elt.setPlacement(pv);
-        for (size_t ic = 0; ic < sensVols.size(); ++ic) {
-          PlacedVolume sens_pv = sensVols[ic];
-          DetElement comp_de(mod_elt, std::string("de_") + sens_pv.volume().name(), module);
-          comp_de.setPlacement(sens_pv);
+          pv = lay_vol.placeVolume(module_env, tr);
+          pv.addPhysVolID("module", module);
+          mod_elt.setPlacement(pv);
+          if(sensitives.count(m_nam)) 
+          {
+            Placements& sensVols = sensitives[m_nam];
+            for (size_t ic = 0; ic < sensVols.size(); ++ic) {
+            PlacedVolume sens_pv = sensVols[ic];
+            DetElement comp_de(mod_elt, std::string("de_") + sens_pv.volume().name(), module);
+            comp_de.setPlacement(sens_pv);
 
-          auto& comp_de_params =
-              DD4hepDetectorHelper::ensureExtension<dd4hep::rec::VariantParameters>(comp_de);
-          comp_de_params.set<string>("axis_definitions", "XYZ");
-          //comp_de.setAttributes(description, sens_pv.volume(), x_layer.regionStr(), x_layer.limitsStr(),
-                                 //xml_det_t(xmleles[m_nam]).visStr());
-          //
+            auto& comp_de_params =
+                DD4hepDetectorHelper::ensureExtension<dd4hep::rec::VariantParameters>(comp_de);
+            comp_de_params.set<string>("axis_definitions", "XYZ");
+            //comp_de.setAttributes(description, sens_pv.volume(), x_layer.regionStr(), x_layer.limitsStr(),
+                                  //xml_det_t(xmleles[m_nam]).visStr());
+            //
 
-          volSurfaceList(comp_de)->push_back(volplane_surfaces[m_nam][ic]);
+            volSurfaceList(comp_de)->push_back(volplane_surfaces[m_nam][ic]);
+            }
+          }
+          /// Increase counters etc.
+          module++;
+          // Adjust the x and y coordinates of the module.
+          x += dx;
+          y += dy;
+          // Flip sign of x and y adjustments.
+          dx *= -1;
+          dy *= -1;
+          // Add z increment to get next z placement pos.
+          module_z += z_incr;
         }
-
-        /// Increase counters etc.
-        module++;
-        // Adjust the x and y coordinates of the module.
-        x += dx;
-        y += dy;
-        // Flip sign of x and y adjustments.
-        dx *= -1;
-        dy *= -1;
-        // Add z increment to get next z placement pos.
-        module_z += z_incr;
+        phic += phi_incr; // Increment the phi placement of module.
+        rc += rphi_dr;    // Increment the center radius according to dr parameter.
+        rphi_dr *= -1;    // Flip sign of dr parameter.
+        module_z = -z0;   // Reset the Z placement parameter for module.
       }
-      phic += phi_incr; // Increment the phi placement of module.
-      rc += rphi_dr;    // Increment the center radius according to dr parameter.
-      rphi_dr *= -1;    // Flip sign of dr parameter.
-      module_z = -z0;   // Reset the Z placement parameter for module.
     }
     // Create the PhysicalVolume for the layer.
     pv = assembly.placeVolume(lay_vol, lay_pos); // Place layer in mother
@@ -609,11 +608,10 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
     lay_elt.setAttributes(description, lay_vol, x_layer.regionStr(), x_layer.limitsStr(),
                           x_layer.visStr());
     //lay_vol.setVisAttributes(description.invisible());
-    lay_elt.setPlacement(pv);
+    lay_elt.setPlacement(pv); 
   }
   
   //finally, place the world
-
   sdet.setAttributes(description, assembly, x_det.regionStr(), x_det.limitsStr(), x_det.visStr());
   assembly.setVisAttributes(description.invisible());
   pv = description.pickMotherVolume(sdet).placeVolume(assembly);
