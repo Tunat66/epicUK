@@ -116,6 +116,8 @@ MIDDLE = '''
       <module name="L4Module" vis="TrackerLayerVis">
 '''
 FOOTER = '''
+        <!--end bundle-->    
+      </module>
       <comment> Layers composed of many arrayed modules  </comment>
       <layer module="L4Module" id="1" vis="TrackerLayerVis">
         <barrel_envelope
@@ -162,6 +164,9 @@ FOOTER = '''
 </lccdd>
 
 '''
+
+MAX_COMPONENT_NUMBER = 500 #less then 2 to the 9 which is what we allocated for sensors
+
 #note that units are in milimeters
 default_thickness_sensitive = 0.09996 #in milimeters
 def module_component(component_path, component_name, my_dict):
