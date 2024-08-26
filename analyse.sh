@@ -1,15 +1,17 @@
 #!/bin/bash
-
+# use: ./analyse.sh <results_dir>
 #some initial setup
 ../eic-shell
 source install/setup.sh
 
 #mom_array=(0.5 1.0 2.0 5.0 10.0 15.0)
-mom_array=(0.5 0.75 1.0 1.25 1.75 2.0 2.50 3.0 4.0 5.0 7.0 8.5 10.0 12.5 15.0)
+mom_array=(0.5 0.75 1.0 1.25 1.75 2.0 2.50 3.0 4.0 5.0 7.0 8.5 10.0)
 particle_array=("pi-")
 filename=("tracking_output") 
 etabin_array=(-3.5 -2.5 -1.0 1.0 2.5 3.5)
-nevents=100
+nevents=10000
+
+#the analysis directory is the first argument
 results_dir=$1
 
 #create a new array which has the momenta formatted to two decimal places
@@ -24,8 +26,21 @@ done
 formatted_mom_array+='}'
 echo ${formatted_mom_array[@]}
 
+#add analysis files if they are not already in $results_dir.
+analysis_files=("Tracking_Performances.C" "doCompare_truth_real_widebins_mom.C" "doCompare_truth_real_widebins_dcaz.C" "doCompare_truth_real_widebins_dcaT.C")
+for file in "${analysis_files[@]}"; do
+    if [ -e "$results_dir/$file" ]; then
+        echo "INFO: $file already exists, not altering for analysis integrity purposes."
+    else
+        echo "INFO: $file does not exist in $results_dir. Copying..."
+        cp "$file" "$results_dir/"
+    fi
+done
+
 #change to the particular results dir to analyse the data
 cd $results_dir
+rm -r truthseed
+rm -r realseed
 mkdir -p truthseed/pi-/mom realseed/pi-/mom truthseed/pi-/dca realseed/pi-/dca
 
 # run the analysis

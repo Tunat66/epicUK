@@ -4,11 +4,11 @@ import sys
 
 infile = open(sys.argv[1], 'rb') #import file
 
-file_with_path = sys.argv[1]
-file_with_path_no_extension = file_with_path[:-4]
+file = sys.argv[1]
+file_with_no_extension = file[:-4]
 
 
-out = open(file_with_path_no_extension + '_ASCII.stl', 'w') #export file
+out = open(file_with_no_extension + '_ASCII.stl', 'w') #export file
 
 data = infile.read()
 

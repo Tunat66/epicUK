@@ -4,6 +4,8 @@ import Part
 import os
 import sys
 
+freecad_file = ""
+
 def get_global_placement(obj): #this method I created with chatgpt
     """
     Calculate the global placement of a given object by considering its parent hierarchy.
@@ -66,7 +68,9 @@ def export_component_as_mesh(component, filename, tessellation_level = 0.1): #fi
     mesh_obj.Mesh = Mesh.Mesh(mesh_data)
     
     # Save the mesh as an STL file
-    dir_path = 'Meshes/'
+    global freecad_file
+    dir_path = os.path.splitext(freecad_file)[0] #remove the freecad extension from the freecad filename
+    dir_path += "/"
     # Check if the directory exists
     if not os.path.exists(dir_path):
         try:
@@ -104,7 +108,7 @@ def transform_all_components_to_global(doc):
 
 # Load the FreeCAD file, the directory is the first argument of the script
 if len(sys.argv) < 2:
-        print("Usage: python refine_step_for_ePIC.py <arg1> [<arg2> ...] where <arg1> is the name of the FreeCAD(.FCStd) file.")
+        print("Usage: python refine_step_for_ePIC.py <arg1> where <arg1> is the name of the FreeCAD(.FCStd) file.")
         sys.exit(1)
 freecad_file = str(sys.argv[2])
 print(freecad_file)

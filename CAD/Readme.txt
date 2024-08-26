@@ -24,14 +24,15 @@ To configure the CAD utility:
 To start using the CAD utility:
 
 1-  Open your STEP file in FreeCAD and save it as a FreeCAD(.FCStd) file with a name of your choice.
-2-  Source the script with arguments: source FCStd_to_gdml.sh <FreeCAD_file_name> <gdml_folder_name>
-    --WARNING: make sure to select a nice and unique name for <gdml_folder_name> to avoid overwriting
-3-  You should be able to see the directory named <gdml_folder_name> created or updated!!!!! Horray!!!
+2-  Source the script with arguments: source FCStd_to_gdml.sh <FreeCAD_file_name>
+3-  
 
 ************************************************************************************************************************
-NOT YET IMPLEMENTED
 You can also produce the silicon_barrel.xml automatically. For this process you need to have produced two folders contining gdml files 
-for components with <gdml_folder_name>s 'L3_stave' and 'L4_stave'. 
+for components of the L3 stave and L4 stave. 
 
+
+
+3-  Run the create_xml.py script with arguments <L3_stave_gdml_folder_name> <L4_stave_gdml_folder_name>
 4-  Move the silicon_barrel.xml file to the ../compact/tracking folder (make sure to backup the older version with a git commit!!)
 5-  STEPource the script: source ../recompile.sh to get the .xml file copied over and then you are done!

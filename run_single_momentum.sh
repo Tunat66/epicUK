@@ -9,7 +9,7 @@ filename=("tracking_output")
 etabin_array=(-3.5 -2.5 -1.0 1.0 2.5 3.5)
 nevents=10000
 #ADJUST THESE VALUES!!!!!!
-results_dir="ParallelResults_n10000"
+results_dir="results_L3L4_dead_areas"
 compact_file_name="epic_craterlake_tracking_only.xml"
 
 source ../epic/install/bin/thisepic.sh
