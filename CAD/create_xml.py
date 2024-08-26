@@ -68,9 +68,21 @@ HEADER = '''
         length="SiBarrelLayer1_length" />
       <comment>Silicon Barrel Modules</comment>
       <!-- L3 Stave -->
-      <module name="L3Module" vis="TrackerLayerVis">
+      <module name="L3Module0" vis="TrackerLayerVis">
         <!--bundle-->
     '''
+
+def string_module_begin(stave_name ,module_number):
+    MODULE_BEGIN = f'''<module name="{stave_name}Module{module_number}" vis="TrackerLayerVis">
+        <!--bundle-->
+    '''
+    return MODULE_BEGIN
+def string_module_end():
+    MODULE_END = '''
+        <!--end bundle-->    
+      </module> '''
+    return MODULE_END
+
 
 MIDDLE = '''
         <!--end bundle-->    
@@ -80,7 +92,7 @@ MIDDLE = '''
         <barrel_envelope
           inner_r="SiBarrelLayer1_rmin-10.0*mm"
           outer_r="SiBarrelLayer1_rmax"
-          z_length="SiBarrelLayer1_length" />
+          z_length="SiBarrelLayer1_length + 50*mm" />
         <layer_material surface="inner" binning="binPhi,binZ" bins0="46" bins1="100" />
         <layer_material surface="outer" binning="binPhi,binZ" bins0="46" bins1="100" />
         <comment>
@@ -113,7 +125,8 @@ MIDDLE = '''
         length="SiBarrelLayer2_length" />
       <comment>Silicon Barrel Modules</comment>
       <comment> L4 Stave </comment>
-      <module name="L4Module" vis="TrackerLayerVis">
+      <module name="L4Module0" vis="TrackerLayerVis">
+        <!--bundle-->
 '''
 FOOTER = '''
         <!--end bundle-->    
@@ -157,7 +170,7 @@ FOOTER = '''
     <readout name="SiBarrelHits">
       <segmentation type="CartesianGridXY" grid_size_x="0.020*mm" grid_size_y="0.020*mm" />
       <comment>bitfieldsizes for indexing sensors and modules, max values are 2 exp bitfieldsize</comment>
-      <id>system:8,layer:4,module:8,sensor:9,x:32:-16,y:-16</id>
+      <id>system:8,layer:1,module:11,sensor:9,x:32:-16,y:-16</id>
     </readout>
   </readouts>
 
@@ -165,14 +178,15 @@ FOOTER = '''
 
 '''
 
-MAX_COMPONENT_NUMBER = 500 #less then 2 to the 9 which is what we allocated for sensors
+MAX_COMPONENT_NUMBER = 80 #less then 2 to the 9 which is what we allocated for sensors
 
 #note that units are in milimeters
 default_thickness_sensitive = 0.09996 #in milimeters
-def module_component(component_path, component_name, my_dict):
+def module_component(component_path, component_name, my_dict, file_count, stave_name):
     COMPONENT_HEADER = f'''
         <module_component name="{component_name}" '''
 
+    sens = False
     #print the attributes of the dictionary
     COMPONENT_BODY = ""      
     for key, value in my_dict.items():
@@ -181,22 +195,38 @@ def module_component(component_path, component_name, my_dict):
                           #sensitive="{component_offset}"
                           #offset="{component_is_sensitive} * mm"
                           #thickness="{component_thickness} * mm"
+        if key == "sensitive" and value == "true":
+          sens = True
     COMPONENT_FOOTER = f'''
                           vis="TrackerLayerVis"
                           file="CAD/{component_path}" />
     '''
     COMPONENT = COMPONENT_HEADER + COMPONENT_BODY + COMPONENT_FOOTER
-    return COMPONENT
-
-def scan_and_place(folder_path, search_string, xml_file, my_dict):
+    
+    #note: do module nesting only for sensitive components (note that this approach might introduce some bugs)
+    remainder = file_count % MAX_COMPONENT_NUMBER
+    if remainder + 1 == MAX_COMPONENT_NUMBER and sens:
+      module_number = int(file_count/MAX_COMPONENT_NUMBER)
+      COMPONENT = string_module_end() + "\n    " + string_module_begin(stave_name ,module_number + 1) + COMPONENT
+      return COMPONENT
+    else:
+      return COMPONENT
+    
+file_count_global = 0
+def scan_and_place(folder_path, search_string, xml_file, my_dict, stave_name):
     # scan folder for gdml name with string and place certain attributes accordingly
     # i.e the material etc. of a component is determined by the name of the .gdml file (very lazy way to do it I know)
+    #add the counter HERE
     for root, dirs, files in os.walk(folder_path):
         for file in files:
             if file.endswith(".gdml") and search_string in file:
                 # Get the relative path and add to the list
                 full_path = os.path.join(root, file)
-                xml_file.write(module_component(full_path, file, my_dict))
+                global file_count_global
+                xml_file.write(module_component(full_path, file, my_dict, file_count_global, stave_name))     
+                file_count_global += 1
+
+
 
 #dictionaries to contain the filename patterns
 dict_list = [
@@ -230,11 +260,14 @@ if os.path.exists(file_path):
 
 with open(file_path, "w") as xml_file:
     xml_file.write(HEADER)
-    for key_dict in dict_list:
-        scan_and_place(L3_folder_path, key_dict["matching_name"], xml_file, key_dict)
+
+    file_count_global = 0 #reset the global file count in each new stave
+    for key_dict in dict_list:   
+        scan_and_place(L3_folder_path, key_dict["matching_name"], xml_file, key_dict, "L3")
     xml_file.write(MIDDLE)
+    file_count_global = 0
     for key_dict in dict_list:
-        scan_and_place(L4_folder_path, key_dict["matching_name"], xml_file, key_dict)
+        scan_and_place(L4_folder_path, key_dict["matching_name"], xml_file, key_dict, "L4")
     xml_file.write(FOOTER)
 
 # Print the resulting list (optional)

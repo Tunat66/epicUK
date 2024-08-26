@@ -185,6 +185,13 @@ class TriangularFacet
  * @author Whitney Armstrong, Tuna Tasali
  */
 
+//a conversion function between Vector3D and TessellatedSolid::Vertex
+Vector3D vertex_to_vector3D(TessellatedSolid::Vertex vertex) 
+{
+  Vector3D vec(vertex[0], vertex[1], vertex[2]);
+  return(vec);
+}
+
 static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h e, SensitiveDetector sens) {
 
   typedef vector<PlacedVolume> Placements;
