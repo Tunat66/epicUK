@@ -75,9 +75,6 @@ fi
 #print the momenta into an array with curly braces
 
 root -b -l -q doCompare_truth_real_widebins_mom.C'("'${particle_array[iparticle]}'",'${etabin_array[i]}','${etabin_array[i+1]}','$xmax_hist', '${#mom_array[@]}', '${formatted_mom_array[@]}')'
-
-
-
 root -b -l -q doCompare_truth_real_widebins_dcaz.C'("'${particle_array[iparticle]}'",'${etabin_array[i]}','${etabin_array[i+1]}')'
 root -b -l -q doCompare_truth_real_widebins_dcaT.C'("'${particle_array[iparticle]}'",'${etabin_array[i]}','${etabin_array[i+1]}')'
 done

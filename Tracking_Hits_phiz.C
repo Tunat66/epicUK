@@ -10,7 +10,7 @@
 #include "TMath.h"
 #define mpi 0.139  // 1.864 GeV/c^2
 
-void Tracking_Hits_phiz(TString filename="tracking_output.root",TString particle="pi-", double mom=0.1, Double_t pTcut = 0.15, TString name = "")
+void Tracking_Hits_phiz(TString filename="tracking_output.root",TString particle="pi-")
 { //slice z determintes where the slice of hits is going to be extracted
 
    // style of the plot

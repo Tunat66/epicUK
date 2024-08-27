@@ -11,7 +11,7 @@
 #define mpi 0.139  // 1.864 GeV/c^2
 #include <cmath>
 
-void Tracking_Hits_xy(TString filename="tracking_output.root",TString particle="pi-", double mom=0.1, Double_t pTcut = 0.15, TString name = "")
+void Tracking_Hits_xy(TString filename="tracking_output.root",TString particle="pi-")
 { //slice z determintes where the slice of hits is going to be extracted
 
    // style of the plot
@@ -52,7 +52,8 @@ void Tracking_Hits_xy(TString filename="tracking_output.root",TString particle="
     
     auto hit_plot = new TGraph();
     hit_plot->SetMarkerColor(kBlue);
-    hit_plot->SetMarkerStyle(kFullCircle);
+    //hit_plot->SetMarkerStyle(kFullCircle);
+    //hit_plot_2->SetMarkerSize(0.1);
     //so why is this while loop needed:
     //essentially, SiBarrelHits_posx etc are unflattened 2d arrays, the while loop traverses each element of an 
     //array. The elements of this array are also arrays, which are then handled by the for loop
