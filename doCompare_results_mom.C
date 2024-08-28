@@ -70,7 +70,7 @@ Bool_t drawreq=1, TString epic ="", TString eicrecon = "") // name = p, pt for g
     TGraphErrors *gr2 = new TGraphErrors(size_real,p_real,sigma_p_real,err_p_real,err_sigma_p_real);
     gr2->SetName("gr_realseed");
 	gr2->SetMarkerStyle(34);
-	gr2->SetMarkerSize(0.5);
+	gr2->SetMarkerSize(2.5);
 	gr2->SetTitle(";p (GeV/c);#sigmap/p");
 	gr2->GetXaxis()->CenterTitle();
 	gr2->GetYaxis()->CenterTitle();
@@ -84,12 +84,12 @@ Bool_t drawreq=1, TString epic ="", TString eicrecon = "") // name = p, pt for g
 void doCompare_results_mom(std::vector<TString> directory_list) 
 {
 	//change the following as required
-	std::vector<double> mom={0.50, 0.75, 1.00, 1.25, 1.75, 2.00, 2.50, 3.00, 4.00, 5.00, 7.00, 8.50, 10.00};
-	const Int_t nfiles=13;
+	std::vector<double> mom={0.50, 0.75, 1.00, 1.25, 1.75, 2.00, 2.50, 3.00, 4.00, 5.00, 7.00, 8.50, 10.00, 12.50, 15.00};
+	const Int_t nfiles=15;
 	TString particle = "pi-";
 	double etamin=-1.0; //etamin
 	double etamax=1.0; //etamax
-	double range =0.3; //range, we rarely change these
+	double range =0.3; //range, we rarely change this
 	std::vector<Color_t> colors = {kRed, kBlue, kGreen, kCyan, kMagenta, kOrange, kBlack};
 	
 	//=== style of the plot=========

@@ -77,7 +77,11 @@
         "doCompare_truth_real_widebins_dcaz copy.C": "cpp",
         "doCompare_truth_real_widebins_dcaT copy.C": "cpp",
         "Tracking_Performances copy.C": "cpp",
-        "doCompare_results_mom.C": "cpp"
+        "doCompare_results_mom.C": "cpp",
+        "doCompare_results_dcaT.C": "cpp",
+        "doCompare_results_dcaT copy.C": "cpp",
+        "doCompare_results_dcaZ copy.C": "cpp",
+        "doCompare_results_dcaz.C": "cpp"
     }
     //"C_Cpp.default.compilerPath": "/bin/g++", 
 }

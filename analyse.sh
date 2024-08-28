@@ -5,7 +5,7 @@
 source install/setup.sh
 
 #mom_array=(0.5 1.0 2.0 5.0 10.0 15.0)
-mom_array=(0.5 0.75 1.0 1.25 1.75 2.0 2.50 3.0 4.0 5.0 7.0 8.5 10.0)
+mom_array=(0.5 0.75 1.0 1.25 1.75 2.0 2.50 3.0 4.0 5.0 7.0 8.5 10.0 12.5 15.0)
 particle_array=("pi-")
 filename=("tracking_output") 
 etabin_array=(-3.5 -2.5 -1.0 1.0 2.5 3.5)

@@ -231,11 +231,11 @@ def scan_and_place(folder_path, search_string, xml_file, my_dict, stave_name):
 #dictionaries to contain the filename patterns
 dict_list = [
     {"matching_name": "Active", "material": "Silicon", "sensitive": "true", "thickness": f"{default_thickness_sensitive} * mm"},
-    {"matching_name": "Biasing", "material": "Silicon"      , "sensitive": "true"},
-    {"matching_name": "DataBackbone", "material": "Silicon" , "sensitive": "true"},
-    {"matching_name": "Pads", "material": "Silicon"         , "sensitive": "true"},
-    {"matching_name": "PowerSwitches", "material": "Silicon", "sensitive": "true"},
-    {"matching_name": "Readout", "material": "Silicon"      , "sensitive": "true"},
+    {"matching_name": "Biasing", "material": "Silicon"      , "sensitive": "false" , "thickness": f"{default_thickness_sensitive} * mm"},
+    {"matching_name": "DataBackbone", "material": "Silicon" , "sensitive": "false" , "thickness": f"{default_thickness_sensitive} * mm"},
+    {"matching_name": "Pads", "material": "Silicon"         , "sensitive": "false" , "thickness": f"{default_thickness_sensitive} * mm"},
+    {"matching_name": "PowerSwitches", "material": "Silicon", "sensitive": "false" , "thickness": f"{default_thickness_sensitive} * mm"},
+    {"matching_name": "Readout", "material": "Silicon"      , "sensitive": "false" , "thickness": f"{default_thickness_sensitive} * mm"},
     {"matching_name": "FPC", "material": "Kapton"           , "sensitive": "false"},
     {"matching_name": "kapton", "material": "Kapton"        , "sensitive": "false"},
     {"matching_name": "K9", "material": "K9"                , "sensitive": "false"},
