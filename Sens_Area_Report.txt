@@ -1,0 +1,4 @@
+Sensitive area loss report from extrusion...
+Check if these values are close to each other (former will be slightly bigger):
+Total Surface Area / 2: 321.312
+Sensitive area: 315.273

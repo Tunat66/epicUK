@@ -1,0 +1,770 @@
+
+<lccdd>
+  <define>
+    <comment>
+      Main parameters - this is for the more realistic June 2022 design
+    </comment>
+
+    <constant name="SiBarrelMod1_rmin"             value="SiBarrel1_rmin+1*mm"/>
+    <constant name="SiBarrelMod2_rmin"             value="SiBarrel2_rmin+1*cm"/>
+    <constant name="SiBarrelMod_angle"             value="SiBarrel_angle"/>
+    <constant name="SiBarrelMod_dz"                value="SiBarrel_dz"/>
+
+    <constant name="SiBarrelSensor_thickness"      value="40*um"/>
+
+    <constant name="SiBarrelMod1Service_thickness" value="0.15*mm"/>
+    <constant name="SiBarrelMod2Service_thickness" value="0.37*mm"/>
+    <constant name="SiBarrelMod1Frame_thickness"   value="0.06*mm"/>
+    <constant name="SiBarrelMod2Frame_thickness"   value="0.12*mm"/>
+    <constant name="SiBarrelMod1Frame_height"      value="0.8*cm"/>
+    <constant name="SiBarrelMod2Frame_height"      value="0.8*cm"/>
+    <constant name="SiBarrelStave1_width"          value="4*cm"/>
+    <constant name="SiBarrelStave2_width"          value="4*cm"/>
+
+    <comment>
+      Actual parametrization
+    </comment>
+
+    <constant name="SiBarrelMod1_length"        value="2 * SiBarrelMod1_rmin / tan(SiBarrelMod_angle) - SiBarrel_dz"/>
+    <comment> 84cm=2*42cm is the engineer max </comment>
+    <constant name="SiBarrelMod2_length"        value="84*cm"/>
+
+    <constant name="SiBarrelLayer1_length"      value="SiBarrelMod1_length + 1*um"/>
+    <constant name="SiBarrelLayer2_length"      value="SiBarrelMod2_length + 1*um"/>
+    <constant name="SiBarrelEnvelope_length"    value="SiBarrelLayer2_length + 1*um" />
+
+    <constant name="SiBarrelLayer_thickness"    value="3.0*cm"/>
+    <constant name="SiBarrelLayer1_rmin"        value="SiBarrelMod1_rmin "/>
+    <constant name="SiBarrelLayer1_rmax"        value="SiBarrelLayer1_rmin + SiBarrelLayer_thickness"/>
+    <constant name="SiBarrelLayer2_rmin"        value="SiBarrelMod2_rmin "/>
+    <constant name="SiBarrelLayer2_rmax"        value="SiBarrelLayer2_rmin + SiBarrelLayer_thickness"/>
+
+    <constant name="SiBarrelStaveTilt_angle"     value="3.0*degree"/>
+    <constant name="SiBarrelStave1_count"        value="floor(180.*degree/asin(SiBarrelStave1_width*cos(SiBarrelStaveTilt_angle)/2/SiBarrelMod1_rmin))+2"/>
+    <constant name="SiBarrelStave2_count"        value="floor(180.*degree/asin(SiBarrelStave2_width*cos(SiBarrelStaveTilt_angle)/2/SiBarrelMod2_rmin))+2"/>
+    
+  </define>
+
+
+  <detectors>
+    <documentation level="5">
+        ### Actual detectors
+    </documentation>
+    <detector
+      id="TrackerBarrel_0_ID"
+      name="SagittaSiBarrel"
+      type="epic_SiliconBarrelStandardized"
+      readout="SiBarrelHits"
+      insideTrackingVolume="true">
+      <type_flags type="DetType_TRACKER + DetType_BARREL"/>
+      <dimensions
+        rmin="SiBarrelLayer1_rmin"
+        rmax="SiBarrelLayer1_rmax"
+        length="SiBarrelLayer1_length" />
+      <comment>Silicon Barrel Modules</comment>
+      <!-- L3 Stave -->
+      <module name="L3Module0" vis="TrackerLayerVis">
+        <!--bundle-->
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY(Mirror)_(2)_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY(Mirror)_(2)_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY(Mirror)_(2)001_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY(Mirror)_(2)001_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY(Mirror)_(2)(Mirror)_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY(Mirror)_(2)(Mirror)_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY(Mirror)_(2)(Mirror)001_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY(Mirror)_(2)(Mirror)001_ASCII.gdml" />
+    
+        <module_component name="FPC_Mockup_Top_ASCII.gdml" 
+                          matching_name="FPC"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/FPC_Mockup_Top_ASCII.gdml" />
+    
+        <module_component name="FPC_Mockup_Top(Mirror)_ASCII.gdml" 
+                          matching_name="FPC"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/FPC_Mockup_Top(Mirror)_ASCII.gdml" />
+    
+        <module_component name="6RSU_LAS_kapton_support_v1(Mirror)_(2)001_ASCII.gdml" 
+                          matching_name="kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/6RSU_LAS_kapton_support_v1(Mirror)_(2)001_ASCII.gdml" />
+    
+        <module_component name="kapton_sensor_tape_v1(Mirror)_(2)(Mirror)_ASCII.gdml" 
+                          matching_name="kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/kapton_sensor_tape_v1(Mirror)_(2)(Mirror)_ASCII.gdml" />
+    
+        <module_component name="6RSU_LAS_kapton_support_v1(Mirror)_(2)(Mirror)001_ASCII.gdml" 
+                          matching_name="kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/6RSU_LAS_kapton_support_v1(Mirror)_(2)(Mirror)001_ASCII.gdml" />
+    
+        <module_component name="kapton_sensor_tape_v1(Mirror)_(2)(Mirror)001_ASCII.gdml" 
+                          matching_name="kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/kapton_sensor_tape_v1(Mirror)_(2)(Mirror)001_ASCII.gdml" />
+    
+        <module_component name="kapton_sensor_tape_v1(Mirror)_(2)_ASCII.gdml" 
+                          matching_name="kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/kapton_sensor_tape_v1(Mirror)_(2)_ASCII.gdml" />
+    
+        <module_component name="kapton_sensor_tape_v1(Mirror)_(2)001_ASCII.gdml" 
+                          matching_name="kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/kapton_sensor_tape_v1(Mirror)_(2)001_ASCII.gdml" />
+    
+        <module_component name="6RSU_LAS_kapton_support_v1(Mirror)_(2)(Mirror)_ASCII.gdml" 
+                          matching_name="kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/6RSU_LAS_kapton_support_v1(Mirror)_(2)(Mirror)_ASCII.gdml" />
+    
+        <module_component name="6RSU_LAS_kapton_support_v1(Mirror)_(2)_ASCII.gdml" 
+                          matching_name="kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/6RSU_LAS_kapton_support_v1(Mirror)_(2)_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant002_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant002_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant003_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant003_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_Sensor_4-5_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/K9_Split_CrossBrace_Sensor_4-5_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant005_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant005_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant007_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant007_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant001_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant001_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant004_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant004_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_Sensor_4-006_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/K9_Split_CrossBrace_Sensor_4-006_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant006_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant006_ASCII.gdml" />
+    
+        <module_component name="Carbon_Composite_Stave_Skin_Bottom_ASCII.gdml" 
+                          matching_name="Carbon"
+                          material="CarbonFiber"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/Carbon_Composite_Stave_Skin_Bottom_ASCII.gdml" />
+    
+        <module_component name="Carbon_Compsite_Central_Spar_ASCII.gdml" 
+                          matching_name="Carbon"
+                          material="CarbonFiber"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/Carbon_Compsite_Central_Spar_ASCII.gdml" />
+    
+        <module_component name="Carbon_Composite_Stave_Skin_Bottom(Mirror)_ASCII.gdml" 
+                          matching_name="Carbon"
+                          material="CarbonFiber"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/Carbon_Composite_Stave_Skin_Bottom(Mirror)_ASCII.gdml" />
+    
+        <module_component name="Carbon_Compsite_Central_Spar(Mirror)_ASCII.gdml" 
+                          matching_name="Carbon"
+                          material="CarbonFiber"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/Carbon_Compsite_Central_Spar(Mirror)_ASCII.gdml" />
+    
+        <module_component name="Ultem_End_Mount_Mod_for_C_channel_Longeron_ASCII.gdml" 
+                          matching_name="Ultem"
+                          material="Ultem"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/Ultem_End_Mount_Mod_for_C_channel_Longeron_ASCII.gdml" />
+    
+        <module_component name="Ultem_End_Mount_Mod_for_C_channel_Longeron001_ASCII.gdml" 
+                          matching_name="Ultem"
+                          material="Ultem"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L3Stave_assembly_no_inactive/Ultem_End_Mount_Mod_for_C_channel_Longeron001_ASCII.gdml" />
+    
+        <!--end bundle-->    
+      </module>
+      <comment> Layers composed of many arrayed modules  </comment>
+      <layer module="L3Module" id="1" vis="TrackerLayerVis">
+        <barrel_envelope
+          inner_r="SiBarrelLayer1_rmin-10.0*mm"
+          outer_r="SiBarrelLayer1_rmax"
+          z_length="SiBarrelLayer1_length + 50*mm" />
+        <layer_material surface="inner" binning="binPhi,binZ" bins0="46" bins1="100" />
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="46" bins1="100" />
+        <comment>
+          phi0     : Starting phi of first module.
+          phi_tilt : Phi tilt of a module.
+          rc       : Radius of the module center.
+          nphi     : Number of modules in phi.
+          rphi_dr  : The delta radius of every other module.
+          z0       : Z position of first module in phi.
+          nz       : Number of modules to place in z.
+          dr       : Radial displacement parameter, of every other module.
+        </comment>
+        <rphi_layout phi_tilt="SiBarrelStaveTilt_angle" nphi="46" phi0="0.0" rc="SiBarrelMod1_rmin" dr="7.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
+      </layer>
+    </detector>
+    <documentation level="5">
+        ### Actual detectors
+    </documentation>
+    <detector
+      id="TrackerBarrel_1_ID"
+      name="OuterSiBarrel"
+      type="epic_SiliconBarrelStandardized"
+      readout="SiBarrelHits"
+      insideTrackingVolume="true">
+      <type_flags type="DetType_TRACKER + DetType_BARREL"/>
+      <dimensions
+        rmin="SiBarrelLayer2_rmin"
+        rmax="SiBarrelLayer2_rmax"
+        length="SiBarrelLayer2_length" />
+      <comment>Silicon Barrel Modules</comment>
+      <comment> L4 Stave </comment>
+      <module name="L4Module0" vis="TrackerLayerVis">
+        <!--bundle-->
+
+        <module_component name="ALICE_SENSOR_ASSEMBLY008_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY008_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY010_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY010_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY012_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY012_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY013_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY013_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY017_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY017_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY021_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY021_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY006_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY006_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY009_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY009_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY014_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY014_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY016_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY016_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY018_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY018_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY020_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY020_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY022_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY022_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY024_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY024_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY025_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY025_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY026_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY026_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY001_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY001_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY002_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY002_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY004_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY004_ASCII.gdml" />
+    
+        <module_component name="ALICE_SENSOR_ASSEMBLY005_ASCII.gdml" 
+                          matching_name="ALICE"
+                          material="Silicon"
+                          sensitive="true"
+                          thickness="0.09996 * mm"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/ALICE_SENSOR_ASSEMBLY005_ASCII.gdml" />
+    
+        <module_component name="FPC_Mockup_Top001_ASCII.gdml" 
+                          matching_name="FPC"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/FPC_Mockup_Top001_ASCII.gdml" />
+    
+        <module_component name="FPC_Mockup_Top_ASCII.gdml" 
+                          matching_name="FPC"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/FPC_Mockup_Top_ASCII.gdml" />
+    
+        <module_component name="Kapton_Electrical_Insulation001_ASCII.gdml" 
+                          matching_name="Kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Kapton_Electrical_Insulation001_ASCII.gdml" />
+    
+        <module_component name="Kapton_Electrical_Insulation003_ASCII.gdml" 
+                          matching_name="Kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Kapton_Electrical_Insulation003_ASCII.gdml" />
+    
+        <module_component name="Kapton_Electrical_Insulation004_ASCII.gdml" 
+                          matching_name="Kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Kapton_Electrical_Insulation004_ASCII.gdml" />
+    
+        <module_component name="Kapton_Electrical_Insulation002_ASCII.gdml" 
+                          matching_name="Kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Kapton_Electrical_Insulation002_ASCII.gdml" />
+    
+        <module_component name="Kapton_Electrical_Insulation005_ASCII.gdml" 
+                          matching_name="Kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Kapton_Electrical_Insulation005_ASCII.gdml" />
+    
+        <module_component name="Kapton_Electrical_Insulation006_ASCII.gdml" 
+                          matching_name="Kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Kapton_Electrical_Insulation006_ASCII.gdml" />
+    
+        <module_component name="Kapton_Electrical_Insulation_ASCII.gdml" 
+                          matching_name="Kapton"
+                          material="Kapton"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Kapton_Electrical_Insulation_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_Sensor_4-5_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_Sensor_4-5_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant001_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant001_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant002_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant002_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant003_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant003_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant004_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant004_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant005_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant005_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant006_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant006_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant007_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant007_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant008_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant008_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant009_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant009_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant010_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant010_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_Sensor_4-006_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_Sensor_4-006_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant011_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant011_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant012_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant012_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant013_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant013_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant014_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant014_ASCII.gdml" />
+    
+        <module_component name="K9_Split_CrossBrace_C-Channel_Variant015_ASCII.gdml" 
+                          matching_name="K9"
+                          material="K9"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/K9_Split_CrossBrace_C-Channel_Variant015_ASCII.gdml" />
+    
+        <module_component name="Carbon_Compsite_Central_Spar001_ASCII.gdml" 
+                          matching_name="Carbon"
+                          material="CarbonFiber"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Carbon_Compsite_Central_Spar001_ASCII.gdml" />
+    
+        <module_component name="Carbon_Compsite_Central_Spar_ASCII.gdml" 
+                          matching_name="Carbon"
+                          material="CarbonFiber"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Carbon_Compsite_Central_Spar_ASCII.gdml" />
+    
+        <module_component name="Carbon_Composite_Stave_Skin_Top_ASCII.gdml" 
+                          matching_name="Carbon"
+                          material="CarbonFiber"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Carbon_Composite_Stave_Skin_Top_ASCII.gdml" />
+    
+        <module_component name="Carbon_Composite_Stave_Skin_Bottom_ASCII.gdml" 
+                          matching_name="Carbon"
+                          material="CarbonFiber"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Carbon_Composite_Stave_Skin_Bottom_ASCII.gdml" />
+    
+        <module_component name="Ultem_End_Mount_Mod_for_C_channel_Longeron001_ASCII.gdml" 
+                          matching_name="Ultem"
+                          material="Ultem"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Ultem_End_Mount_Mod_for_C_channel_Longeron001_ASCII.gdml" />
+    
+        <module_component name="Ultem_End_Mount_Mod_for_C_channel_Longeron_ASCII.gdml" 
+                          matching_name="Ultem"
+                          material="Ultem"
+                          sensitive="false"
+                          vis="TrackerLayerVis"
+                          file="CAD/L4Stave_assembly_no_inactive/Ultem_End_Mount_Mod_for_C_channel_Longeron_ASCII.gdml" />
+    
+        <!--end bundle-->    
+      </module>
+      <comment> Layers composed of many arrayed modules  </comment>
+      <layer module="L4Module" id="1" vis="TrackerLayerVis">
+        <barrel_envelope
+          inner_r="SiBarrelLayer2_rmin-10.0*mm"
+          outer_r="SiBarrelLayer2_rmax"
+          z_length="SiBarrelLayer2_length + 50*mm" />
+        <layer_material surface="inner" binning="binPhi,binZ" bins0="128" bins1="100" />
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="128" bins1="100" />
+        <comment>
+          phi0     : Starting phi of first module.
+          phi_tilt : Phi tilt of a module.
+          rc       : Radius of the module center.
+          nphi     : Number of modules in phi.
+          rphi_dr  : The delta radius of every other module.
+          z0       : Z position of first module in phi.
+          nz       : Number of modules to place in z.
+          dr       : Radial displacement parameter, of every other module.
+        </comment>
+        <rphi_layout phi_tilt="SiBarrelStaveTilt_angle" nphi="70" phi0="0.0" rc="SiBarrelMod2_rmin" dr="6.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
+      </layer>
+    </detector>
+  </detectors>
+
+  <plugins>
+    <plugin name="DD4hep_ParametersPlugin">
+      <argument value="SagittaSiBarrel"/>
+      <argument value="layer_pattern: str=SagittaSiBarrel_layer\d"/>
+    </plugin>
+    <plugin name="DD4hep_ParametersPlugin">
+      <argument value="OuterSiBarrel"/>
+      <argument value="layer_pattern: str=OuterSiBarrel_layer\d"/>
+    </plugin>
+  </plugins>
+
+  <readouts>
+    <readout name="SiBarrelHits">
+      <segmentation type="CartesianGridXY" grid_size_x="0.020*mm" grid_size_y="0.020*mm" />
+      <comment>bitfieldsizes for indexing sensors and modules, max values are 2 exp bitfieldsize</comment>
+      <id>system:8,layer:1,module:11,sensor:9,x:32:-16,y:-16</id>
+    </readout>
+  </readouts>
+
+</lccdd>
