@@ -1,0 +1,3 @@
+INFO:    Environment variable SINGULARITY_BINDPATH is set, but APPTAINER_BINDPATH is preferred
+WARNING: Skipping mount /tmp [tmp]: /tmp doesn't exist in container
+WARNING: Skipping mount /var/tmp [tmp]: /var/tmp doesn't exist in container

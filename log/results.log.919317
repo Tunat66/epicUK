@@ -1,0 +1,27 @@
+000 (919317.000.000) 2024-08-30 15:29:50 Job submitted from host: <163.1.136.58:9618?addrs=163.1.136.58-9618+[fde1-53ba-e9a0-de11-9793-9e2-f84c-e365]-9618&alias=pplxcondor03.physics.ox.ac.uk&noUDP&sock=schedd_2378_b04d>
+...
+001 (919317.000.000) 2024-08-30 15:30:00 Job executing on host: <163.1.136.133:9618?addrs=163.1.136.133-9618&alias=pplxwn061.physics.ox.ac.uk&noUDP&sock=startd_1537_d527>
+	SlotName: slot1_2@pplxwn061.physics.ox.ac.uk
+	CondorScratchDir = "/condor/execute/dir_2026658"
+	Cpus = 1
+	Disk = 3607251
+	Memory = 8192
+...
+006 (919317.000.000) 2024-08-30 15:30:01 Image size of job updated: 1
+	0  -  MemoryUsage of job (MB)
+	0  -  ResidentSetSize of job (KB)
+...
+004 (919317.000.000) 2024-08-30 15:30:01 Job was evicted.
+	(0) CPU times
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :                 1         1 
+	   Disk (KB)            :        1        1   3607251 
+	   Memory (MB)          :        0     8192      8192 
+...
+009 (919317.000.000) 2024-08-30 15:30:01 Job was aborted.
+	via condor_rm (by user pemb7000)
+...

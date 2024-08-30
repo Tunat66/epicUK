@@ -17,7 +17,7 @@ etabin_array=(-3.5 -2.5 -1.0 1.0 2.5 3.5)
 
 nevents=10000
 #ADJUST THESE VALUES!!!!!!
-results_dir="results_no_dead_additional"
+results_dir="results_L3_old"
 compact_file_name="epic_craterlake_tracking_only_active.xml"
 
 #rm -rf truthseed/ realseed/ *.root
