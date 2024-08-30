@@ -336,6 +336,7 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
       }
       c_vol.import();
       c_vol.setMaterial(description.material(x_comp.materialStr()));
+      printout(WARNING, "BarrelTrackerOuter", "%s", x_comp.materialStr().c_str());
       //risky bit, might quickly fill up memory if too many solids are imported
       TessellatedSolid c_sol(c_vol.solid());
       //note: c_sol gets casted automatically to parent class TGeoTessellated by the copy constructor. IDK why?

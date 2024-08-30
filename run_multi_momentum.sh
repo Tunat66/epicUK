@@ -8,7 +8,8 @@
 source install/setup.sh
 
 #CONFIG_VARIABLES
-mom_array=(0.50 0.75 1.0 1.25 1.75 2.0 2.50 3.0 4.0 5.0 7.0 8.5 10.0 12.5 15.0)
+#mom_array=(0.50 0.75 1.0 1.25 1.75 2.0 2.50 3.0 4.0 5.0 7.0 8.5 10.0 12.5 15.0)
+mom_array=(12.5 15.0)
 #note that these variables must match between the single and multi momentum scripts
 particle_array=("pi-")
 filename=("tracking_output") 
@@ -16,7 +17,7 @@ etabin_array=(-3.5 -2.5 -1.0 1.0 2.5 3.5)
 
 nevents=10000
 #ADJUST THESE VALUES!!!!!!
-results_dir="results_L3L4_no_dead"
+results_dir="results_no_dead_additional"
 compact_file_name="epic_craterlake_tracking_only_active.xml"
 
 #rm -rf truthseed/ realseed/ *.root
@@ -40,5 +41,5 @@ done
 # run the simulation and the reconstruction
 
 for ((i=0; i<${#formatted_mom_array[@]}; i++)); do
-    condor_submit MOM=${formatted_mom_array[i]} run_simulationinactive.submit
+    condor_submit MOM=${formatted_mom_array[i]} run_simulationactive.submit
 done
