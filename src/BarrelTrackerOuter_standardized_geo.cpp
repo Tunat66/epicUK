@@ -324,9 +324,6 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
 
       Volume c_vol(c_nam);
       //printout(WARNING, "BarrelTrackerOuter", "Parsing a large GDML file may lead to segfault or heap overflow.");
-      //STANDARD WHEN IMPORTING CAD MODELS: 
-      //-> STAVE LONG AXIS MUST BE Z
-      //-> STAVE FACES ALONG THE X AXIS
       c_vol = parser->GDMLReadFile(gdml_file.c_str());
       //check the validity of the volume
       if (!c_vol.isValid()) {
@@ -390,37 +387,6 @@ static Ref_t create_BarrelTrackerOuterStandardized(Detector& description, xml_h 
           if(!is_good_facet) continue;
           else accepted_facets.push_back(tri_facet);
         }
-        //handle the extrusion length accordingly:
-        //handle extrusion direction based on the concavity
-        /*switch(sgn(component_direction)) 
-        {
-          case  1:
-           extrusion_length *= -1;
-           break;
-          case -1:
-            break;
-          default: throw runtime_error("BarrelTrackerOuterStandardized: concavity of sensor is not 1 or -1.");
-        }
-        for(int facet_index = 0; facet_index < c_sol->GetNfacets(); facet_index++)  {
-          Volume sc_vol_tmp(c_nam + "_" + to_string(facet_index));
-          TessellatedSolid::Facet current_facet = c_sol->GetFacet(facet_index);
-          if (current_facet.GetNvert() == 3) {
-            //construct a TriangularFacet from the facet
-            struct TriangularFacet extruded_facet_access;
-            extruded_facet_access.compute_facet_properties(current_facet, c_sol);
-            
-            double facet_area = extruded_facet_access.facet_area;
-            concavity_score = extruded_facet_access.concavity_score;
-            
-            
-            //extrude if the facet is a good facet
-            double costheta = TessellatedSolid::Vertex::Dot(yhat, extruded_facet_access.normal);
-            bool good_facet = abs(costheta) >= costheta_threshold && facet_area > facet_area_threshold;
-            if (good_facet) {
-              
-            }
-          }
-        }*/
         //now work with the accepted prisms
         for(auto& tri_facet: accepted_facets) {
           sensitive_area += tri_facet.facet_area; //log the area
