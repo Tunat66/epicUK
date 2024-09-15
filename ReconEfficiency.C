@@ -1,18 +1,28 @@
 #include <iostream>
 #include <vector>
 #include <filesystem>
+#include <regex>
+#include <string>
 #include "TFile.h"
 #include "TTree.h"
 #include "TLeaf.h"
 #include "TH1F.h"
+#include "TGraph.h"
 #include "TCanvas.h"
 
-void ReconEfficiency(std::filesystem::path DataDir)
+std::string treeString = "events";
+std::string realleafString = "CentralCKFSeededTrackParameters.type";
+std::string truthleafString = "CentralCKFTrackParameters.type";
+
+const char* treeName = treeString.c_str();
+const char* realleafName = realleafString.c_str();
+const char* truthleafName = truthleafString.c_str();
+
+void ReconEfficiency(TString DataDir)
 {
+    //move into the data dir
+	gSystem->cd(DataDir);
 
-}
-
-void plotLeafEntries(const char* treeName, const char* leafName) {
     // Get all files matching the pattern
     std::vector<std::string> fileNames = getFiles("tracking_output");
 
@@ -27,14 +37,40 @@ void plotLeafEntries(const char* treeName, const char* leafName) {
         }
     }
 
-    // Draw the histogram
-    TCanvas *c1 = new TCanvas("c1", "Leaf Entries", 800, 600);
-    hist->Draw();
-    c1->SaveAs("leaf_entries.png");
+    // Draw the graph
+    TCanvas *c1 = new TCanvas("c1", "Efficiency", 800, 600);
+
+    //graph to combine real and truth seeding
+    TMultiGraph *mgEff;
+    TLegend *lEff;
+    mgEff = new TMultiGraph("mgEff",";p (GeV/c); Efficiency %");
+	lmom = new TLegend(0.65,0.80,0.90,0.93);
+
+    TGraphErrors *gr2 = new TGraphErrors(size_real,p_real,sigma_p_real,err_p_real,err_sigma_p_real);
+    gr2->SetName("gr_realseed");
+	gr2->SetMarkerStyle(34);
+	gr2->SetMarkerSize(2.5);
+	gr2->SetTitle(";p (GeV/c);#sigmap/p");
+	gr2->GetXaxis()->CenterTitle();
+	gr2->GetYaxis()->CenterTitle();
+
+    //save the graph drawn on the canvas
+    c1->SaveAs("ReconstructionEfficiency.png");
+
+    //leave the directory
+	gSystem->cd("..");
 }
 
 
-
+// Function to extract the number after "tracking_output_" in the filename
+int extractNumber(const std::string& filename) {
+    std::regex pattern("tracking_output_(\\d+)");
+    std::smatch matches;
+    if (std::regex_search(filename, matches, pattern) && matches.size() > 1) {
+        return std::stoi(matches[1].str());
+    }
+    return -1; // Return -1 if the number is not found
+}
 
 
 int countLeafEntries(const char* filename, const char* treeName, const char* leafName) {

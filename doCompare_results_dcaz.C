@@ -14,11 +14,20 @@
 #include <cstdlib>
 
 void draw_req_DCA(double etamin, double etamax, double xmin=0., double xmax=0.);
-TGraphErrors* draw_directory(TString directory, TString particle = "pi-",double etamin=-1.0, double etamax=1.0, Bool_t drawreq=1, TString epic ="24.06.0", TString eicrecon = "v1.14.0") // name = p, pt for getting p or pt dependence fitted results
+TGraphErrors* draw_directory(TString directory, 
+                             TString particle = "pi-",
+                             double etamin=-1.0, 
+                             double etamax=1.0, 
+                             //some new arguments
+                             std::vector <double> pt={0},
+                             //new arguments end
+                             Bool_t drawreq=1, 
+                             TString epic ="24.06.0", 
+                             TString eicrecon = "v1.14.0") // name = p, pt for getting p or pt dependence fitted results
 {
    gSystem->cd(directory);
-   const Int_t nptbins = 10;
-   double pt[nptbins] ={0.2, 0.3, 0.5,1.0, 1.5, 2.0, 5.0, 8.0, 10., 15.0};
+   const Int_t nptbins = pt.size();
+   //double pt[nptbins] ={0.2, 0.3, 0.5,1.0, 1.5, 2.0, 5.0, 8.0, 10., 15.0};
    Double_t variation = 0.1; // 10 % variation 
    std::vector<double> momV_real;
    std::vector<double> dcazresolV_real, err_dcazresolV_real;
@@ -39,9 +48,6 @@ TGraphErrors* draw_directory(TString directory, TString particle = "pi-",double 
      TF1 *func_real = new TF1("func_real","gaus",-0.5,0.5);
 	
     for(int iptbin=0; iptbin<nptbins; ++iptbin){
-    	
-   TCanvas *cp = new TCanvas("cp","cp",1400,1000);
-   cp->SetMargin(0.10, 0.05 ,0.1,0.07);
      
     double ptmin = (1.0-variation)*pt[iptbin]; // 10% range  
     double ptmax = (1.0+variation)*pt[iptbin]; // 10% range 
@@ -53,7 +59,7 @@ TGraphErrors* draw_directory(TString directory, TString particle = "pi-",double 
     histd0z_real_1d->SetTitle(Form("d0_{z} (real): %1.1f <#eta< %1.1f && %1.2f <p_{T}< %1.2f",etamin,etamax,ptmin,ptmax));   
     histd0z_real_1d->SetName(Form("eta_%1.1f_%1.1f_d0z_real_pt_%1.1f",etamin,etamax,pt[iptbin])); 
    
-   //if (histd0xy_real_1d->GetEntries()<100) continue;    
+   if (histd0z_real_1d->GetEntries() < 1) continue;    
    double mu_real = histd0z_real_1d->GetMean(); 
    double sigma_real = histd0z_real_1d->GetStdDev();
    func_real->SetRange(mu_real-2.0*sigma_real,mu_real+2.0*sigma_real); // fit with in 2 sigma range
@@ -83,7 +89,7 @@ TGraphErrors* draw_directory(TString directory, TString particle = "pi-",double 
      gr2->SetName("gr_realseed");
 	gr2->SetMarkerStyle(34);
 	gr2->SetMarkerColor(kRed);
-	gr2->SetMarkerSize(2.0);
+	gr2->SetMarkerSize(1.5);
 	gr2->SetTitle(";p_{z} (GeV/c); #sigma_{DCA_{z}} (#mum)");
 	gr2->GetXaxis()->CenterTitle();
 	gr2->GetYaxis()->CenterTitle();
@@ -100,8 +106,13 @@ void doCompare_results_dcaz(std::vector<TString> directory_list)
 	double etamin=-1.0; //etamin
 	double etamax=1.0; //etamax
 	std::vector<Color_t> colors = {kRed, kBlue, kGreen, kCyan, kMagenta, kOrange, kBlack};
-
-	//=== style of the plot=========
+	
+     
+     //Test momenta (change as you need)
+     std::vector<double> mom={0.50, 0.75, 1.00, 1.25, 1.75, 2.00, 2.50, 3.00, 4.00, 5.00, 7.00, 8.50, 10.00};
+	
+     
+     //=== style of the plot=========
    	gStyle->SetPalette(1);
    	gStyle->SetOptTitle(1);
    	gStyle->SetTitleOffset(1.0,"XY");
@@ -136,7 +147,8 @@ void doCompare_results_dcaz(std::vector<TString> directory_list)
           TGraphErrors* new_graph = draw_directory(directory, 
 												 particle, 
 												 etamin, 
-												 etamax);
+												 etamax,
+                                                             mom);
           new_graph->SetMarkerColor(colors[i]);
           mgDCAz->Add(new_graph);
 		lDCAz->AddEntry(new_graph, directory);
