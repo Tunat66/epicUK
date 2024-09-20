@@ -3,6 +3,9 @@
 Overview
 --------
 
+**Notice to Oxford Users**
+Read the file: README_oxford_users.txt. It contains the instructions to get you started.
+
 <a href="https://eic.github.io/epic/artifacts/epic_craterlake_views/view1_top.pdf"><img align="right" alt="craterlake" src="https://eic.github.io/epic/artifacts/epic_craterlake_views/view1_top.png" width="70%"/></a>
 
 **Detector geometry:**
