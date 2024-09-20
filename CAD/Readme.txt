@@ -25,14 +25,15 @@ To start using the CAD utility:
 
 1-  Open your STEP file in FreeCAD and save it as a FreeCAD(.FCStd) file with a name of your choice.
 2-  Source the script with arguments: source FCStd_to_gdml.sh <FreeCAD_file_name>
-3-  
+    NOTE: this file contains a few parameters, adjust them to your own needs: 
+        MAX_COMPONENT_NUMBER: maximum number of sensitive <module_component/>s per <module/>
+        dict_list: a map allowing file names to be mapped to materials and sensitive/insensitive etc. 
+3-  A folder containing the .gdml files named <FreeCAD_file_name> will be generated.
 
 ************************************************************************************************************************
 You can also produce the silicon_barrel.xml automatically. For this process you need to have produced two folders contining gdml files 
 for components of the L3 stave and L4 stave. 
 
-
-
-3-  Run the create_xml.py script with arguments <L3_stave_gdml_folder_name> <L4_stave_gdml_folder_name>
-4-  Move the silicon_barrel.xml file to the ../compact/tracking folder (make sure to backup the older version with a git commit!!)
-5-  STEPource the script: source ../recompile.sh to get the .xml file copied over and then you are done!
+1-  Run the create_xml.py script with arguments <L3_stave_gdml_folder_name> <L4_stave_gdml_folder_name>
+2-  Move the silicon_barrel.xml file to the ../compact/tracking folder (make sure to backup the older version with a git commit!!)
+3-  Source the script: source ../recompile.sh to get the .xml file copied over to $DETECTOR_PATH and then you are done!
