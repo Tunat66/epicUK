@@ -8,8 +8,8 @@ Now that you have cloned the repository, do the following:
 1- Get in the eic-shell. To get in the eic-shell:
     1- Make sure the eic-shell executable is installed on the parent directory (..)
     2- Run: ../eic-shell
-    3- Run: source install/setup.sh to set up your environment variables.
-2- Source cmake_build.sh (this will set up the .xml files in the build directory)
+    3- Run: source cmake_build.sh (this will set up the .xml files and scripts in the build directory, that is install/)
+    4- Run: source install/setup.sh to set up your environment variables.
 3- Your project is ready. Edit as you like. After an edit in the compact files or the src files, recompile the edit by sourcing recompile.sh
 
 ********************************************************************************************************
